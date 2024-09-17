@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "nuxt-sanity-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build"
+  },
+  "devDependencies": {
+    "@nuxt/image": "^1.8.0",
+    "@nuxtjs/sanity": "^1.12.1",
+    "@sanity/client": "^6.21.3"
+  },
+  "dependencies": {
+    "nuxt": "^3.13.2"
+  }
+}

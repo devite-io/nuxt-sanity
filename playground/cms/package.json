@@ -1,0 +1,28 @@
+{
+  "name": "nuxt-sanity-playground-cms",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/vision": "^3.57.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sanity": "^3.57.3",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^4.0.0",
+    "@sanity/icons": "^3.4.0",
+    "@types/react": "^18.0.25",
+    "eslint": "^8.6.0",
+    "typescript": "^5.1.6"
+  }
+}
