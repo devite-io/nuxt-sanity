@@ -1,6 +1,6 @@
 {
   "name": "@devite/nuxt-sanity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Optimizes the configuration for @nuxt/sanity and provides additional helper components.",
   "repository": "devite-io/nuxt-sanity",
   "license": "MIT",
