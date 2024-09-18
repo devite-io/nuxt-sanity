@@ -1,5 +1,5 @@
 import type { Slug } from '@sanity/types'
-import type { SEO } from '~/types/sanity/objects/SEO'
+import type { SEO } from '../objects/SEO'
 
 export interface Page {
   _id: string

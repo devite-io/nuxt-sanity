@@ -7,8 +7,9 @@
 
 <script setup lang="ts">
 import { PortableText, type PortableTextComponents } from '@portabletext/vue'
-import type { RichText } from '~/types/richText/RichText'
-import { LinkExternal, LinkInternal } from '#components'
+import type { RichText } from '../types/richText/RichText'
+import { computed } from '#imports'
+import { SanityLinkExternal, SanityLinkInternal } from '#components'
 
 const { data, placeholders = {} } = defineProps<{ data: RichText, placeholders?: object }>()
 const currentData = computed(() => {
@@ -47,9 +48,9 @@ function replacePlaceholders(text: string) {
 const richTextSerializer: PortableTextComponents = {
   marks: {
     linkExternal: ({ value }, { slots }) =>
-      h(LinkExternal, { data: value }, slots.default),
+      h(SanityLinkExternal, { data: value }, slots.default),
     linkInternal: ({ value }, { slots }) =>
-      h(LinkInternal, { data: value }, slots.default),
+      h(SanityLinkInternal, { data: value }, slots.default),
   },
 }
 </script>

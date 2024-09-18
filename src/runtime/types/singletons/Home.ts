@@ -1,4 +1,4 @@
-import type { SEO } from '~/types/sanity/objects/SEO'
+import type { SEO } from '../objects/SEO'
 
 export interface Home {
   _type: 'home'

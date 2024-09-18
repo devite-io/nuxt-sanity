@@ -9,10 +9,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Home } from '~/types/singletons/Home'
-import type { Page } from '~/types/documents/Page'
-import type { NotFound } from '~/types/singletons/NotFound'
-import type { GlobalSEO } from '~/types/objects/global/GlobalSEO'
+import { useSanityQuery } from '@nuxtjs/sanity/runtime/composables'
+import { groq } from '@nuxtjs/sanity/runtime/groq'
+import type { Home } from '../types/singletons/Home'
+import type { Page } from '../types/documents/Page'
+import type { NotFound } from '../types/singletons/NotFound'
+import type { GlobalSEO } from '../types/objects/global/GlobalSEO'
+import { useHead, useRoute, useRuntimeConfig, useSeoMeta } from '#app'
+import { computed } from '#imports'
 
 const { baseURL } = useRuntimeConfig().public
 

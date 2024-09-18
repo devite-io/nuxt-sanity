@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LinkExternal } from '~/types/objects/link/LinkExternal'
+import type { LinkExternal } from '../types/objects/link/LinkExternal'
 
 defineProps<{ data: LinkExternal }>()
 </script>
