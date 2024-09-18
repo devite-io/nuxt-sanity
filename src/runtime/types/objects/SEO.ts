@@ -4,7 +4,7 @@ export interface SEO {
   _type: 'seo'
   indexable: boolean
   title: string
-  opengraph_title: string
+  shortTitle: string
   description: string
   image?: Image
 }

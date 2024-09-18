@@ -1,5 +1,5 @@
 export interface LinkExternal {
-  _type: 'link-external'
+  _type: 'linkExternal'
   url: string
   newWindow: boolean
 }

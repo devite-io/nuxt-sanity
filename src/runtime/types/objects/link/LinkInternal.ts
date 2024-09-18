@@ -1,4 +1,4 @@
 export interface LinkInternal {
-  _type: 'link-internal'
+  _type: 'linkInternal'
   slug: string
 }

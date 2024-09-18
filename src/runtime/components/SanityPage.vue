@@ -27,12 +27,12 @@ const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(groq`*
 const seo = computed(() => sanityData.value?.seo)
 const url = computed(() => baseURL + (sanityData.value?.slug || '/'))
 
-const { data: globalSEO } = await useSanityQuery<GlobalSEO>(groq`*[_type == 'settings'][0].seo { site_name, image }`)
+const { data: globalSEO } = await useSanityQuery<GlobalSEO>(groq`*[_type == 'settings'][0].seo { siteName, image }`)
 const image = computed(() => sanityData.value?.image || globalSEO.value?.image)
 
 useHead({
   meta: [
-    { name: 'site_name', content: () => globalSEO.value?.site_name },
+    { name: 'site_name', content: () => globalSEO.value?.siteName },
     { name: 'og:image', content: () => image.value?.url },
     { name: 'og:image:width', content: () => image.value?.metadata.dimensions.width },
     { name: 'og:image:height', content: () => image.value?.metadata.dimensions.height },
@@ -51,9 +51,9 @@ useSeoMeta({
   robots: () => ((seo.value?.indexable ? '' : 'no') + 'index,follow'),
   title: () => seo.value?.title,
   description: () => seo.value?.description,
-  ogTitle: () => seo.value?.opengraph_title,
+  ogTitle: () => seo.value?.shortTitle,
   ogDescription: () => seo.value?.description,
-  twitterTitle: () => seo.value?.opengraph_title,
+  twitterTitle: () => seo.value?.shortTitle,
   twitterDescription: () => seo.value?.description,
 })
 </script>
