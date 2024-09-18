@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.0.2...v1.0.3)
+
+### 🩹 Fixes
+
+- Add image projections ([8ac419e](https://github.com/devite-io/nuxt-sanity/commit/8ac419e))
+
+### 📖 Documentation
+
+- Change dependency installation command ([2a9b7e0](https://github.com/devite-io/nuxt-sanity/commit/2a9b7e0))
+- Update module description ([0ec9376](https://github.com/devite-io/nuxt-sanity/commit/0ec9376))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.0.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.0.1...v1.0.2)
