@@ -2,7 +2,7 @@
 
 [![npm version][npm-version-src]][npm-version-href]
 
-Optimizes the configuration for [@nuxtjs/sanity][nuxt-sanity] and provides additional helper components.
+Provides additional helper components and utilities for the [Nuxt Sanity Module][nuxt-sanity].
 
 ## Quick Setup
 
@@ -12,7 +12,7 @@ Install the module to your Nuxt application with one command:
 npx nuxi module add @devite/nuxt-sanity
 ```
 
-That's it! You can now use the Sanity Integration in your Nuxt app ✨
+That's it! You can now use data from Sanity in your Nuxt app ✨
 
 
 ## Contribution
