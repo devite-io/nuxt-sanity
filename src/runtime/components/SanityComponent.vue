@@ -9,12 +9,30 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ data: object }>()
+import type { Component } from '@nuxt/schema'
+import { resolveComponent } from '#imports'
+import { SanityLinkExternal, SanityLinkInternal, SanityRichText } from '#components'
 
-const type
-  = props.data.constructor.name === 'Array' && props.data.every(item => item._type === 'block')
-    ? 'richText'
-    : props.data?._type
-const upperCamelCase = type?.charAt(0).toUpperCase() + type?.slice(1)
-const component = resolveComponent('Sanity' + upperCamelCase)
+const props = defineProps<{ data?: object }>()
+
+const type = props.data?._type
+let component: Component
+
+switch (type) {
+  case 'linkInternal':
+    component = SanityLinkInternal
+    break
+  case 'linkExternal':
+    component = SanityLinkExternal
+    break
+  default:
+    if (props.data?.constructor.name === 'Array' && props.data.every(item => item._type === 'block'))
+      component = SanityRichText
+    else if (type) {
+      const upperCamelCase = type.charAt(0).toUpperCase() + type.slice(1)
+      component = resolveComponent('Sanity' + upperCamelCase)
+    }
+
+    break
+}
 </script>
