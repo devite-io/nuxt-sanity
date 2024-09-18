@@ -1,4 +1,4 @@
-import { addComponentsDir, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { addComponentsDir, addImportsDir, createResolver, defineNuxtModule } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -9,5 +9,7 @@ export default defineNuxtModule({
 
     await addComponentsDir({ path: resolve('runtime/components') })
     await addComponentsDir({ path: '~/sanity', global: true, prefix: 'Sanity' })
+
+    addImportsDir(resolve('runtime/utils'))
   },
 })
