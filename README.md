@@ -22,7 +22,7 @@ That's it! You can now use the Sanity Integration in your Nuxt app ✨
   
   ```bash
   # Install dependencies
-  pnpm install
+  pnpm install && cd playground/cms && pnpm install
   
   # Generate type stubs
   pnpm dev:prepare
