@@ -1,5 +1,5 @@
 <template>
-  <main v-if="sanityData.modules?.length > 0">
+  <main v-if="sanityData?.modules?.length > 0">
     <SanityComponent
       v-for="module in sanityData.modules"
       :key="module._key"
