@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { PortableText, type PortableTextComponents } from '@portabletext/vue'
 import type { RichText } from '../types/richText/RichText'
-import { computed } from '#imports'
+import { computed, h } from '#imports'
 import { SanityLinkExternal, SanityLinkInternal } from '#components'
 
 const { data, placeholders = {} } = defineProps<{ data: RichText, placeholders?: object }>()
