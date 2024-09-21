@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.0.3...v1.1.0)
+
+### 🚀 Enhancements
+
+- Add resolveImageAssetById utility function + update projections ([51c4d2c](https://github.com/devite-io/nuxt-sanity/commit/51c4d2c))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.0.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.0.2...v1.0.3)
