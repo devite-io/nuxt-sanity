@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Internal projection usage ([30feeaf](https://github.com/devite-io/nuxt-sanity/commit/30feeaf))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.1.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.0.3...v1.1.0)
