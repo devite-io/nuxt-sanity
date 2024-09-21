@@ -17,7 +17,7 @@ import type { Home } from '../types/singletons/Home'
 import type { Page } from '../types/documents/Page'
 import type { NotFound } from '../types/singletons/NotFound'
 import type { GlobalSEO } from '../types/objects/global/GlobalSEO'
-import { IMAGE_PROJECTION } from '../utils/projections'
+import { IMAGE_WITHOUT_PREVIEW_PROJECTION } from '../utils/projections'
 import { useHead, useRoute, useRuntimeConfig, useSeoMeta } from '#app'
 import { computed } from '#imports'
 
@@ -25,12 +25,12 @@ const { baseURL } = useRuntimeConfig().public
 
 const path = useRoute().fullPath
 const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == "${path.substring(1)}"`
-const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_PROJECTION} } }`)
+const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`)
 
 const seo = computed(() => sanityData.value?.seo)
 const url = computed(() => baseURL + (sanityData.value?.slug || '/'))
 
-const { data: globalSEO } = await useSanityQuery<GlobalSEO>(groq`*[_type == 'settings'][0].seo { siteName, image ${IMAGE_PROJECTION} }`)
+const { data: globalSEO } = await useSanityQuery<GlobalSEO>(groq`*[_type == 'settings'][0].seo { siteName, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} }`)
 const image: ComputedRef<ImageAsset> = computed(() => sanityData.value?.image?.asset || globalSEO.value?.image?.asset)
 
 useHead({
