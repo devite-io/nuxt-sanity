@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- Return type of helper function ([f6891a5](https://github.com/devite-io/nuxt-sanity/commit/f6891a5))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.1.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.0...v1.1.1)
