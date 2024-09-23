@@ -10,29 +10,29 @@
 
 <script setup lang="ts">
 import type { Component } from '@nuxt/schema'
-import { resolveComponent } from '#imports'
+import { computed, resolveComponent } from '#imports'
 import { SanityLinkExternal, SanityLinkInternal, SanityRichText } from '#components'
 
-const props = defineProps<{ data?: object }>()
+const { data } = defineProps<{ data?: object }>()
 
-const type = props.data?._type
-let component: Component
+const component = computed<Component>(() => {
+  const type = data?._type
 
-switch (type) {
-  case 'linkInternal':
-    component = SanityLinkInternal
-    break
-  case 'linkExternal':
-    component = SanityLinkExternal
-    break
-  default:
-    if (props.data?.constructor.name === 'Array' && props.data.every(item => item._type === 'block'))
-      component = SanityRichText
-    else if (type) {
-      const upperCamelCase = type.charAt(0).toUpperCase() + type.slice(1)
-      component = resolveComponent('Sanity' + upperCamelCase)
-    }
+  switch (type) {
+    case 'linkInternal':
+      return SanityLinkInternal
+    case 'linkExternal':
+      return SanityLinkExternal
+    default:
+      if (data?.constructor.name === 'Array' && data.every(item => item._type === 'block'))
+        return SanityRichText
+      else if (type) {
+        const upperCamelCase = type.charAt(0).toUpperCase() + type.slice(1)
 
-    break
-}
+        return resolveComponent('Sanity' + upperCamelCase)
+      }
+  }
+
+  return null
+})
 </script>
