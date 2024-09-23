@@ -24,8 +24,8 @@ import { computed } from '#imports'
 const { baseURL } = useRuntimeConfig().public
 
 const path = useRoute().fullPath
-const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == "${path.substring(1)}"`
-const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`)
+const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`
+const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`, { slug: path.substring(1) })
 
 const seo = computed(() => sanityData.value?.seo)
 const url = computed(() => baseURL + (sanityData.value?.slug || '/'))
