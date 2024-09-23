@@ -1,7 +1,7 @@
 {
   "name": "@devite/nuxt-sanity",
   "version": "1.1.2",
-  "description": "Optimizes the configuration for @nuxt/sanity and provides additional helper components.",
+  "description": "Provides additional helper components and utilities for the Nuxt.js Sanity module",
   "repository": "devite-io/nuxt-sanity",
   "license": "MIT",
   "author": {
