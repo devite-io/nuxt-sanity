@@ -32,16 +32,18 @@ const url = computed(() => baseURL + (sanityData.value?.slug || '/'))
 
 const { data: globalSEO } = await useSanityQuery<GlobalSEO>(groq`*[_type == 'settings'][0].seo { siteName, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} }`)
 const image: ComputedRef<ImageAsset> = computed(() => sanityData.value?.image?.asset || globalSEO.value?.image?.asset)
+const imageUrl = computed(() => image.value?.url)
+const imageDimensions = computed(() => image.value?.metadata.dimensions)
 
 useHead({
   meta: [
     { name: 'site_name', content: () => globalSEO.value?.siteName },
-    { name: 'og:image', content: () => image.value?.url },
-    { name: 'og:image:width', content: () => image.value?.metadata.dimensions.width },
-    { name: 'og:image:height', content: () => image.value?.metadata.dimensions.height },
-    { name: 'twitter:image', content: () => image.value?.url },
-    { name: 'twitter:image:width', content: () => image.value?.metadata.dimensions.width },
-    { name: 'twitter:image:height', content: () => image.value?.metadata.dimensions.height },
+    { name: 'og:image', content: () => imageUrl.value },
+    { name: 'og:image:width', content: () => imageDimensions.value?.width },
+    { name: 'og:image:height', content: () => imageDimensions.value?.height },
+    { name: 'twitter:image', content: () => imageUrl.value },
+    { name: 'twitter:image:width', content: () => imageDimensions.value?.width },
+    { name: 'twitter:image:height', content: () => imageDimensions.value?.height },
     { name: 'og:url', content: () => url.value },
     { name: 'twitter:url', content: () => url.value },
   ],
@@ -51,7 +53,7 @@ useHead({
 })
 
 useSeoMeta({
-  robots: () => ((seo.value?.indexable ? '' : 'no') + 'index,follow'),
+  robots: () => `${seo.value?.indexable ? '' : 'no'}index,follow`,
   title: () => seo.value?.title,
   description: () => seo.value?.description,
   ogTitle: () => seo.value?.shortTitle,
