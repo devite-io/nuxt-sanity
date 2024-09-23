@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.1.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.2...v1.1.3)
+
+### 🩹 Fixes
+
+- Make sanity component type reactive ([c118c1a](https://github.com/devite-io/nuxt-sanity/commit/c118c1a))
+- Use query parameter for slug ([6ac0374](https://github.com/devite-io/nuxt-sanity/commit/6ac0374))
+
+### 💅 Refactors
+
+- Reduce duplicate code ([9111de6](https://github.com/devite-io/nuxt-sanity/commit/9111de6))
+
+### 📖 Documentation
+
+- Update module description ([6ae21df](https://github.com/devite-io/nuxt-sanity/commit/6ae21df))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.1.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.1...v1.1.2)
