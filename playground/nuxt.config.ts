@@ -39,5 +39,14 @@ export default defineNuxtConfig({
     dirs: ['../types/**/*.ts'],
   },
 
+  // server
+  nitro: {
+    prerender: {
+      routes: ['/'],
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
+
   compatibilityDate: '2024-09-17',
 })
