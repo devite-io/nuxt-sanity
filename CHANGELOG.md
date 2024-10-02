@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.3...v1.2.0)
+
+### 🚀 Enhancements
+
+- Automatically resolve image references ([fa1bb6a](https://github.com/devite-io/nuxt-sanity/commit/fa1bb6a))
+- Add demo section to playground cms ([75048de](https://github.com/devite-io/nuxt-sanity/commit/75048de))
+
+### 📖 Documentation
+
+- Restructure environment file ([7b635ac](https://github.com/devite-io/nuxt-sanity/commit/7b635ac))
+
+### 🏡 Chore
+
+- Update dependencies ([ea0b12d](https://github.com/devite-io/nuxt-sanity/commit/ea0b12d))
+
+### ✅ Tests
+
+- **playground:** Add prerender capabilities ([65ea82e](https://github.com/devite-io/nuxt-sanity/commit/65ea82e))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.1.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.2...v1.1.3)
