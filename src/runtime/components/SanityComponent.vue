@@ -2,7 +2,8 @@
   <component
     :is="component"
     v-if="data"
-    :data="data"
+    ref="componentRef"
+    v-bind="{ ...$props, ...$attrs }"
   >
     <slot />
   </component>
@@ -35,4 +36,7 @@ const component = computed<Component>(() => {
 
   return null
 })
+
+const componentRef = ref<Component>()
+defineExpose({ componentRef })
 </script>
