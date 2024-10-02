@@ -5,6 +5,8 @@ import { globalSEOType } from './objects/global/globalSEOType'
 import { seoType } from './objects/seoType'
 
 import { richTextType } from './richText/richTextType'
+import { imageBlockType } from './objects/module/imageBlockType'
+import { demoSectionType } from './objects/module/demoSectionType'
 
 import { pageType } from './documents/page'
 
@@ -17,7 +19,7 @@ const annotations = [linkExternalType, linkInternalType]
 
 const objects = [globalSEOType, seoType]
 
-const blocks = [richTextType]
+const blocks = [richTextType, imageBlockType, demoSectionType]
 
 const documents = [pageType]
 

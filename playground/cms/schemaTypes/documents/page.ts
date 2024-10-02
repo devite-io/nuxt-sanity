@@ -2,7 +2,7 @@ import { DocumentIcon } from '@sanity/icons'
 import { defineField } from 'sanity'
 
 import { validateSlug } from '../../utils/validateSlug'
-import { GROUPS } from '../../constants'
+import { GROUPS, MODULE_TYPES } from '../../constants'
 
 export const pageType = defineField({
   name: 'page',
@@ -23,6 +23,12 @@ export const pageType = defineField({
       type: 'slug',
       options: { source: 'title' },
       validation: validateSlug,
+    }),
+    defineField({
+      name: 'modules',
+      group: 'editorial',
+      type: 'array',
+      of: MODULE_TYPES,
     }),
     defineField({
       name: 'seo',

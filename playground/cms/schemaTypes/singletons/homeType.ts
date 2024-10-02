@@ -1,6 +1,6 @@
 import { HomeIcon } from '@sanity/icons'
 import { defineField } from 'sanity'
-import { GROUPS } from '../../constants'
+import { GROUPS, MODULE_TYPES } from '../../constants'
 
 const TITLE = 'Home'
 
@@ -13,9 +13,9 @@ export const homeType = defineField({
   fields: [
     defineField({
       name: 'modules',
-      type: 'array',
-      of: [],
       group: 'editorial',
+      type: 'array',
+      of: MODULE_TYPES,
     }),
     defineField({
       name: 'seo',

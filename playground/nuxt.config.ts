@@ -1,8 +1,10 @@
+import { fileURLToPath } from 'node:url'
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
   // modules
-  modules: ['@nuxtjs/sanity', '../src/module'],
+  modules: ['@nuxtjs/sanity', '@nuxt/image', '../src/module'],
   image: {
     provider: 'sanity',
     screens: {
@@ -36,7 +38,11 @@ export default defineNuxtConfig({
 
   // auto-imports for types
   imports: {
-    dirs: ['../types/**/*.ts'],
+    dirs: ['types/**/*.ts'],
+  },
+
+  alias: {
+    '#module-types': fileURLToPath(new URL('../src/runtime/types', import.meta.url)),
   },
 
   // server

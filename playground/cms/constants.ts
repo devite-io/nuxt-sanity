@@ -8,6 +8,9 @@ export const LOCKED_DOCUMENT_TYPES = ['settings', 'home', 'notFound', 'media.tag
 // References to include in 'internal' links
 export const PAGE_REFERENCES = [{ type: 'home' }, { type: 'page' }]
 
+// Module types
+export const MODULE_TYPES = [{ type: 'imageBlock' }, { type: 'demoSection' }]
+
 // Field groups used through schema types
 export const GROUPS = [
   {
