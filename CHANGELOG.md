@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.2.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- Forward props and attributes to dynamic component + expose ref to component ([f615f94](https://github.com/devite-io/nuxt-sanity/commit/f615f94))
+
+### 🩹 Fixes
+
+- Add required imports ([992aa75](https://github.com/devite-io/nuxt-sanity/commit/992aa75))
+- Visual editing for page documents ([f686cbb](https://github.com/devite-io/nuxt-sanity/commit/f686cbb))
+- Adjust linting rules to be compatible with prettier ([96e125a](https://github.com/devite-io/nuxt-sanity/commit/96e125a))
+
+### ✅ Tests
+
+- **playground/cms:** Add media plugin ([213ea0d](https://github.com/devite-io/nuxt-sanity/commit/213ea0d))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.2.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.1.3...v1.2.0)
