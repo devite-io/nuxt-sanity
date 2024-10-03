@@ -1,5 +1,7 @@
 import { defineConfig } from 'sanity'
 
+import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array'
+import { media, mediaAssetSource } from 'sanity-plugin-media'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
@@ -17,6 +19,8 @@ export default defineConfig({
   plugins: [
     customDocumentActions(),
     structureTool({ structure }),
+    imageHotspotArrayPlugin(),
+    media(),
     presentationTool({
       title: 'Preview',
       previewUrl: {
@@ -32,5 +36,18 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  form: {
+    file: {
+      assetSources: (previousAssetSources) => {
+        return previousAssetSources.filter((assetSource) => assetSource !== mediaAssetSource)
+      },
+    },
+    image: {
+      assetSources: (previousAssetSources) => {
+        return previousAssetSources.filter((assetSource) => assetSource === mediaAssetSource)
+      },
+    },
   },
 })
