@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useSanityQuery } from '@nuxtjs/sanity/runtime/composables'
+import { useSanityQuery } from '@nuxtjs/sanity/runtime/composables/visual-editing'
 import { groq } from '@nuxtjs/sanity/runtime/groq'
 import type { ComputedRef } from 'vue'
 import type { ImageAsset } from '@sanity/types'
@@ -18,15 +18,13 @@ import type { Page } from '../types/documents/Page'
 import type { NotFound } from '../types/singletons/NotFound'
 import type { GlobalSEO } from '../types/objects/global/GlobalSEO'
 import { IMAGE_WITHOUT_PREVIEW_PROJECTION } from '../utils/projections'
-import { useHead, useRoute, useRuntimeConfig, useSeoMeta } from '#app'
-import { computed } from '#imports'
-
-const { baseURL } = useRuntimeConfig().public
+import { useHead, useRoute, useRuntimeConfig, useSeoMeta, computed } from '#imports'
 
 const path = useRoute().fullPath
 const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`
 const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`, { slug: path.substring(1) })
 
+const { baseURL } = useRuntimeConfig().public
 const seo = computed(() => sanityData.value?.seo)
 const url = computed(() => baseURL + (sanityData.value?.slug || '/'))
 
