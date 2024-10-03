@@ -7,7 +7,7 @@ export const demoSectionType = defineField({
     defineField({
       name: 'headline',
       type: 'string',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'paragraph',

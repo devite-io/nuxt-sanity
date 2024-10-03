@@ -19,7 +19,7 @@ export const seoType = defineField({
     defineField({
       name: 'title',
       type: 'string',
-      validation: Rule =>
+      validation: (Rule) =>
         Rule.max(50).warning('Longer titles may be truncated by search engines').required(),
     }),
     defineField({
@@ -27,14 +27,14 @@ export const seoType = defineField({
       title: 'Short Title',
       type: 'string',
       description: 'A short, descriptive title for sharing on social media',
-      validation: Rule =>
+      validation: (Rule) =>
         Rule.max(50).warning('Longer titles may be truncated by some platforms').required(),
     }),
     defineField({
       name: 'description',
       type: 'text',
       rows: 2,
-      validation: Rule =>
+      validation: (Rule) =>
         Rule.max(150).warning('Longer descriptions may be truncated by search engines').required(),
     }),
     defineField({

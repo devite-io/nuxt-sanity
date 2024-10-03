@@ -11,7 +11,7 @@ export const linkExternalType = defineField({
       title: 'URL',
       name: 'url',
       type: 'url',
-      validation: Rule => Rule.required().uri({ scheme: ['http', 'https'] }),
+      validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'] }),
     }),
     defineField({
       title: 'Open in a new window?',

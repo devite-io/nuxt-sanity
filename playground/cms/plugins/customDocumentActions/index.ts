@@ -21,7 +21,7 @@ export const resolveDocumentActions: DocumentActionsResolver = (prev, { schemaTy
 }
 
 export const resolveNewDocumentOptions: NewDocumentOptionsResolver = (prev) => {
-  return prev.filter(previousOption => !LOCKED_DOCUMENT_TYPES.includes(previousOption.templateId))
+  return prev.filter((previousOption) => !LOCKED_DOCUMENT_TYPES.includes(previousOption.templateId))
 }
 
 export const customDocumentActions = definePlugin({

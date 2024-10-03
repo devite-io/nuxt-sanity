@@ -25,7 +25,7 @@ const component = computed<Component>(() => {
     case 'linkExternal':
       return SanityLinkExternal
     default:
-      if (data?.constructor.name === 'Array' && data.every(item => item._type === 'block'))
+      if (data?.constructor.name === 'Array' && data.every((item) => item._type === 'block'))
         return SanityRichText
       else if (type) {
         const upperCamelCase = type.charAt(0).toUpperCase() + type.slice(1)
