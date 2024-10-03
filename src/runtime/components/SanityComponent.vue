@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import type { Component } from '@nuxt/schema'
-import { computed, resolveComponent } from '#imports'
+import { computed, ref, resolveComponent } from '#imports'
 import { SanityLinkExternal, SanityLinkInternal, SanityRichText } from '#components'
 
 const { data } = defineProps<{ data?: object }>()
