@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LinkInternal } from '../types/objects/link/LinkInternal'
+import type { LinkInternal } from '@devite/nuxt-sanity'
 
 defineProps<{ data: LinkInternal }>()
 </script>

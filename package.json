@@ -42,6 +42,7 @@
     "@sanity/types": "^3.59.0"
   },
   "devDependencies": {
+    "@devite/nuxt-sanity": "link:.",
     "@nuxt/devtools": "^1.5.1",
     "@nuxt/eslint-config": "^0.5.7",
     "@nuxt/module-builder": "^0.8.4",

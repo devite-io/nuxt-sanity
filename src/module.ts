@@ -1,5 +1,7 @@
 import { addComponentsDir, addImportsDir, createResolver, defineNuxtModule } from '@nuxt/kit'
 
+export * from './types'
+
 export default defineNuxtModule({
   meta: {
     name: '@devite/nuxt-sanity',

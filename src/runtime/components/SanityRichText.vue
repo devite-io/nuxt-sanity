@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { PortableText, type PortableTextComponents } from '@portabletext/vue'
-import type { RichText } from '../types/richText/RichText'
+import type { RichText } from '@devite/nuxt-sanity'
 import { computed, h } from '#imports'
 import { SanityLinkExternal, SanityLinkInternal } from '#components'
 

@@ -1,4 +1,4 @@
-import type { RichText } from '#module-types/richText/RichText'
+import type { RichText } from '@devite/nuxt-sanity'
 
 export interface DemoSection {
   _type: 'demoSection'

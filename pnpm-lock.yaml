@@ -27,6 +27,9 @@ importers:
         specifier: ^3.59.0
         version: 3.59.0
     devDependencies:
+      '@devite/nuxt-sanity':
+        specifier: link:.
+        version: 'link:'
       '@nuxt/devtools':
         specifier: ^1.5.1
         version: 1.5.1(rollup@4.24.0)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))(vue@3.5.10(typescript@5.6.2))

@@ -13,10 +13,7 @@ import { useSanityQuery } from '@nuxtjs/sanity/runtime/composables/visual-editin
 import { groq } from '@nuxtjs/sanity/runtime/groq'
 import type { ComputedRef } from 'vue'
 import type { ImageAsset } from '@sanity/types'
-import type { Home } from '../types/singletons/Home'
-import type { Page } from '../types/documents/Page'
-import type { NotFound } from '../types/singletons/NotFound'
-import type { GlobalSEO } from '../types/objects/global/GlobalSEO'
+import type { Home, Page, NotFound, GlobalSEO } from '@devite/nuxt-sanity'
 import { IMAGE_WITHOUT_PREVIEW_PROJECTION } from '../utils/projections'
 import { useHead, useRoute, useRuntimeConfig, useSeoMeta, computed } from '#imports'
 

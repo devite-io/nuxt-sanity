@@ -1,5 +1,3 @@
-import { fileURLToPath } from 'node:url'
-
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
@@ -39,10 +37,6 @@ export default defineNuxtConfig({
   // auto-imports for types
   imports: {
     dirs: ['types/**/*.ts'],
-  },
-
-  alias: {
-    '#module-types': fileURLToPath(new URL('../src/runtime/types', import.meta.url)),
   },
 
   // server
