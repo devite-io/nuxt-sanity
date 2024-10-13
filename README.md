@@ -22,7 +22,7 @@ That's it! You can now use data from Sanity in your Nuxt app ✨
   
   ```bash
   # Install dependencies
-  pnpm install && cd playground/cms && pnpm install
+  pnpm install && cd playground/cms && pnpm install && cd -
   
   # Generate type stubs
   pnpm dev:prepare
