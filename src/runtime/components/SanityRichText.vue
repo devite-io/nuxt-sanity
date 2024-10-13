@@ -11,7 +11,7 @@ import type { RichText } from '@devite/nuxt-sanity'
 import { computed, h } from '#imports'
 import { SanityLinkExternal, SanityLinkInternal } from '#components'
 
-const { data, placeholders = {} } = defineProps<{ data: RichText, placeholders?: object }>()
+const { data, placeholders = {} as object } = defineProps<{ data: RichText, placeholders?: object }>()
 const currentData = computed(() => {
   return data.map((block) => {
     return {
