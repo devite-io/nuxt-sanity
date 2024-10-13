@@ -27,6 +27,9 @@ That's it! You can now use data from Sanity in your Nuxt app ✨
   # Generate type stubs
   pnpm dev:prepare
   
+  # Generate module types and build the module
+  pnpm prepack
+  
   # Develop with the playground
   pnpm dev
   
