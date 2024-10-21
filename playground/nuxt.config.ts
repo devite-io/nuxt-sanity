@@ -34,6 +34,10 @@ export default defineNuxtConfig({
     },
   },
 
+  build: {
+    transpile: ['@nuxtjs/sanity'],
+  },
+
   // auto-imports for types
   imports: {
     dirs: ['types/**/*.ts'],
