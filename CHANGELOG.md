@@ -1,6 +1,36 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.3.0...v1.4.0)
+
+### 🚀 Enhancements
+
+- Export types in build ([e5fe405](https://github.com/devite-io/nuxt-sanity/commit/e5fe405))
+
+### 🩹 Fixes
+
+- Imports in the playground ([fa89b1f](https://github.com/devite-io/nuxt-sanity/commit/fa89b1f))
+- Use visual editing composable + change return type of utility function ([5522e17](https://github.com/devite-io/nuxt-sanity/commit/5522e17))
+
+### 💅 Refactors
+
+- Code cleanup ([046f9b5](https://github.com/devite-io/nuxt-sanity/commit/046f9b5))
+
+### 📖 Documentation
+
+- Navigate back to working directory ([f6651e7](https://github.com/devite-io/nuxt-sanity/commit/f6651e7))
+- Add module build instructions ([92df290](https://github.com/devite-io/nuxt-sanity/commit/92df290))
+
+### 🏡 Chore
+
+- Update dependencies ([6405671](https://github.com/devite-io/nuxt-sanity/commit/6405671))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.3.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.2.0...v1.3.0)
