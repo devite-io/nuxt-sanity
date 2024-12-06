@@ -8,32 +8,26 @@
 <script setup lang="ts">
 import { PortableText, type PortableTextComponents } from '@portabletext/vue'
 import type { RichText } from '@devite/nuxt-sanity'
+import type { PortableTextChild, PortableTextSpan } from '@sanity/types'
 import { computed, h } from '#imports'
 import { SanityLinkExternal, SanityLinkInternal } from '#components'
 
-const { data, placeholders = {} as object } = defineProps<{ data: RichText, placeholders?: object }>()
+const props = defineProps<{ data: RichText, placeholders?: Record<string, string> }>()
 const currentData = computed(() => {
-  return data.map((block) => {
+  return props.data.map((block) => {
     return {
       ...block,
-      children: replaceChildren(block.children),
+      children: replaceChildren(block.children as PortableTextChild[]),
     }
   })
 })
 
-function replaceChildren(children: object[]) {
+function replaceChildren(children: PortableTextChild[]): PortableTextChild[] {
   return children.map((child) => {
     if (child._type === 'span') {
       return {
         ...child,
-        text: replacePlaceholders(child.text),
-      }
-    }
-
-    if (child.children) {
-      return {
-        ...child,
-        children: replaceChildren(child.children),
+        text: replacePlaceholders((child as PortableTextSpan).text),
       }
     }
 
@@ -42,15 +36,17 @@ function replaceChildren(children: object[]) {
 }
 
 function replacePlaceholders(text: string) {
-  return text.replace(/\{\{(.*?)\}\}/g, (match, key) => placeholders[key] || match)
+  return text.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+    if (!props.placeholders || !Object.prototype.hasOwnProperty.call(props.placeholders, key)) return match
+
+    return props.placeholders[key]
+  })
 }
 
 const richTextSerializer: PortableTextComponents = {
   marks: {
-    linkExternal: ({ value }, { slots }) =>
-      h(SanityLinkExternal, { data: value }, slots.default),
-    linkInternal: ({ value }, { slots }) =>
-      h(SanityLinkInternal, { data: value }, slots.default),
+    linkExternal: ({ value }, { slots }) => h(SanityLinkExternal, { data: value }, slots.default),
+    linkInternal: ({ value }, { slots }) => h(SanityLinkInternal, { data: value }, slots.default),
   },
 }
 </script>

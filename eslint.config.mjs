@@ -12,18 +12,15 @@ export default createConfigForNuxt({
     },
   },
   dirs: {
-    src: [
-      './playground',
-    ],
+    src: ['./playground'],
   },
-})
-  .append(
-    {
-      rules: {
-        'vue/multi-word-component-names': 'off',
-      },
+}).append(
+  {
+    rules: {
+      'vue/multi-word-component-names': 'off',
     },
-    {
-      ignores: ['**/.sanity'],
-    },
-  )
+  },
+  {
+    ignores: ['**/.sanity'],
+  },
+)
