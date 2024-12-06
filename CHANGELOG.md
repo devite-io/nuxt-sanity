@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v1.5.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.4.0...v1.5.1)
+
+### 🚀 Enhancements
+
+- Change return type from null to undefined in function ([84ca478](https://github.com/devite-io/nuxt-sanity/commit/84ca478))
+- Add LINK_PROJECTION for external and internal links ([ace0b1f](https://github.com/devite-io/nuxt-sanity/commit/ace0b1f))
+- Add resolveInternalLink utility function ([c2b6fb4](https://github.com/devite-io/nuxt-sanity/commit/c2b6fb4))
+- Add link resolution logic to SanityLinkInternal ([db9ef36](https://github.com/devite-io/nuxt-sanity/commit/db9ef36))
+
+### 🩹 Fixes
+
+- Query parameter ([f686cbe](https://github.com/devite-io/nuxt-sanity/commit/f686cbe))
+
+### 🏡 Chore
+
+- Update dependencies ([647091e](https://github.com/devite-io/nuxt-sanity/commit/647091e))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.4.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.3.0...v1.4.0)
