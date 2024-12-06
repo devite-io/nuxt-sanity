@@ -9,8 +9,11 @@
 
 <script setup lang="ts">
 import type { LinkInternal } from '@devite/nuxt-sanity'
-import type { Ref } from '#imports'
+import type { Reference } from '@sanity/types'
+import { type Ref, resolveInternalLink } from '#imports'
 
-const { data } = defineProps<{ data: LinkInternal }>()
-const resolvedLink: Ref<LinkInternal | undefined> | undefined = 'reference' in data ? await resolveInternalLink(data.reference) : data
+const { data } = defineProps<{ data: LinkInternal | { reference: Reference } }>()
+const resolvedLink: Ref<LinkInternal | undefined> | LinkInternal = 'reference' in data
+  ? await resolveInternalLink(data.reference)
+  : data as LinkInternal
 </script>

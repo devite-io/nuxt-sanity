@@ -14,8 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import type { ImageAsset } from '@sanity/types'
+import type { ImageAsset, Reference } from '@sanity/types'
+import { type Ref, resolveImageAssetById } from '#imports'
 
-const { asset, loading = 'lazy' } = defineProps<{ asset?: ImageAsset, loading?: 'lazy' | 'eager' }>()
-const imageAsset = asset?._ref ? await resolveImageAssetById(asset._ref) : asset
+const { asset, loading = 'lazy' } = defineProps<{ asset?: ImageAsset | Reference, loading?: 'lazy' | 'eager' }>()
+const imageAsset: Ref<ImageAsset | undefined> | ImageAsset | undefined = asset?._ref
+  ? await resolveImageAssetById((asset as Reference)._ref)
+  : asset as (ImageAsset | undefined)
 </script>
