@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.5.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.5.1...v1.5.2)
+
+### 🩹 Fixes
+
+- Imports and types for helper components ([61adbce](https://github.com/devite-io/nuxt-sanity/commit/61adbce))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.5.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.4.0...v1.5.1)
