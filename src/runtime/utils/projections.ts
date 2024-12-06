@@ -18,3 +18,9 @@ export const IMAGE_WITH_PREVIEW_PROJECTION = groq`{
   _type,
   asset-> ${IMAGE_ASSET_PROJECTION}
 }`
+
+export const LINK_PROJECTION = groq`{
+  '_type': @._type,
+  _type == 'linkExternal' => { url, newWindow },
+  _type == 'linkInternal' => { 'slug': coalesce(@.reference->slug.current, '/') }
+}`
