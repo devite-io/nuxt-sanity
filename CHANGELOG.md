@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.5.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.5.2...v1.5.3)
+
+### 🩹 Fixes
+
+- Dynamic component slots + component resolve logic ([94ade62](https://github.com/devite-io/nuxt-sanity/commit/94ade62))
+
+### 💅 Refactors
+
+- Clean up code ([46e27f1](https://github.com/devite-io/nuxt-sanity/commit/46e27f1))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.5.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.5.1...v1.5.2)
