@@ -7,9 +7,9 @@
 
 <script setup lang="ts">
 import { PortableText, type PortableTextComponents } from '@portabletext/vue'
-import type { RichText } from '@devite/nuxt-sanity'
 import type { PortableTextChild, PortableTextSpan } from '@sanity/types'
-import { computed, h } from '#imports'
+import type { RichText } from '@devite/nuxt-sanity'
+import { computed, h } from 'vue'
 import { SanityLinkExternal, SanityLinkInternal } from '#components'
 
 const props = defineProps<{ data: RichText, placeholders?: Record<string, string> }>()
@@ -36,7 +36,7 @@ function replaceChildren(children: PortableTextChild[]): PortableTextChild[] {
 }
 
 function replacePlaceholders(text: string) {
-  return text.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+  return text.replace(/\{\{(.*?)}}/g, (match, key) => {
     if (!props.placeholders || !Object.prototype.hasOwnProperty.call(props.placeholders, key)) return match
 
     return props.placeholders[key]

@@ -13,8 +13,8 @@ export default defineConfig({
   name: 'default',
   title: 'nuxt-sanity-demo',
 
-  projectId: 'v797kwt3',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID || '',
+  dataset: process.env.SANITY_DATASET || '',
 
   plugins: [
     customDocumentActions(),
@@ -22,12 +22,12 @@ export default defineConfig({
     imageHotspotArrayPlugin(),
     media(),
     presentationTool({
-      title: 'Preview',
+      title: 'Visual Editor',
       previewUrl: {
         origin: 'http://localhost:3000',
         previewMode: {
-          enable: '/preview/enable',
-          disable: '/preview/disable',
+          enable: '/_sanity/preview/enable',
+          disable: '/_sanity/preview/disable',
         },
       },
     }),

@@ -1,11 +1,11 @@
 import type { Slug } from '@sanity/types'
-import type { SEO } from '../objects/SEO'
+import type { SanityArray, SanityModule, SEO } from '..'
 
 export interface Page {
   _id: string
   _type: 'page'
   title: string
   slug: Slug
-  modules: Array<object>
+  modules: SanityArray<SanityModule>
   seo: SEO
 }

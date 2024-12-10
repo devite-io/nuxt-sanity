@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "nuxi start"
+  },
+  "dependencies": {
+    "@devite/nuxt-sanity": "latest",
+    "nuxt": "3.14.1592",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "engines": {
+    "node": "^18.20.4 || ^20.9.0 || ^22.0.0 || >=23.0.0"
+  }
+}

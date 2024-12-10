@@ -6,7 +6,7 @@
     :width="imageAsset.metadata.dimensions.width"
     :height="imageAsset.metadata.dimensions.height"
     :alt="imageAsset.altText"
-    :placeholder="imageAsset.metadata.lqip"
+    :placeholder="loading === 'eager' ? undefined : imageAsset.metadata.lqip"
     :loading="loading"
     :format="imageAsset.mimeType === 'image/svg+xml' ? undefined : 'webp'"
     draggable="false"
@@ -15,10 +15,11 @@
 
 <script setup lang="ts">
 import type { ImageAsset, Reference } from '@sanity/types'
-import { type Ref, resolveImageAssetById } from '#imports'
+import type { Ref } from 'vue'
+import { resolveImageAssetById } from '#imports'
 
-const { asset, loading = 'lazy' } = defineProps<{ asset?: ImageAsset | Reference, loading?: 'lazy' | 'eager' }>()
-const imageAsset: Ref<ImageAsset | undefined> | ImageAsset | undefined = asset?._ref
+const { asset, loading = 'lazy' } = defineProps<{ asset?: ImageAsset | Reference, loading?: 'eager' | 'lazy' }>()
+const imageAsset: Ref<ImageAsset | null> | ImageAsset | undefined = asset?._ref
   ? await resolveImageAssetById((asset as Reference)._ref)
   : asset as (ImageAsset | undefined)
 </script>

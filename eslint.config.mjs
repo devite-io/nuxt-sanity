@@ -18,6 +18,7 @@ export default createConfigForNuxt({
   {
     rules: {
       'vue/multi-word-component-names': 'off',
+      'regexp/strict': 'off',
     },
   },
   {

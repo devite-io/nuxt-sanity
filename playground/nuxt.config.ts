@@ -1,8 +1,26 @@
 export default defineNuxtConfig({
-  devtools: { enabled: false },
 
   // modules
-  modules: ['@nuxtjs/sanity', '@nuxt/image', '../src/module'],
+  modules: ['@nuxt/image', '../src/module'],
+
+  // auto-imports for types
+  imports: {
+    dirs: ['types/**/*.ts'],
+  },
+
+  // runtime config
+  runtimeConfig: {
+    public: {
+      baseURL: 'http://localhost:3000',
+    },
+  },
+
+  // ignore Sanity Studio directory
+  ignore: ['cms'],
+
+  compatibilityDate: '2024-09-17',
+
+  // server
   image: {
     provider: 'sanity',
     screens: {
@@ -14,43 +32,20 @@ export default defineNuxtConfig({
       '2xl': 1536,
     },
     sanity: {
-      projectId: 'v797kwt3',
-      dataset: 'production',
+      projectId: process.env.NUXT_SANITY_PROJECT_ID,
+      dataset: process.env.NUXT_SANITY_DATASET,
     },
   },
   sanity: {
-    minimal: process.env.NUXT_SANITY_MINIMAL === 'true',
+    projectId: process.env.NUXT_SANITY_PROJECT_ID,
+    dataset: process.env.NUXT_SANITY_DATASET,
+    minimalClient: process.env.NUXT_SANITY_MINIMAL === 'true',
     visualEditing: {
+      mode: 'live-visual-editing',
       studioUrl: process.env.NUXT_SANITY_STUDIO_URL,
       token: process.env.NUXT_SANITY_READ_TOKEN,
     },
     apiVersion: '2024-08-08',
   },
 
-  // runtime config
-  runtimeConfig: {
-    public: {
-      baseURL: 'http://localhost:3000',
-    },
-  },
-
-  build: {
-    transpile: ['@nuxtjs/sanity'],
-  },
-
-  // auto-imports for types
-  imports: {
-    dirs: ['types/**/*.ts'],
-  },
-
-  // server
-  nitro: {
-    prerender: {
-      routes: ['/'],
-      crawlLinks: true,
-      failOnError: false,
-    },
-  },
-
-  compatibilityDate: '2024-09-17',
 })

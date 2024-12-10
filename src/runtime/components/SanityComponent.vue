@@ -18,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Component } from '@nuxt/schema'
-import { computed, ref, resolveComponent } from '#imports'
-import { SanityLinkExternal, SanityLinkInternal, SanityRichText } from '#components'
+import { type Component, computed, ref, resolveComponent } from 'vue'
+import type { SanityModule } from '@devite/nuxt-sanity'
+import { SanityImageAsset, SanityLinkExternal, SanityLinkInternal, SanityRichText } from '#components'
 
-const { data } = defineProps<{ data?: { _type?: string } | Array<{ _type: string }> }>()
+const { data } = defineProps<{ data?: SanityModule | Array<SanityModule> }>()
 
 const component = computed<Component | null>(() => {
   if (Array.isArray(data) && data.every((item) => item._type === 'block')) {
@@ -37,6 +37,8 @@ const component = computed<Component | null>(() => {
         return SanityLinkInternal
       case 'linkExternal':
         return SanityLinkExternal
+      case 'sanity.imageAsset':
+        return SanityImageAsset
       default: {
         const upperCamelCase = type.charAt(0).toUpperCase() + type.slice(1)
         const resolvedComponent = resolveComponent('Sanity' + upperCamelCase)

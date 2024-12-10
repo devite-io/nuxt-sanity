@@ -2,7 +2,7 @@
 
 [![npm version][npm-version-src]][npm-version-href]
 
-Provides additional helper components and utilities for the [Nuxt Sanity Module][nuxt-sanity].
+Advanced [Sanity](https://www.sanity.io/) integration for Nuxt.js. Based on the official [@nuxtjs/sanity][nuxt-sanity] module.
 
 ## Quick Setup
 
@@ -12,7 +12,7 @@ Install the module to your Nuxt application with one command:
 npx nuxi module add @devite/nuxt-sanity
 ```
 
-That's it! You can now use data from Sanity in your Nuxt app ✨
+That's it! You can now use Sanity with your Nuxt app ✨
 
 
 ## Contribution
@@ -22,7 +22,7 @@ That's it! You can now use data from Sanity in your Nuxt app ✨
   
   ```bash
   # Install dependencies
-  pnpm install && cd playground/cms && pnpm install && cd -
+  pnpm install
   
   # Generate type stubs
   pnpm dev:prepare

@@ -1,4 +1,4 @@
-import type { Image } from '@sanity/types'
+import type { ImageAsset } from '@sanity/types'
 
 export interface SEO {
   _type: 'seo'
@@ -6,5 +6,5 @@ export interface SEO {
   title: string
   shortTitle: string
   description: string
-  image?: Image
+  image?: { asset: ImageAsset }
 }

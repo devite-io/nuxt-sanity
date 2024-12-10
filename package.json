@@ -1,7 +1,7 @@
 {
   "name": "@devite/nuxt-sanity",
   "version": "1.5.3",
-  "description": "Provides additional helper components and utilities for the Nuxt.js Sanity module",
+  "description": "Advanced Sanity integration for Nuxt.js.",
   "repository": "devite-io/nuxt-sanity",
   "license": "MIT",
   "author": {
@@ -28,33 +28,46 @@
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
     "release": "pnpm lint && pnpm test && pnpm prepack && changelogen --release && pnpm publish --access=public && git push --follow-tags",
-    "lint": "eslint .",
+    "lint": "eslint --fix .",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+    "test:types": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
-    "@nuxt/kit": "^3.13.2",
-    "@nuxtjs/sanity": "^1.12.2",
+    "@nuxt/kit": "^3.14.1592",
     "@portabletext/vue": "^1.0.11",
     "@sanity/client": "^6.24.1",
-    "@sanity/types": "^3.66.1"
+    "@sanity/core-loader": "^1.7.19",
+    "@sanity/preview-url-secret": "^2.0.5",
+    "@sanity/types": "^3.66.1",
+    "@sanity/visual-editing": "^2.10.5",
+    "defu": "^6.1.4",
+    "ofetch": "^1.4.1",
+    "ohash": "^1.1.4"
   },
   "devDependencies": {
-    "@devite/nuxt-sanity": "link:",
-    "@nuxt/eslint-config": "^0.5.7",
+    "@nuxt/eslint-config": "^0.7.2",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/schema": "^3.13.2",
+    "@nuxt/schema": "^3.14.1592",
     "@nuxt/test-utils": "^3.15.1",
-    "@types/node": "^22.10.1",
+    "@types/node": "latest",
     "changelogen": "^0.5.7",
-    "eslint": "^9.12.0",
-    "nuxt": "^3.13.2",
+    "eslint": "^9.16.0",
+    "h3": "^1.13.0",
+    "nuxt": "^3.14.1592",
     "prettier": "^3.4.2",
-    "typescript": "^5.7.2",
+    "typescript": "~5.6.3",
     "vitest": "^2.1.8",
+    "vue-router": "^4.5.0",
     "vue-tsc": "^2.1.10"
   },
-  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
+  "resolutions": {
+    "@devite/nuxt-sanity": "link:."
+  },
+  "build": {
+    "externals": [
+      "@sanity/client"
+    ]
+  }
 }
