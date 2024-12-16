@@ -1,7 +1,8 @@
 <template>
   <NuxtLink
     :to="data.url"
-    :options="{ external: true, target: data.newWindow ? '_blank' : '_self' }"
+    :target="data.newWindow ? '_blank' : '_self'"
+    external
   >
     <slot />
   </NuxtLink>
