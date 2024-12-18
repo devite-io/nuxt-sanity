@@ -1,6 +1,6 @@
 import { onScopeDispose } from 'vue'
 import type DefaultSanityClient from '../client/DefaultSanityClient'
-import { useSanityClient } from '#imports'
+import useSanityClient from '../utils/useSanityClient'
 
 export const useSanityLiveMode = () => {
   let disable = () => {}

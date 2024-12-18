@@ -8,7 +8,7 @@
 import type { Reference } from '@sanity/types'
 import type { LinkInternal } from '@devite/nuxt-sanity'
 import type { Ref } from 'vue'
-import { resolveInternalLink } from '#imports'
+import { resolveInternalLink } from '../utils/resolveInternalLink'
 
 const { data } = defineProps<{ data: LinkInternal | { reference: Reference } }>()
 const resolvedLink: Ref<LinkInternal | null> | LinkInternal = 'reference' in data

@@ -1,9 +1,9 @@
 import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
+import { useSanityLiveMode } from '../composables/useSanityLiveMode'
+import { useSanityVisualEditing } from '../composables/useSanityVisualEditing'
 import {
   defineNuxtPlugin,
   useRuntimeConfig,
-  useSanityLiveMode,
-  useSanityVisualEditing,
 } from '#imports'
 
 export default defineNuxtPlugin(() => {

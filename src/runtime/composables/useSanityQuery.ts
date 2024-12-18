@@ -12,7 +12,8 @@ import type { AsyncData, AsyncDataOptions, AsyncDataRequestStatus } from 'nuxt/a
 import type { QueryStoreState } from '@sanity/core-loader'
 import { onScopeDispose, reactive, type Ref, ref } from 'vue'
 import type DefaultSanityClient from '../client/DefaultSanityClient'
-import { useAsyncData, useLazyAsyncData, useSanityClient } from '#imports'
+import useSanityClient from '../utils/useSanityClient'
+import { useAsyncData, useLazyAsyncData } from '#imports'
 
 export interface SanityQueryResponse<T> {
   data: T

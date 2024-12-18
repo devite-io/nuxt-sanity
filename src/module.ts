@@ -36,18 +36,6 @@ export default defineNuxtModule<ModuleOptions>({
       visualEditing: options.visualEditing || null,
     })
 
-    /* Imports */
-
-    nuxt.hook('nitro:config', (config) => {
-      config.externals ||= {}
-      config.externals.inline ||= []
-      config.externals.inline.push(resolve('runtime'))
-    })
-
-    addImportsDir(resolve('runtime/client'))
-    addImportsDir(resolve('runtime/utils'))
-    addImportsDir(resolve('runtime/composables'))
-
     /* Visual Editing */
 
     if (sanityRuntimeConfig.visualEditing) {
@@ -81,8 +69,6 @@ export default defineNuxtModule<ModuleOptions>({
         console.warn('Visual Editing requires "stega" to be enabled in "live-visual-editing" mode')
 
       nuxt.options.build.transpile.push(
-        resolve('runtime'),
-        '@devite/nuxt-sanity',
         'async-cache-dedupe',
         '@sanity/core-loader',
         '@sanity/preview-url-secret',
@@ -153,6 +139,12 @@ export default defineNuxtModule<ModuleOptions>({
           && ({ enabled: true, studioUrl: options.visualEditing.studioUrl } as StegaConfig))
         || {},
     }
+
+    /* Imports */
+
+    addImportsDir(resolve('runtime/client'))
+    addImportsDir(resolve('runtime/utils'))
+    addImportsDir(resolve('runtime/composables'))
 
     /* Components */
 
