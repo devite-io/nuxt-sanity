@@ -36,6 +36,18 @@ export default defineNuxtModule<ModuleOptions>({
       visualEditing: options.visualEditing || null,
     })
 
+    /* Imports */
+
+    nuxt.hook('nitro:config', (config) => {
+      config.externals ||= {}
+      config.externals.inline ||= []
+      config.externals.inline.push(resolve('runtime'))
+    })
+
+    addImportsDir(resolve('runtime/client'))
+    addImportsDir(resolve('runtime/utils'))
+    addImportsDir(resolve('runtime/composables'))
+
     /* Visual Editing */
 
     if (sanityRuntimeConfig.visualEditing) {
@@ -52,19 +64,43 @@ export default defineNuxtModule<ModuleOptions>({
         zIndex: 100,
       })
 
-      sanityRuntimeConfig.visualEditing = defu(sanityRuntimeConfig.visualEditing, visualEditingConfig && {
-        previewModeId: visualEditingConfig.previewMode ? randomBytes(16).toString('hex') : '',
-        token: sanityRuntimeConfig.visualEditing.token || '',
-      })
+      sanityRuntimeConfig.visualEditing = defu(
+        sanityRuntimeConfig.visualEditing,
+        visualEditingConfig && {
+          previewModeId: visualEditingConfig.previewMode ? randomBytes(16).toString('hex') : '',
+          token: sanityRuntimeConfig.visualEditing.token || '',
+        },
+      )
 
       if (!sanityRuntimeConfig.visualEditing.token?.length)
         console.warn('Visual editing requires a token with "read" access')
 
-      if (!visualEditingConfig.studioUrl)
-        console.warn('Visual editing requires a studio URL')
+      if (!visualEditingConfig.studioUrl) console.warn('Visual editing requires a studio URL')
 
       if (visualEditingConfig.mode === 'live-visual-editing' && !visualEditingConfig.stega)
         console.warn('Visual Editing requires "stega" to be enabled in "live-visual-editing" mode')
+
+      nuxt.options.build.transpile.push(
+        resolve('runtime'),
+        '@devite/nuxt-sanity',
+        'async-cache-dedupe',
+        '@sanity/core-loader',
+        '@sanity/preview-url-secret',
+      )
+      nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
+        dedupe: ['@sanity/client'],
+      })
+      nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
+        include: [
+          `${name} > @sanity/visual-editing > @sanity/mutate > lodash/groupBy.js`,
+          `${name} > @sanity/visual-editing > react`,
+          `${name} > @sanity/visual-editing > react/jsx-runtime`,
+          `${name} > @sanity/visual-editing > react-dom`,
+          `${name} > @sanity/visual-editing > react-dom/client`,
+          `${name} > @sanity/visual-editing > react-compiler-runtime`,
+          '@sanity/client',
+        ],
+      })
 
       if (visualEditingConfig.mode !== 'custom') {
         addPlugin({
@@ -96,22 +132,6 @@ export default defineNuxtModule<ModuleOptions>({
         route: visualEditingConfig.proxyEndpoint,
         handler: resolve('runtime/server/routes/proxy'),
       })
-
-      nuxt.options.build.transpile.push(resolve('runtime'), '@devite/nuxt-sanity', 'async-cache-dedupe', '@sanity/core-loader', '@sanity/preview-url-secret')
-      nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
-        include: [
-          `${name} > @sanity/visual-editing > @sanity/mutate > lodash/groupBy.js`,
-          `${name} > @sanity/visual-editing > react`,
-          `${name} > @sanity/visual-editing > react/jsx-runtime`,
-          `${name} > @sanity/visual-editing > react-dom`,
-          `${name} > @sanity/visual-editing > react-dom/client`,
-          `${name} > @sanity/visual-editing > react-compiler-runtime`,
-          '@sanity/client',
-        ],
-      })
-      nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
-        dedupe: ['@sanity/client'],
-      })
     }
 
     nuxt.options.runtimeConfig.sanity = sanityRuntimeConfig
@@ -126,16 +146,17 @@ export default defineNuxtModule<ModuleOptions>({
       visualEditing: sanityRuntimeConfig.visualEditing,
       token: null,
       withCredentials: false,
-      stega: (options.visualEditing && options.visualEditing.stega !== false && options.visualEditing.previewMode !== false && ({ enabled: true, studioUrl: options.visualEditing.studioUrl } as StegaConfig)) || {},
+      stega:
+        (options.visualEditing
+          && options.visualEditing.stega !== false
+          && options.visualEditing.previewMode !== false
+          && ({ enabled: true, studioUrl: options.visualEditing.studioUrl } as StegaConfig))
+        || {},
     }
 
-    /* Import and component registration */
+    /* Components */
 
     await addComponentsDir({ path: resolve('runtime/components') })
     await addComponentsDir({ path: '~/sanity', global: true, prefix: 'Sanity' })
-
-    addImportsDir(resolve('runtime/client'))
-    addImportsDir(resolve('runtime/utils'))
-    addImportsDir(resolve('runtime/composables'))
   },
 })
