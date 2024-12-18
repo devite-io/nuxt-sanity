@@ -43,7 +43,7 @@ export interface UseSanityQueryOptions<T> extends AsyncDataOptions<T> {
   perspective?: 'previewDrafts' | 'published' | 'raw'
 }
 
-export default function useSanityQuery<T = unknown, E = Error>(query: string, _params: QueryParams = {}, _options: UseSanityQueryOptions<SanityQueryResponse<T | null>> = {}, lazy = false): AsyncSanityData<T | null, E> {
+export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: QueryParams = {}, _options: UseSanityQueryOptions<SanityQueryResponse<T | null>> = {}, lazy = false): AsyncSanityData<T | null, E> => {
   const { client: clientType, perspective: _perspective, ...options } = _options
   const client = clientType ? useSanityClient(clientType) : useSanityClient()
   const perspective = (

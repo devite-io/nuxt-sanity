@@ -10,7 +10,7 @@ export interface VisualEditingProps {
 }
 
 /** @return A function to disable visual editing */
-export default function useSanityVisualEditing(options: VisualEditingProps = {}): DisableVisualEditing {
+export const useSanityVisualEditing = (options: VisualEditingProps = {}): DisableVisualEditing => {
   const { refresh, zIndex } = options
   let disable = () => {}
 

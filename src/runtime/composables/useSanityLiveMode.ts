@@ -2,7 +2,7 @@ import { onScopeDispose } from 'vue'
 import type DefaultSanityClient from '../client/DefaultSanityClient'
 import { useSanityClient } from '#imports'
 
-export default function useSanityLiveMode() {
+export const useSanityLiveMode = () => {
   let disable = () => {}
 
   if (import.meta.client) {

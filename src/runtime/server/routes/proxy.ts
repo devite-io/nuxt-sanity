@@ -1,5 +1,5 @@
 import { createError, defineEventHandler, getCookie, readBody } from 'h3'
-import useSanityClient from '../../utils/useSanityClient'
+import useSanityClient from '../utils/useSanityClient'
 
 export default defineEventHandler(async (event) => {
   const previewModeCookie = getCookie(event, '__sanity_preview')

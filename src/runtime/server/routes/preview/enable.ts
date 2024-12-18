@@ -1,6 +1,6 @@
 import { validatePreviewUrl } from '@sanity/preview-url-secret'
 import { createError, defineEventHandler, getRequestURL, sendRedirect, setCookie } from 'h3'
-import useSanityClient from '../../../utils/useSanityClient'
+import useSanityClient from '../../utils/useSanityClient'
 import type DefaultSanityClient from '../../../client/DefaultSanityClient'
 
 export default defineEventHandler(async (event) => {

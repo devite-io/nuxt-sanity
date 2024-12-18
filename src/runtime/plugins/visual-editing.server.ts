@@ -1,5 +1,5 @@
 import defu from 'defu'
-import useSanityVisualEditingState from '../composables/useSanityVisualEditingState'
+import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
 import { defineNuxtPlugin, useCookie, useRuntimeConfig } from '#imports'
 
 export default defineNuxtPlugin(() => {
