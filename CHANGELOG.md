@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v2.0.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.0.0...v2.0.1)
+
+### 🩹 Fixes
+
+- **types:** Vue-router + internal types ([768174b](https://github.com/devite-io/nuxt-sanity/commit/768174b))
+- **playground:** Add import to module type ([fefe0a1](https://github.com/devite-io/nuxt-sanity/commit/fefe0a1))
+
+### 🏡 Chore
+
+- Update dependencies + remove prettier ([dacddc4](https://github.com/devite-io/nuxt-sanity/commit/dacddc4))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.0.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.5.3...v2.0.0)
