@@ -1,5 +1,4 @@
 import type {
-  ClientConfig,
   ClientPerspective,
   ContentSourceMap,
   FilteredResponseQueryOptions,
@@ -8,7 +7,7 @@ import type {
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 
 export default abstract class SanityClient {
-  public config: ClientConfig & ModuleOptions
+  public config: ModuleOptions
   public sourceMap: ContentSourceMap | undefined = undefined
 
   protected constructor(config: ModuleOptions) {

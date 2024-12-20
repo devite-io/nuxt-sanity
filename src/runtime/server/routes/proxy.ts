@@ -20,8 +20,5 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const client = useSanityClient('default')
-  client.config.useCdn = false
-
-  return await client.fetch(query, params)
+  return await useSanityClient('default').fetch(query, params)
 })

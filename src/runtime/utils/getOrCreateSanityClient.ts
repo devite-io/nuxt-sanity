@@ -24,7 +24,7 @@ export default function getOrCreateSanityClient(
   const client
     = clientType === 'minimal' ? new MinimalSanityClient(clientConfig) : new DefaultSanityClient(clientConfig)
 
-  if (visualEditing) (client as DefaultSanityClient).createQueryStore()
+  if (visualEditing && import.meta.client) (client as DefaultSanityClient).createQueryStore()
 
   clients[clientType] = client
 

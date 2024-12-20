@@ -47,8 +47,9 @@ export interface UseSanityQueryOptions<T> extends AsyncDataOptions<T> {
 export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: QueryParams = {}, _options: UseSanityQueryOptions<SanityQueryResponse<T | null>> = {}, lazy = false): AsyncSanityData<T | null, E> => {
   const { client: clientType, perspective: _perspective, ...options } = _options
   const client = clientType ? useSanityClient(clientType) : useSanityClient()
+  const hasQueryStore = 'queryStore' in client && client.queryStore !== null
   const perspective = (
-    (_perspective || 'queryStore' in client) ? 'previewDrafts' : 'published'
+    (_perspective || (hasQueryStore ? 'previewDrafts' : 'published'))
   ) as ClientPerspective
 
   const key = 'sanity-' + hash(query + (_params ? JSON.stringify(_params) : ''))
@@ -69,13 +70,15 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     sourceMap.value = newSourceMap || null
 
     if (client.config.visualEditing) {
-      encodeDataAttribute.value = defineEncodeDataAttribute(newData, newSourceMap, client.config?.visualEditing?.studioUrl)
+      encodeDataAttribute.value = defineEncodeDataAttribute(newData, newSourceMap, client.config.visualEditing?.studioUrl)
     }
   }
 
-  let fetchFunc = () => client.fetch<SanityQueryResponse<T>>(query, reactiveParams || {}, { perspective })
+  let fetchFunc: () => Promise<SanityQueryResponse<T>> = async () => {
+    return { data: await client.fetch<T>(query, reactiveParams || {}, { perspective }) }
+  }
 
-  if ('queryStore' in client) {
+  if (hasQueryStore) {
     const defaultClient = client as DefaultSanityClient
 
     let unsubscribe = () => {}
@@ -83,9 +86,8 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     function setupFetcher(cb?: (state: Readonly<QueryStoreState<T, E>>) => void) {
       unsubscribe()
 
-      if (!defaultClient.queryStore) return
-
-      const fetcher = defaultClient.queryStore.createFetcherStore<T, E>(query, _params, undefined)
+      const deepClonedParams = JSON.parse(JSON.stringify(_params))
+      const fetcher = defaultClient.queryStore!.createFetcherStore<T, E>(query, deepClonedParams, undefined)
 
       unsubscribe = fetcher.subscribe((newSnapshot) => {
         if (newSnapshot.data) {
@@ -100,7 +102,7 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
         query: string,
         params: QueryParams,
         options: UnfilteredResponseQueryOptions,
-      ) => $fetch<{ result: T, resultSourceMap: ContentSourceMap }>(defaultClient.config.visualEditing!.proxyEndpoint || '/_sanity/proxy', {
+      ) => $fetch<{ result: T, resultSourceMap: ContentSourceMap }>(defaultClient.config.visualEditing!.proxyEndpoint || '/_sanity/fetch', {
         method: 'POST',
         body: { query, params, options },
       }),
@@ -127,8 +129,8 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     ? useLazyAsyncData<SanityQueryResponse<T | null>, E>(key, fetchFunc, options)
     : useAsyncData<SanityQueryResponse<T | null>, E>(key, fetchFunc, options)) as AsyncData<SanityQueryResponse<T | null>, E>
 
-  return Object.assign(new Promise((resolve) => pendingData.then(async (result) => {
-    updateResult(result.data.value?.data, client.sourceMap)
-    resolve(result)
+  return Object.assign(new Promise((resolve) => pendingData.then(({ data: { value } }) => {
+    updateResult(value.data, value.sourceMap)
+    resolve({ ...pendingData, data, sourceMap, encodeDataAttribute })
   })), { ...pendingData, data, sourceMap, encodeDataAttribute }) as AsyncSanityData<T | null, E>
 }

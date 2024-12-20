@@ -1,4 +1,4 @@
-import { randomBytes } from 'node:crypto'
+import crypto from 'node:crypto'
 import {
   addComponentsDir,
   addImportsDir,
@@ -27,7 +27,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* Config validation */
 
-    const sanityRuntimeConfig = defu(nuxt.options.runtimeConfig.sanity || {}, {
+    const moduleConfig = defu(nuxt.options.runtimeConfig.public.sanity, {
       projectId: options.projectId,
       dataset: options.dataset || 'production',
       minimalClient: options.minimalClient || false,
@@ -38,29 +38,24 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* Visual Editing */
 
-    if (sanityRuntimeConfig.visualEditing) {
-      const visualEditingConfig = defu(sanityRuntimeConfig.visualEditing, {
+    if (options.visualEditing) {
+      const previewMode = moduleConfig.visualEditing.previewMode !== false
+      const visualEditingConfig = defu(moduleConfig.visualEditing, {
         mode: 'live-visual-editing',
-        previewMode: (sanityRuntimeConfig.visualEditing.previewMode !== false
-          ? defu(sanityRuntimeConfig.visualEditing.previewMode, {
+        previewMode: (previewMode
+          ? defu(moduleConfig.visualEditing.previewMode, {
               enable: '/_sanity/preview/enable',
               disable: '/_sanity/preview/disable',
             })
           : false) as { enable: string, disable: string } | false,
+        previewModeId: previewMode ? crypto.randomBytes(16).toString('hex') : '',
         proxyEndpoint: '/_sanity/fetch',
         stega: true,
         zIndex: 100,
+        token: '',
       })
 
-      sanityRuntimeConfig.visualEditing = defu(
-        sanityRuntimeConfig.visualEditing,
-        visualEditingConfig && {
-          previewModeId: visualEditingConfig.previewMode ? randomBytes(16).toString('hex') : '',
-          token: sanityRuntimeConfig.visualEditing.token || '',
-        },
-      )
-
-      if (!sanityRuntimeConfig.visualEditing.token?.length)
+      if (!moduleConfig.visualEditing.token?.length)
         console.warn('Visual editing requires a token with "read" access')
 
       if (!visualEditingConfig.studioUrl) console.warn('Visual editing requires a studio URL')
@@ -90,7 +85,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       addPlugin({ src: resolve('runtime/plugins/visual-editing') })
 
-      if (typeof visualEditingConfig.previewMode === 'object') {
+      if (previewMode) {
         addServerHandler({
           method: 'get',
           route: visualEditingConfig.previewMode.enable,
@@ -108,33 +103,39 @@ export default defineNuxtModule<ModuleOptions>({
         route: visualEditingConfig.proxyEndpoint,
         handler: resolve('runtime/server/routes/proxy'),
       })
+
+      moduleConfig.visualEditing = visualEditingConfig
     }
 
-    nuxt.options.runtimeConfig.sanity = sanityRuntimeConfig
-    nuxt.options.runtimeConfig.public.sanity = {
-      projectId: sanityRuntimeConfig.projectId,
-      dataset: sanityRuntimeConfig.dataset,
-      minimalClient: sanityRuntimeConfig.minimalClient,
-      useCdn: sanityRuntimeConfig.useCdn,
-      apiVersion: sanityRuntimeConfig.apiVersion,
+    nuxt.options.runtimeConfig.sanity = moduleConfig
+    nuxt.options.runtimeConfig.public.sanity = defu(nuxt.options.runtimeConfig.public.sanity, {
+      projectId: moduleConfig.projectId,
+      dataset: moduleConfig.dataset,
+      minimalClient: moduleConfig.minimalClient,
+      useCdn: moduleConfig.useCdn,
+      apiVersion: moduleConfig.apiVersion,
       perspective: 'raw',
       /* Visual Editing */
-      visualEditing: sanityRuntimeConfig.visualEditing,
-      token: null,
-      withCredentials: false,
+      token: options.token || '',
+      withCredentials: options.withCredentials || false,
       stega:
-        (options.visualEditing
-          && options.visualEditing.stega !== false
-          && options.visualEditing.previewMode !== false
-          && ({ enabled: true, studioUrl: options.visualEditing.studioUrl } as StegaConfig))
+        (moduleConfig.visualEditing
+          && moduleConfig.visualEditing.stega !== false
+          && moduleConfig.visualEditing.previewMode !== false
+          && ({ enabled: true, studioUrl: moduleConfig.visualEditing.studioUrl } as StegaConfig))
         || {},
-    }
+      visualEditing: moduleConfig.visualEditing,
+    })
 
     /* Imports */
 
     addImportsDir(resolve('runtime/client'))
-    addImportsDir(resolve('runtime/utils'))
     addImportsDir(resolve('runtime/composables'))
+
+    addImportsDir(resolve('runtime/utils/groq'))
+    addImportsDir(resolve('runtime/utils/projections'))
+    addImportsDir(resolve('runtime/utils/resolveImageAssetById'))
+    addImportsDir(resolve('runtime/utils/resolveInternalLink'))
 
     /* Components */
 
