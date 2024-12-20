@@ -1,6 +1,39 @@
 # Changelog
 
 
+## v2.0.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.5.3...v2.0.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Adapt sanity integration from @nuxtjs/sanity into own codebase ([f52fe78](https://github.com/devite-io/nuxt-sanity/commit/f52fe78))
+- Reduce component code ([80d96eb](https://github.com/devite-io/nuxt-sanity/commit/80d96eb))
+
+### 🩹 Fixes
+
+- External nuxt link implementation ([407b9fb](https://github.com/devite-io/nuxt-sanity/commit/407b9fb))
+- Composable definition and usage ([eef976b](https://github.com/devite-io/nuxt-sanity/commit/eef976b))
+- Internal module imports ([58b78fe](https://github.com/devite-io/nuxt-sanity/commit/58b78fe))
+- Make project id and dataset static ([c5bc1ca](https://github.com/devite-io/nuxt-sanity/commit/c5bc1ca))
+- Minimal client data fetching ([82c202b](https://github.com/devite-io/nuxt-sanity/commit/82c202b))
+- SanityPage imports ([ba6a4f3](https://github.com/devite-io/nuxt-sanity/commit/ba6a4f3))
+- Visual editing capabilities ([a932ccc](https://github.com/devite-io/nuxt-sanity/commit/a932ccc))
+
+### 💅 Refactors
+
+- Change order of module setup steps ([b8c1ed8](https://github.com/devite-io/nuxt-sanity/commit/b8c1ed8))
+- Clarify module config types ([d137191](https://github.com/devite-io/nuxt-sanity/commit/d137191))
+- Minify code ([e6b94e4](https://github.com/devite-io/nuxt-sanity/commit/e6b94e4))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Adapt sanity integration from @nuxtjs/sanity into own codebase ([f52fe78](https://github.com/devite-io/nuxt-sanity/commit/f52fe78))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v1.5.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v1.5.2...v1.5.3)
