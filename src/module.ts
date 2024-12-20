@@ -36,6 +36,8 @@ export default defineNuxtModule<ModuleOptions>({
       visualEditing: options.visualEditing || null,
     })
 
+    nuxt.options.build.transpile.push('@sanity/core-loader')
+
     /* Visual Editing */
 
     if (options.visualEditing) {
@@ -63,14 +65,8 @@ export default defineNuxtModule<ModuleOptions>({
       if (visualEditingConfig.mode === 'live-visual-editing' && !visualEditingConfig.stega)
         console.warn('Visual Editing requires "stega" to be enabled in "live-visual-editing" mode')
 
-      nuxt.options.build.transpile.push(
-        'async-cache-dedupe',
-        '@sanity/core-loader',
-        '@sanity/preview-url-secret',
-      )
-      nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
-        dedupe: ['@sanity/client'],
-      })
+      nuxt.options.build.transpile.push('@sanity/preview-url-secret', 'async-cache-dedupe')
+      nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, { dedupe: ['@sanity/client'] })
       nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
         include: [
           `${name} > @sanity/visual-editing > @sanity/mutate > lodash/groupBy.js`,
