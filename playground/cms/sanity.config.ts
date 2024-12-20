@@ -13,8 +13,8 @@ export default defineConfig({
   name: 'default',
   title: 'nuxt-sanity-demo',
 
-  projectId: process.env.SANITY_PROJECT_ID || '',
-  dataset: process.env.SANITY_DATASET || '',
+  projectId: 'v797kwt3',
+  dataset: 'production',
 
   plugins: [
     customDocumentActions(),
