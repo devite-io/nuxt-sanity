@@ -1,11 +1,11 @@
 <template>
   <section>
-    <h1>{{ data.headline }}</h1>
+    <h1 v-html="data.headline" />
     <SanityComponent :data="data.paragraph" />
     <SanityComponent :data="data.image" />
   </section>
 </template>
 
 <script setup lang="ts">
-const { data } = defineProps<{ data: DemoSection }>()
+defineProps<{ data: DemoSection }>()
 </script>
