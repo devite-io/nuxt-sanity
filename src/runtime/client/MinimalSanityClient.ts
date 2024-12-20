@@ -46,18 +46,27 @@ class MinimalSanityClient extends SanityClient {
     }, baseQueryStr)
   }
 
-  public fetch<T>(query: string, params: QueryParams, _options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions): Promise<T> {
-    const queryString = this.toQueryString(query, params || {})
+  public async fetch<T>(
+    query: string,
+    params: QueryParams,
+    _options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions,
+  ): Promise<T> {
+    const perspectiveQueryString = `&perspective=${_options?.perspective || this.config.perspective}`
+    const queryString = this.toQueryString(query, params || {}) + perspectiveQueryString
     const byteLength = this.getByteLength(queryString)
     const isEligibleForGetRequest = byteLength <= 9000
 
     const queryHost = this.config.useCdn && isEligibleForGetRequest ? API_CDN_HOST : API_HOST
 
-    return $fetch<T>(`https://${queryHost + this.queryPath}${queryString}`, {
-      ...this.fetchOptions,
-      method: isEligibleForGetRequest ? 'GET' : 'POST',
-      body: !isEligibleForGetRequest ? { query, params } : undefined,
-    })
+    return (
+      await $fetch<{
+        result: T
+      }>(`https://${this.config.projectId}.${queryHost + this.queryPath}${queryString}`, {
+        ...this.fetchOptions,
+        method: isEligibleForGetRequest ? 'GET' : 'POST',
+        body: !isEligibleForGetRequest ? { query, params } : undefined,
+      })
+    ).result
   }
 
   public clone(): MinimalSanityClient {
