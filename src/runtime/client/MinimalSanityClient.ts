@@ -39,7 +39,10 @@ class MinimalSanityClient extends SanityClient {
     const baseQueryStr = `?query=${encodeURIComponent(query)}`
 
     return Object.keys(params).reduce((acc, paramName) => {
-      return acc + `&${encodeURIComponent(`$${paramName}`)}=${encodeURIComponent(JSON.stringify(params[paramName]))}`
+      return (
+        acc
+        + `&${encodeURIComponent(`$${paramName}`)}=${encodeURIComponent(JSON.stringify(params[paramName]))}`
+      )
     }, baseQueryStr)
   }
 

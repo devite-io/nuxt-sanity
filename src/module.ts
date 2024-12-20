@@ -88,17 +88,7 @@ export default defineNuxtModule<ModuleOptions>({
         ],
       })
 
-      if (visualEditingConfig.mode !== 'custom') {
-        addPlugin({
-          mode: 'client',
-          src: resolve('runtime/plugins/visual-editing.client'),
-        })
-      }
-
-      addPlugin({
-        mode: 'server',
-        src: resolve('runtime/plugins/visual-editing.server'),
-      })
+      addPlugin({ src: resolve('runtime/plugins/visual-editing') })
 
       if (typeof visualEditingConfig.previewMode === 'object') {
         addServerHandler({

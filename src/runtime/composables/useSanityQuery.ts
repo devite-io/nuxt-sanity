@@ -109,13 +109,13 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     fetchFunc = async () => {
       const currentClient = import.meta.server ? (defaultClient.queryStore!.unstable__serverClient.instance || defaultClient.client) : (proxyClient as SanityClient)
 
-      const { result: data, resultSourceMap: sourceMap } = await currentClient.fetch<T>(query, reactiveParams || {}, {
+      const { result: fetchData, resultSourceMap: sourceMap } = await currentClient.fetch<T>(query, reactiveParams || {}, {
         perspective,
         filterResponse: false,
         resultSourceMap: 'withKeyArraySelector',
       })
 
-      return sourceMap ? { data, sourceMap } : { data }
+      return sourceMap ? { data: fetchData, sourceMap } : { data: fetchData }
     }
 
     if (import.meta.client) setupFetcher()

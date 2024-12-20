@@ -11,9 +11,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const client = useSanityClient('default')
-  client.config.useCdn = false
-
   const { query, params = {} } = await readBody(event)
 
   if (!query) {
@@ -22,6 +19,9 @@ export default defineEventHandler(async (event) => {
       statusMessage: `Field "query" is required`,
     })
   }
+
+  const client = useSanityClient('default')
+  client.config.useCdn = false
 
   return await client.fetch(query, params)
 })
