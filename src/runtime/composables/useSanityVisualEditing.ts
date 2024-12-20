@@ -1,6 +1,7 @@
 import type { DisableVisualEditing, VisualEditingOptions } from '@sanity/visual-editing'
 import { enableVisualEditing } from '@sanity/visual-editing'
 import type { SanityVisualEditingRefreshHandler } from '@devite/nuxt-sanity'
+import type { Router } from 'vue-router'
 import { onScopeDispose } from 'vue'
 import { reloadNuxtApp, useRouter } from '#imports'
 
@@ -15,7 +16,7 @@ export const useSanityVisualEditing = (options: VisualEditingProps = {}): Disabl
   let disable = () => {}
 
   if (import.meta.client) {
-    const router = useRouter()
+    const router: Router = useRouter()
 
     disable = enableVisualEditing({
       zIndex,

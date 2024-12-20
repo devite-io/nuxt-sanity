@@ -1,7 +1,7 @@
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import MinimalSanityClient from '../client/MinimalSanityClient'
 import DefaultSanityClient from '../client/DefaultSanityClient'
-import type SanityClient from '~/src/runtime/client/SanityClient'
+import type SanityClient from '../client/SanityClient'
 
 export type SanityClientType = 'minimal' | 'default'
 

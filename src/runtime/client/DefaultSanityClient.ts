@@ -1,7 +1,6 @@
 import {
   type ClientPerspective,
   createClient,
-  type FilteredResponseQueryOptions,
   type QueryParams,
   type SanityClient as SanityClientType,
 } from '@sanity/client'
@@ -21,7 +20,7 @@ class DefaultSanityClient extends SanityClient {
   public async fetch<T = unknown>(
     query: string,
     params: QueryParams,
-    options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions,
+    options?: { perspective?: ClientPerspective },
   ): Promise<T> {
     return await this.client.fetch<T>(query, params, options)
   }

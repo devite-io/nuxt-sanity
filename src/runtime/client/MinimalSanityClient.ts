@@ -1,5 +1,5 @@
 import { $fetch } from 'ofetch'
-import type { ClientPerspective, FilteredResponseQueryOptions, QueryParams } from '@sanity/client'
+import type { ClientPerspective, QueryParams } from '@sanity/client'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import SanityClient from './SanityClient'
 
@@ -49,7 +49,7 @@ class MinimalSanityClient extends SanityClient {
   public async fetch<T>(
     query: string,
     params: QueryParams,
-    _options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions,
+    _options?: { perspective?: ClientPerspective },
   ): Promise<T> {
     const perspectiveQueryString = `&perspective=${_options?.perspective || this.config.perspective}`
     const queryString = this.toQueryString(query, params || {}) + perspectiveQueryString

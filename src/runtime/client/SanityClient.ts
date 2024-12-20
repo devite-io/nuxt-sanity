@@ -1,9 +1,4 @@
-import type {
-  ClientPerspective,
-  ContentSourceMap,
-  FilteredResponseQueryOptions,
-  QueryParams,
-} from '@sanity/client'
+import type { ClientPerspective, ContentSourceMap, QueryParams } from '@sanity/client'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 
 export default abstract class SanityClient {
@@ -17,6 +12,6 @@ export default abstract class SanityClient {
   public abstract fetch<T = unknown>(
     query: string,
     params: QueryParams,
-    options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions
+    options?: { perspective?: ClientPerspective }
   ): Promise<T>
 }
