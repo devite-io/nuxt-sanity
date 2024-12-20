@@ -1,26 +1,20 @@
 export default defineNuxtConfig({
-
-  // modules
   modules: ['@nuxt/image', '../src/module'],
 
-  // auto-imports for types
   imports: {
-    dirs: ['types/**/*.ts'],
+    dirs: ['types/**/*.ts'], // auto-imports for types
   },
 
-  // runtime config
   runtimeConfig: {
     public: {
       baseURL: 'http://localhost:3000',
     },
   },
 
-  // ignore Sanity Studio directory
-  ignore: ['cms'],
+  ignore: ['cms'], // ignore Sanity Studio directory
 
   compatibilityDate: '2024-09-17',
 
-  // server
   image: {
     provider: 'sanity',
     screens: {
@@ -36,6 +30,7 @@ export default defineNuxtConfig({
       dataset: process.env.NUXT_SANITY_DATASET,
     },
   },
+
   sanity: {
     projectId: process.env.NUXT_SANITY_PROJECT_ID,
     dataset: process.env.NUXT_SANITY_DATASET,
@@ -47,5 +42,4 @@ export default defineNuxtConfig({
     },
     apiVersion: '2024-08-08',
   },
-
 })
