@@ -1,5 +1,5 @@
 import { $fetch } from 'ofetch'
-import type { ClientConfig, ClientPerspective, FilteredResponseQueryOptions, QueryParams } from '@sanity/client'
+import type { ClientPerspective, FilteredResponseQueryOptions, QueryParams } from '@sanity/client'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import SanityClient from './SanityClient'
 
@@ -10,9 +10,10 @@ class MinimalSanityClient extends SanityClient {
   private readonly queryPath: string
   private readonly fetchOptions: RequestInit
 
-  constructor(config: ClientConfig & ModuleOptions) {
+  constructor(config: ModuleOptions) {
     super({
       ...config,
+      perspective: config.perspective || 'raw',
       useCdn: config.perspective === 'previewDrafts' ? false : config.useCdn,
     })
 

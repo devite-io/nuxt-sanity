@@ -1,5 +1,4 @@
 import {
-  type ClientConfig,
   type ClientPerspective,
   createClient,
   type FilteredResponseQueryOptions,
@@ -14,13 +13,17 @@ class DefaultSanityClient extends SanityClient {
   public readonly client: SanityClientType
   public queryStore: QueryStore | null = null
 
-  constructor(config: ClientConfig & ModuleOptions) {
+  constructor(config: ModuleOptions) {
     super(config)
     this.client = createClient(config)
   }
 
-  public fetch<T = unknown>(query: string, params: QueryParams, options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions): Promise<T> {
-    return this.client.fetch<T>(query, params, options)
+  public async fetch<T = unknown>(
+    query: string,
+    params: QueryParams,
+    options?: { perspective?: ClientPerspective } & FilteredResponseQueryOptions,
+  ): Promise<T> {
+    return await this.client.fetch<T>(query, params, options)
   }
 
   public createQueryStore(tag?: string) {

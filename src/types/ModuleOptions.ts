@@ -1,6 +1,10 @@
-import type { HistoryRefresh, VisualEditingOptions as SanityVisualEditingOptions } from '@sanity/visual-editing'
+import type {
+  HistoryRefresh,
+  VisualEditingOptions as SanityVisualEditingOptions,
+} from '@sanity/visual-editing'
+import type { ClientConfig } from '@sanity/client'
 
-export interface ModuleOptions {
+export type ModuleOptions = ClientConfig & {
   projectId: string
   /** @default 'production' */
   dataset: string
@@ -33,5 +37,5 @@ export interface VisualEditingOptions {
 
 export type SanityVisualEditingRefreshHandler = (
   payload: HistoryRefresh,
-  refreshDefault: () => false | Promise<void>,
+  refreshDefault: () => false | Promise<void>
 ) => false | Promise<void>
