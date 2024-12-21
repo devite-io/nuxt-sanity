@@ -136,6 +136,6 @@ export default defineNuxtModule<ModuleOptions>({
     /* Components */
 
     await addComponentsDir({ path: resolve('runtime/components') })
-    await addComponentsDir({ path: '~/sanity', global: true, prefix: 'Sanity' })
+    await addComponentsDir({ path: '~/sanity', global: true, prefix: 'Sanity', pathPrefix: false })
   },
 })
