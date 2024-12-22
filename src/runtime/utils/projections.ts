@@ -6,6 +6,7 @@ export const IMAGE_ASSET_PROJECTION = groq`{
   url,
   altText,
   mimeType,
+  originalFilename,
   metadata { lqip, dimensions }
 }`
 
