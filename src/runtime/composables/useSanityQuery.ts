@@ -86,7 +86,7 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     function setupFetcher(cb?: (state: Readonly<QueryStoreState<T, E>>) => void) {
       unsubscribe()
 
-      const deepClonedParams = JSON.parse(JSON.stringify(_params))
+      const deepClonedParams = _params ? JSON.parse(JSON.stringify(_params)) : undefined
       const fetcher = defaultClient.queryStore!.createFetcherStore<T, E>(query, deepClonedParams, undefined)
 
       unsubscribe = fetcher.subscribe((newSnapshot) => {
