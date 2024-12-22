@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.2.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.1.0...v2.2.0)
+
+### 🚀 Enhancements
+
+- Add originalFilename field to asset projection ([6a16394](https://github.com/devite-io/nuxt-sanity/commit/6a16394))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.1.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.0.1...v2.1.0)
