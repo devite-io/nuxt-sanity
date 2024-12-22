@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v2.1.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.0.1...v2.1.0)
+
+### 🚀 Enhancements
+
+- Allow nesting of schema type components without being restricted to the name of the schema type ([9a14ff2](https://github.com/devite-io/nuxt-sanity/commit/9a14ff2))
+
+### 🩹 Fixes
+
+- Always transpile Sanity core loader ([4295c9f](https://github.com/devite-io/nuxt-sanity/commit/4295c9f))
+- Provided module imports ([964ca81](https://github.com/devite-io/nuxt-sanity/commit/964ca81))
+- Only deep clone params if provided ([8905a21](https://github.com/devite-io/nuxt-sanity/commit/8905a21))
+- Use reactive params for key generation ([6b82153](https://github.com/devite-io/nuxt-sanity/commit/6b82153))
+
+### 🏡 Chore
+
+- Update dependencies ([d956e5a](https://github.com/devite-io/nuxt-sanity/commit/d956e5a))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.0.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.0.0...v2.0.1)
