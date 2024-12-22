@@ -17,7 +17,7 @@ import { useSanityQuery } from '../composables/useSanityQuery'
 import { groq } from '../utils/groq'
 import { useHead, useRoute, useRuntimeConfig, useSeoMeta } from '#imports'
 
-const path = useRoute().fullPath
+const path = useRoute().path
 const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`
 const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(
   groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
