@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.2.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.2.0...v2.2.1)
+
+### 🩹 Fixes
+
+- Don't include query string when resolving sanity document for a page ([f9cb5fb](https://github.com/devite-io/nuxt-sanity/commit/f9cb5fb))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.2.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.1.0...v2.2.0)
