@@ -1,6 +1,7 @@
 import crypto from 'node:crypto'
 import {
   addComponentsDir,
+  addImports,
   addImportsDir,
   addPlugin,
   addServerHandler,
@@ -50,7 +51,9 @@ export default defineNuxtModule<ModuleOptions>({
               disable: '/_sanity/preview/disable',
             })
           : false) as { enable: string, disable: string } | false,
-        previewModeId: previewMode ? crypto.randomBytes(16).toString('hex') : '',
+        previewModeId: previewMode
+          ? crypto.randomBytes(16).toString('hex')
+          : '',
         proxyEndpoint: '/_sanity/fetch',
         stega: true,
         zIndex: 100,
@@ -60,7 +63,8 @@ export default defineNuxtModule<ModuleOptions>({
       if (!moduleConfig.visualEditing.token?.length)
         console.warn('Visual editing requires a token with "read" access')
 
-      if (!visualEditingConfig.studioUrl) console.warn('Visual editing requires a studio URL')
+      if (!visualEditingConfig.studioUrl)
+        console.warn('Visual editing requires a studio URL')
 
       if (visualEditingConfig.mode === 'live-visual-editing' && !visualEditingConfig.stega)
         console.warn('Visual Editing requires "stega" to be enabled in "live-visual-editing" mode')
@@ -115,27 +119,50 @@ export default defineNuxtModule<ModuleOptions>({
       token: options.token || '',
       withCredentials: options.withCredentials || false,
       stega:
-        (moduleConfig.visualEditing
-          && moduleConfig.visualEditing.stega !== false
-          && moduleConfig.visualEditing.previewMode !== false
-          && ({ enabled: true, studioUrl: moduleConfig.visualEditing.studioUrl } as StegaConfig))
-        || {},
+          (moduleConfig.visualEditing
+            && moduleConfig.visualEditing.stega !== false
+            && moduleConfig.visualEditing.previewMode !== false
+            && ({
+              enabled: true,
+              studioUrl: moduleConfig.visualEditing.studioUrl,
+            } as StegaConfig))
+            || {},
       visualEditing: moduleConfig.visualEditing,
     })
 
     /* Imports */
 
     addImportsDir(resolve('runtime/client'))
-    addImportsDir(resolve('runtime/composables'))
+    addImports([
+      // composables
+      { name: 'useSanityQuery', from: resolve('runtime/composables/useSanityQuery') },
+      { name: 'useLazySanityQuery', from: resolve('runtime/composables/useLazySanityQuery') },
 
-    addImportsDir(resolve('runtime/utils/groq'))
-    addImportsDir(resolve('runtime/utils/projections'))
-    addImportsDir(resolve('runtime/utils/resolveImageAssetById'))
-    addImportsDir(resolve('runtime/utils/resolveInternalLink'))
+      // helper methods
+      { name: 'groq', from: resolve('runtime/utils/groq') },
+      { name: 'resolveImageAssetById', from: resolve('runtime/utils/resolveImageAssetById') },
+      { name: 'resolveInternalLink', from: resolve('runtime/utils/resolveInternalLink') },
+
+      // projections
+      ...[
+        'IMAGE_ASSET_PROJECTION',
+        'IMAGE_WITHOUT_PREVIEW_PROJECTION',
+        'IMAGE_WITH_PREVIEW_PROJECTION',
+        'LINK_PROJECTION',
+      ].map((field) => ({
+        name: field,
+        from: resolve('runtime/utils/projections'),
+      }))],
+    )
 
     /* Components */
 
     await addComponentsDir({ path: resolve('runtime/components') })
-    await addComponentsDir({ path: '~/sanity', global: true, prefix: 'Sanity', pathPrefix: false })
+    await addComponentsDir({
+      path: '~/sanity',
+      global: true,
+      prefix: 'Sanity',
+      pathPrefix: false,
+    })
   },
 })
