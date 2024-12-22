@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.3.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.2.1...v2.3.0)
+
+### 🚀 Enhancements
+
+- Watch SanityImageAsset props and automatically resolve updated values ([3d0a3dd](https://github.com/devite-io/nuxt-sanity/commit/3d0a3dd))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.2.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.2.0...v2.2.1)
