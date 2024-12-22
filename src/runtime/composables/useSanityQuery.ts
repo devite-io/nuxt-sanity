@@ -52,14 +52,14 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     (_perspective || (hasQueryStore ? 'previewDrafts' : 'published'))
   ) as ClientPerspective
 
-  const key = 'sanity-' + hash(query + (_params ? JSON.stringify(_params) : ''))
-
   const reactiveParams = _params ? reactive(_params) : undefined
 
   if (reactiveParams) {
     options.watch ||= []
     options.watch.push(reactiveParams)
   }
+
+  const key = 'sanity-' + hash(query + (reactiveParams ? JSON.stringify(reactiveParams) : ''))
 
   const data = ref<T | null>(null)
   const sourceMap = ref<ContentSourceMap | null>(null)
