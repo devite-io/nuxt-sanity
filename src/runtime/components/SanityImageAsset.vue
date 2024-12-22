@@ -7,7 +7,7 @@
     :height="imageAsset.metadata.dimensions.height"
     :alt="imageAsset.altText"
     :placeholder="loading === 'eager' ? undefined : imageAsset.metadata.lqip"
-    :loading="loading"
+    :loading="loading || 'lazy'"
     :format="imageAsset.mimeType === 'image/svg+xml' ? undefined : 'webp'"
     draggable="false"
   />
@@ -23,7 +23,7 @@ const props = defineProps<{
   loading?: 'eager' | 'lazy'
 }>()
 
-const { data: imageAsset } = (
+const { data: imageAsset } = await (
   props.loading !== 'eager' ? useLazyAsyncData : useAsyncData
 )<ImageAsset | null>(
   useId(),
