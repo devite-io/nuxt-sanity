@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v2.3.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.3.0...v2.3.1)
+
+### 🩹 Fixes
+
+- Await asset resolution ([1a9c78d](https://github.com/devite-io/nuxt-sanity/commit/1a9c78d))
+- Explicitly set image provider ([ffe8951](https://github.com/devite-io/nuxt-sanity/commit/ffe8951))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.3.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.2.1...v2.3.0)
