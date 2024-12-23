@@ -1,6 +1,7 @@
 <template>
   <NuxtImg
     v-if="imageAsset?._id"
+    provider="sanity"
     densities="x1 x2"
     :src="imageAsset._id"
     :width="imageAsset.metadata.dimensions.width"
