@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.3.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.3.1...v2.3.2)
+
+### 🩹 Fixes
+
+- Use watcher instead of useAsyncData to trigger asset resolvation ([001dcfe](https://github.com/devite-io/nuxt-sanity/commit/001dcfe))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.3.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.3.0...v2.3.1)
