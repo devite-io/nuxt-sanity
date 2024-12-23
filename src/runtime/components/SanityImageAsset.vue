@@ -16,22 +16,30 @@
 
 <script setup lang="ts">
 import type { ImageAsset, Reference } from '@sanity/types'
+import { ref, watch } from 'vue'
 import { resolveImageAssetById } from '../utils/resolveImageAssetById'
-import { useLazyAsyncData, useAsyncData, useId } from '#imports'
 
 const props = defineProps<{
   asset?: ImageAsset | Reference | null
   loading?: 'eager' | 'lazy'
 }>()
+const imageAsset = ref<ImageAsset | null>(null)
+let unwatchFunc = undefined as (() => void) | undefined
 
-const { data: imageAsset } = await (
-  props.loading !== 'eager' ? useLazyAsyncData : useAsyncData
-)<ImageAsset | null>(
-  useId(),
-  async () =>
-    props.asset?._ref
-      ? (await resolveImageAssetById((props.asset as Reference)._ref)).value
-      : ((props.asset || null) as ImageAsset | null),
-  { watch: [props] },
-)
+async function resolveImageAsset() {
+  if (props.asset?._ref) {
+    const assetRef = await resolveImageAssetById((props.asset as Reference)._ref)
+
+    imageAsset.value = assetRef.value
+
+    unwatchFunc?.()
+    unwatchFunc = watch(assetRef, (updatedAsset) => imageAsset.value = updatedAsset)
+    return
+  }
+
+  imageAsset.value = (props.asset || null) as ImageAsset | null
+}
+
+await resolveImageAsset()
+watch(() => props.asset, resolveImageAsset)
 </script>
