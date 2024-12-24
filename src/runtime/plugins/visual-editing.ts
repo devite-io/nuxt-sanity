@@ -1,3 +1,4 @@
+import type { ModuleOptions } from '@devite/nuxt-sanity'
 import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
 import { useSanityLiveMode } from '../composables/useSanityLiveMode'
 import { useSanityVisualEditing } from '../composables/useSanityVisualEditing'
@@ -9,16 +10,16 @@ import {
 export default defineNuxtPlugin(() => {
   const visualEditingState = useSanityVisualEditingState()
   const $config = useRuntimeConfig()
-  const { visualEditing } = $config.public.sanity
+  const { visualEditing } = $config.public.sanity as ModuleOptions
 
   if (import.meta.server) {
-    if (visualEditing?.previewMode) {
+    if (visualEditing?.previewMode && visualEditing.previewModeId) {
       const previewModeCookie = useCookie('__sanity_preview')
 
       visualEditingState.enabled = visualEditing.previewModeId === previewModeCookie.value
     }
   }
-  else if (visualEditingState.enabled && visualEditing.mode !== 'custom') {
+  else if (visualEditingState.enabled && visualEditing?.mode !== 'custom') {
     switch (visualEditing?.mode) {
       case 'live-visual-editing':
       case 'visual-editing':
