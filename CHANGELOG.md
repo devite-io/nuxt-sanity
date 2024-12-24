@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.4.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.0...v2.4.1)
+
+### 🩹 Fixes
+
+- Dont' cache empty results ([2c2dfea](https://github.com/devite-io/nuxt-sanity/commit/2c2dfea))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.4.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.3.2...v2.4.0)
