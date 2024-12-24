@@ -49,6 +49,9 @@ export default defineEventHandler(async (event) => {
   // Prevent recursive calls
   delete client.config.minimalClient
 
+  // prevent caching of outdated data
+  client.config.useCdn = false
+
   const result = await client.fetch<object>(
     query,
     Object.fromEntries(params.map(([key, value]) => [key.slice(1), JSON.parse(value)])),
