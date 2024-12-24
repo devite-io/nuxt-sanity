@@ -82,7 +82,7 @@ export default defineEventHandler(async (event) => {
   setResponseHeader(event, 'Content-Type', 'application/json')
 
   if (import.meta.dev) {
-    console.log(`Cache miss for query ${hashedQuery}`)
+    console.log(`Cache miss for query ${hashedQuery} (${referencedIds.join(', ')})`)
   }
 
   return { result }

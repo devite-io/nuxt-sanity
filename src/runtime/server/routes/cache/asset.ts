@@ -59,10 +59,10 @@ export default defineEventHandler(async (event) => {
           documentDeps.push(hashedPath)
 
           await sanityDocumentDeps.setItem(assetId, documentDeps)
-        }
 
-        if (import.meta.dev) {
-          console.log(`Cache miss for asset ${hashedPath}`)
+          if (import.meta.dev) {
+            console.log(`Cache miss for asset ${hashedPath} (${assetId})`)
+          }
         }
 
         resolve(new Response(assetBinaryData, {

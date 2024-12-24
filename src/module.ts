@@ -118,11 +118,12 @@ export default defineNuxtModule<ModuleOptions>({
     if (typeof moduleConfig.minimalClient === 'object' && moduleConfig.minimalClient.cachingEnabled) {
       nuxt.options.nitro.storage ||= {}
       nuxt.options.nitro.storage.sanityDocumentDeps = {
-        driver: 'memory',
+        driver: 'fsLite',
+        base: '.tmp/sanityDocumentDeps',
       }
       nuxt.options.nitro.storage.sanityData = {
         driver: 'fsLite',
-        base: '.tmp/sanity',
+        base: '.tmp/sanityData',
       }
 
       addServerHandler({
