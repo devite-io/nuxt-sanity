@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v2.4.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.3.2...v2.4.0)
+
+### 🚀 Enhancements
+
+- Add proxy routes with caching and webhook-based invalidation for minimal client ([c604762](https://github.com/devite-io/nuxt-sanity/commit/c604762))
+
+### 🩹 Fixes
+
+- Don't enable visual editing if previewMode is undefined ([eab918a](https://github.com/devite-io/nuxt-sanity/commit/eab918a))
+- Visual editing refresh loop ([5a9578e](https://github.com/devite-io/nuxt-sanity/commit/5a9578e))
+- Keep dependencies as long as data is available ([a93ade2](https://github.com/devite-io/nuxt-sanity/commit/a93ade2))
+- Prevent caching of outdated data ([f07d1aa](https://github.com/devite-io/nuxt-sanity/commit/f07d1aa))
+
+### 🏡 Chore
+
+- Replace log and warn with debug to prepare module for production ([2082a75](https://github.com/devite-io/nuxt-sanity/commit/2082a75))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.3.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.3.1...v2.3.2)
