@@ -52,21 +52,23 @@ class MinimalSanityClient extends SanityClient {
     _options?: { perspective?: ClientPerspective },
   ): Promise<T> {
     const perspectiveQueryString = `&perspective=${_options?.perspective || this.config.perspective}`
-    const queryString = this.toQueryString(query, params || {}) + perspectiveQueryString
+    const queryString = this.toQueryString(query, params || {}) + (this.config.useCdn ? '' : perspectiveQueryString)
     const byteLength = this.getByteLength(queryString)
     const isEligibleForGetRequest = byteLength <= 9000
 
-    const queryHost = this.config.useCdn && isEligibleForGetRequest ? API_CDN_HOST : API_HOST
+    const minimalClientConfig = typeof this.config.minimalClient === 'object' ? this.config.minimalClient : {}
+    const useCache = minimalClientConfig.cachingEnabled && isEligibleForGetRequest
+    const requestUrl = useCache && minimalClientConfig.cacheBaseUrl
+      ? minimalClientConfig.cacheBaseUrl + minimalClientConfig.queryEndpoint
+      : `https://${this.config.projectId}.${this.config.useCdn && isEligibleForGetRequest ? API_CDN_HOST : API_HOST}${this.queryPath}`
 
-    return (
-      await $fetch<{
-        result: T
-      }>(`https://${this.config.projectId}.${queryHost + this.queryPath}${queryString}`, {
-        ...this.fetchOptions,
-        method: isEligibleForGetRequest ? 'GET' : 'POST',
-        body: !isEligibleForGetRequest ? { query, params } : undefined,
-      })
-    ).result
+    return (await $fetch<{
+      result: T
+    }>(requestUrl + queryString, {
+      ...this.fetchOptions,
+      method: isEligibleForGetRequest ? 'GET' : 'POST',
+      body: !isEligibleForGetRequest ? { query, params } : undefined,
+    })).result
   }
 
   public clone(): MinimalSanityClient {
@@ -78,6 +80,7 @@ class MinimalSanityClient extends SanityClient {
       withCredentials: this.config.withCredentials,
       token: this.config.token,
       perspective: this.config.perspective,
+      minimalClient: this.config.minimalClient,
     })
   }
 }

@@ -8,7 +8,7 @@ import { useRuntimeConfig } from '#imports'
 export default function useSanityClient(type?: SanityClientType): SanityClient {
   const $config = useRuntimeConfig()
   const sanityConfig = defu($config.sanity, $config.public.sanity || {}) as ModuleOptions
-  const visualEditingEnabled = sanityConfig.visualEditing && sanityConfig.visualEditing.previewMode !== false
+  const visualEditingEnabled = type !== 'minimal' && sanityConfig.visualEditing && sanityConfig.visualEditing.previewMode !== false
 
   return getOrCreateSanityClient(
     visualEditingEnabled || false,

@@ -1,16 +1,16 @@
 <template>
   <NuxtImg
     v-if="imageAsset?._id"
-    provider="sanity"
     densities="x1 x2"
     :src="imageAsset._id"
     :width="imageAsset.metadata.dimensions.width"
     :height="imageAsset.metadata.dimensions.height"
-    :alt="imageAsset.altText"
+    :alt="imageAsset.altText as (string | undefined)"
     :placeholder="loading === 'eager' ? undefined : imageAsset.metadata.lqip"
     :loading="loading || 'lazy'"
     :format="imageAsset.mimeType === 'image/svg+xml' ? undefined : 'webp'"
     draggable="false"
+    provider="cachedSanity"
   />
 </template>
 

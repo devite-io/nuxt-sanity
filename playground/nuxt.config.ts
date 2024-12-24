@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['@nuxt/image', '../src/module'],
+  modules: ['../src/module', '@nuxt/image'],
 
   imports: {
     dirs: ['types/**/*.ts'], // auto-imports for types
@@ -34,7 +34,9 @@ export default defineNuxtConfig({
   sanity: {
     projectId: process.env.NUXT_SANITY_PROJECT_ID,
     dataset: process.env.NUXT_SANITY_DATASET,
-    minimalClient: process.env.NUXT_SANITY_MINIMAL === 'true',
+    minimalClient: {
+      webhookSecret: process.env.NUXT_SANITY_WEBHOOK_SECRET,
+    },
     visualEditing: {
       mode: 'live-visual-editing',
       studioUrl: process.env.NUXT_SANITY_STUDIO_URL,

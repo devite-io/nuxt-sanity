@@ -6,58 +6,66 @@ import {
   addPlugin,
   addServerHandler,
   createResolver,
-  defineNuxtModule,
+  defineNuxtModule, installModule,
 } from '@nuxt/kit'
 import defu from 'defu'
 import type { StegaConfig } from '@sanity/client'
 import { name, version } from '../package.json'
-import type { ModuleOptions } from './types/ModuleOptions'
+import type { ModuleOptions, SanityVisualEditingMode } from './types/ModuleOptions'
 
 export * from './types/sanity'
 export * from './types/ModuleOptions'
+
+const CONFIG_KEY = 'sanity'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name,
     version,
-    configKey: 'sanity',
+    configKey: CONFIG_KEY,
   },
   defaults: {},
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
+    const $config = nuxt.options.runtimeConfig
 
     /* Config validation */
 
-    const moduleConfig = defu(nuxt.options.runtimeConfig.public.sanity, {
+    const moduleConfig = {
       projectId: options.projectId,
       dataset: options.dataset || 'production',
-      minimalClient: options.minimalClient || false,
+      minimalClient:
+        (options.minimalClient !== false
+          ? defu(options.minimalClient, {
+              cachingEnabled: true,
+              cacheBaseUrl: 'http://localhost:3000',
+              assetEndpoint: '/_sanity/cache/asset',
+              queryEndpoint: '/_sanity/cache/query',
+              webhookEndpoint: '/_sanity/cache/invalidate',
+            })
+          : false) as ({ cachingEnabled: boolean, cacheBaseUrl: string, assetEndpoint: string, queryEndpoint: string, webhookEndpoint: string, webhookSecret?: string } | false),
       useCdn: options.useCdn || true,
       apiVersion: options.apiVersion || '2024-08-08',
       visualEditing: options.visualEditing || null,
-    })
+    }
 
     nuxt.options.build.transpile.push('@sanity/core-loader')
 
     /* Visual Editing */
 
-    if (options.visualEditing) {
+    if (moduleConfig.visualEditing) {
       const previewMode = moduleConfig.visualEditing.previewMode !== false
       const visualEditingConfig = defu(moduleConfig.visualEditing, {
-        mode: 'live-visual-editing',
+        mode: 'live-visual-editing' as SanityVisualEditingMode,
         previewMode: (previewMode
           ? defu(moduleConfig.visualEditing.previewMode, {
-              enable: '/_sanity/preview/enable',
-              disable: '/_sanity/preview/disable',
+              enableEndpoint: '/_sanity/preview/enable',
+              disableEndpoint: '/_sanity/preview/disable',
             })
-          : false) as { enable: string, disable: string } | false,
-        previewModeId: previewMode
-          ? crypto.randomBytes(16).toString('hex')
-          : '',
+          : false) as ({ enableEndpoint: string, disableEndpoint: string } | false),
         proxyEndpoint: '/_sanity/fetch',
         stega: true,
         zIndex: 100,
-        token: '',
       })
 
       if (!moduleConfig.visualEditing.token?.length)
@@ -85,15 +93,15 @@ export default defineNuxtModule<ModuleOptions>({
 
       addPlugin({ src: resolve('runtime/plugins/visual-editing') })
 
-      if (previewMode) {
+      if (typeof visualEditingConfig.previewMode === 'object') {
         addServerHandler({
           method: 'get',
-          route: visualEditingConfig.previewMode.enable,
+          route: visualEditingConfig.previewMode.enableEndpoint,
           handler: resolve('runtime/server/routes/preview/enable'),
         })
         addServerHandler({
           method: 'get',
-          route: visualEditingConfig.previewMode.disable,
+          route: visualEditingConfig.previewMode.disableEndpoint,
           handler: resolve('runtime/server/routes/preview/disable'),
         })
       }
@@ -107,8 +115,53 @@ export default defineNuxtModule<ModuleOptions>({
       moduleConfig.visualEditing = visualEditingConfig
     }
 
-    nuxt.options.runtimeConfig.sanity = moduleConfig
-    nuxt.options.runtimeConfig.public.sanity = defu(nuxt.options.runtimeConfig.public.sanity, {
+    if (typeof moduleConfig.minimalClient === 'object' && moduleConfig.minimalClient.cachingEnabled) {
+      nuxt.options.nitro.storage ||= {}
+      nuxt.options.nitro.storage.sanityDocumentDeps = {
+        driver: 'memory',
+      }
+      nuxt.options.nitro.storage.sanityData = {
+        driver: 'fsLite',
+        base: '.tmp/sanity',
+      }
+
+      addServerHandler({
+        method: 'get',
+        route: moduleConfig.minimalClient.assetEndpoint,
+        handler: resolve('runtime/server/routes/cache/asset'),
+      })
+      addServerHandler({
+        method: 'get',
+        route: moduleConfig.minimalClient.queryEndpoint,
+        handler: resolve('runtime/server/routes/cache/query'),
+      })
+
+      if (moduleConfig.minimalClient.webhookSecret) {
+        addServerHandler({
+          method: 'delete',
+          route: moduleConfig.minimalClient.webhookEndpoint,
+          handler: resolve('runtime/server/routes/cache/webhook'),
+        })
+      }
+      else {
+        console.warn('Webhook secret is required for webhook-based cache invalidation')
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    $config.sanity = defu($config.sanity as any, {
+      visualEditing: options.visualEditing && {
+        ...moduleConfig.visualEditing,
+        previewModeId: moduleConfig.visualEditing!.previewMode
+          ? crypto.randomBytes(16).toString('hex')
+          : '',
+        token: options.visualEditing.token || '',
+      },
+      webhookSecret: (moduleConfig.minimalClient && moduleConfig.minimalClient.webhookSecret) || undefined,
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    $config.public.sanity = defu($config.public.sanity as any, {
       projectId: moduleConfig.projectId,
       dataset: moduleConfig.dataset,
       minimalClient: moduleConfig.minimalClient,
@@ -164,5 +217,15 @@ export default defineNuxtModule<ModuleOptions>({
       prefix: 'Sanity',
       pathPrefix: false,
     })
+
+    /* @nuxt/image provider */
+
+    await installModule('@nuxt/image', {
+      providers: {
+        cachedSanity: {
+          provider: resolve('runtime/imageProviders/sanity'),
+        },
+      },
+    }, nuxt)
   },
 })

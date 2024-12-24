@@ -44,6 +44,9 @@ importers:
       ohash:
         specifier: ^1.1.4
         version: 1.1.4
+      unstorage:
+        specifier: ^1.14.1
+        version: 1.14.1(db0@0.2.1)(ioredis@5.4.2)
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.7.4
