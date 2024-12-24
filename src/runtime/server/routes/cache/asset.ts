@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     const meta = await dataCache.getMeta(hashedPath)
 
     if (import.meta.dev) {
-      console.log(`Cache hit for asset ${hashedPath}`)
+      console.debug(`Cache hit for asset ${hashedPath}`)
     }
 
     return new Response(cachedAsset, {
@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
           await sanityDocumentDeps.setItem(assetId, documentDeps)
 
           if (import.meta.dev) {
-            console.log(`Cache miss for asset ${hashedPath} (${assetId})`)
+            console.debug(`Cache miss for asset ${hashedPath} (${assetId})`)
           }
         }
 

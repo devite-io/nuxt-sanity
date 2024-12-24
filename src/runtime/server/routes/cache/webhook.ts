@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
   await sanityDocumentDeps.dispose()
 
   if (import.meta.dev) {
-    console.warn(`Cleared cache for document ${_id} (${documentDeps?.length || 0} entries removed)`)
+    console.debug(`Cleared cache for document ${_id} (${documentDeps?.length || 0} entries removed)`)
   }
 
   setResponseStatus(event, 204)

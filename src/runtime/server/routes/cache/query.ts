@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
     setResponseHeader(event, 'Content-Type', 'application/json')
 
     if (import.meta.dev) {
-      console.log(`Cache hit for query ${hashedQuery}`)
+      console.debug(`Cache hit for query ${hashedQuery}`)
     }
 
     return { result: cachedResult }
@@ -85,7 +85,7 @@ export default defineEventHandler(async (event) => {
   setResponseHeader(event, 'Content-Type', 'application/json')
 
   if (import.meta.dev) {
-    console.log(`Cache miss for query ${hashedQuery} (${referencedIds.join(', ')})`)
+    console.debug(`Cache miss for query ${hashedQuery} (${referencedIds.join(', ')})`)
   }
 
   return { result }
