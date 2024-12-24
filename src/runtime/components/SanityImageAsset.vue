@@ -41,5 +41,4 @@ async function resolveImageAsset() {
 }
 
 await resolveImageAsset()
-watch(() => props.asset, resolveImageAsset)
 </script>

@@ -1,6 +1,6 @@
 import { createError, defineEventHandler, getRequestURL } from 'h3'
 import { hash } from 'ohash'
-import { resolveSanityImageUrl } from '../../../imageProviders/sanity'
+import resolveSanityImageUrl from '../../utils/resolveSanityImageUrl'
 import { useStorage } from '#imports'
 
 const TTL = 60 * 60 * 24 * 365 // 1 year
@@ -23,7 +23,9 @@ export default defineEventHandler(async (event) => {
   if (cachedAsset) {
     const meta = await dataCache.getMeta(hashedPath)
 
-    await dataCache.dispose()
+    if (import.meta.dev) {
+      console.log(`Cache hit for asset ${hashedPath}`)
+    }
 
     return new Response(cachedAsset, {
       headers: {
@@ -48,7 +50,6 @@ export default defineEventHandler(async (event) => {
 
         await dataCache.setItemRaw(hashedPath, assetBinaryData, { ttl: TTL })
         await dataCache.setMeta(hashedPath, { contentType: response.headers.get('Content-Type') }, { ttl: TTL })
-        await dataCache.dispose()
 
         const assetId = src.split('/').pop()
 
@@ -58,7 +59,10 @@ export default defineEventHandler(async (event) => {
           documentDeps.push(hashedPath)
 
           await sanityDocumentDeps.setItem(assetId, documentDeps)
-          await sanityDocumentDeps.dispose()
+        }
+
+        if (import.meta.dev) {
+          console.log(`Cache miss for asset ${hashedPath}`)
         }
 
         resolve(new Response(assetBinaryData, {

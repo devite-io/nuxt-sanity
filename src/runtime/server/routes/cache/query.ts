@@ -37,7 +37,9 @@ export default defineEventHandler(async (event) => {
     setResponseHeader(event, 'X-Cache', 'hit')
     setResponseHeader(event, 'Content-Type', 'application/json')
 
-    await dataCache.dispose()
+    if (import.meta.dev) {
+      console.log(`Cache hit for query ${hashedQuery}`)
+    }
 
     return { result: cachedResult }
   }
@@ -57,7 +59,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Invalid query' })
 
   await dataCache.setItem(hashedQuery, result, { ttl: TTL })
-  await dataCache.dispose()
 
   // resolve document ids
   const stringifiedResult = JSON.stringify(result)
@@ -76,10 +77,13 @@ export default defineEventHandler(async (event) => {
         sanityDocumentDeps.setItem(id, documentDeps).then(resolve)
       })
     })))
-    await sanityDocumentDeps.dispose()
   }
 
   setResponseHeader(event, 'Content-Type', 'application/json')
+
+  if (import.meta.dev) {
+    console.log(`Cache miss for query ${hashedQuery}`)
+  }
 
   return { result }
 })

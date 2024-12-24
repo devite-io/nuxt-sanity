@@ -13,10 +13,13 @@ export default defineNuxtPlugin(() => {
   const { visualEditing } = $config.public.sanity as ModuleOptions
 
   if (import.meta.server) {
-    if (visualEditing?.previewMode && visualEditing.previewModeId) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const previewModeId = ($config.sanity as any).visualEditing.previewModeId
+
+    if (visualEditing?.previewMode && previewModeId) {
       const previewModeCookie = useCookie('__sanity_preview')
 
-      visualEditingState.enabled = visualEditing.previewModeId === previewModeCookie.value
+      visualEditingState.enabled = previewModeId === previewModeCookie.value
     }
   }
   else if (visualEditingState.enabled && visualEditing?.mode !== 'custom') {

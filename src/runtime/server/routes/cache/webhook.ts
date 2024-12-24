@@ -14,9 +14,8 @@ export default defineEventHandler(async (event) => {
   const timestamp = Number.parseInt(signatureParts[0].slice(2), 10)
   const signature = signatureParts[1].slice(3)
 
-  const encoder = new TextEncoder()
   const secret = useRuntimeConfig().sanity.webhookSecret
-  const expectedSignature = createHmac('sha256', encoder.encode(secret))
+  const expectedSignature = createHmac('sha256', secret)
     .update(`${timestamp}.${body}`)
     .digest('base64')
   const expectedSignatureUrl = expectedSignature
@@ -42,6 +41,10 @@ export default defineEventHandler(async (event) => {
 
   await sanityDocumentDeps.removeItem(_id)
   await sanityDocumentDeps.dispose()
+
+  if (import.meta.dev) {
+    console.warn(`Cleared cache for document ${_id} (${documentDeps?.length || 0} entries removed)`)
+  }
 
   setResponseStatus(event, 204)
 })

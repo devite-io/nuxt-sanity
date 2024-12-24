@@ -5,6 +5,8 @@ export default defineNuxtConfig({
     dirs: ['types/**/*.ts'], // auto-imports for types
   },
 
+  devtools: { enabled: false },
+
   runtimeConfig: {
     public: {
       baseURL: 'http://localhost:3000',

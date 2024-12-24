@@ -150,12 +150,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     $config.sanity = defu($config.sanity as any, {
-      visualEditing: options.visualEditing && {
+      visualEditing: moduleConfig.visualEditing && {
         ...moduleConfig.visualEditing,
         previewModeId: moduleConfig.visualEditing!.previewMode
           ? crypto.randomBytes(16).toString('hex')
           : '',
-        token: options.visualEditing.token || '',
+        token: moduleConfig.visualEditing.token || '',
       },
       webhookSecret: (moduleConfig.minimalClient && moduleConfig.minimalClient.webhookSecret) || undefined,
     })
