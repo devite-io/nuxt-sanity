@@ -61,6 +61,11 @@ export default defineEventHandler(async (event) => {
   if (!result)
     throw createError({ statusCode: 400, statusMessage: 'Invalid query' })
 
+  setResponseHeader(event, 'Content-Type', 'application/json')
+
+  if (Object.keys(result).length === 0)
+    return {}
+
   await dataCache.setItem(hashedQuery, result, { ttl: TTL })
 
   // resolve document ids
@@ -81,8 +86,6 @@ export default defineEventHandler(async (event) => {
       })
     })))
   }
-
-  setResponseHeader(event, 'Content-Type', 'application/json')
 
   if (import.meta.dev) {
     console.debug(`Cache miss for query ${hashedQuery} (${referencedIds.join(', ')})`)
