@@ -58,8 +58,9 @@ class MinimalSanityClient extends SanityClient {
 
     const minimalClientConfig = typeof this.config.minimalClient === 'object' ? this.config.minimalClient : {}
     const useCache = minimalClientConfig.cachingEnabled && isEligibleForGetRequest
-    const requestUrl = useCache && minimalClientConfig.cacheBaseUrl
-      ? minimalClientConfig.cacheBaseUrl + minimalClientConfig.queryEndpoint
+    const cacheBaseUrl = import.meta.client ? minimalClientConfig.cacheClientBaseUrl : minimalClientConfig.cacheServerBaseUrl
+    const requestUrl = useCache && cacheBaseUrl
+      ? cacheBaseUrl + minimalClientConfig.queryEndpoint
       : `https://${this.config.projectId}.${this.config.useCdn && isEligibleForGetRequest ? API_CDN_HOST : API_HOST}${this.queryPath}`
 
     return (await $fetch<{

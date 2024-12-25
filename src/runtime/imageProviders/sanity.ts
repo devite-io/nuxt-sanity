@@ -14,12 +14,12 @@ export const getImage: ProviderGetImage = (
   const minimalClientConfig = sanityConfig.minimalClient
   const useCaching = typeof minimalClientConfig === 'object' && minimalClientConfig.cachingEnabled
 
-  if (useCaching && minimalClientConfig.cacheBaseUrl && !useSanityVisualEditingState().enabled) {
+  if (useCaching && minimalClientConfig.cacheClientBaseUrl && !useSanityVisualEditingState().enabled) {
     const params = new URLSearchParams()
     params.set('src', src)
     params.set('modifiers', JSON.stringify(modifiers))
 
-    return { url: joinURL(minimalClientConfig.cacheBaseUrl, minimalClientConfig.assetEndpoint + `?${params.toString()}`) }
+    return { url: joinURL(minimalClientConfig.cacheClientBaseUrl, minimalClientConfig.assetEndpoint + `?${params.toString()}`) }
   }
 
   return getSanityImage(src, { modifiers, projectId: sanityConfig.projectId, dataset: sanityConfig.dataset }, ctx)

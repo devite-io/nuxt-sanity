@@ -38,7 +38,8 @@ export default defineNuxtModule<ModuleOptions>({
         (options.minimalClient !== false
           ? defu(options.minimalClient, {
               cachingEnabled: true,
-              cacheBaseUrl: 'http://localhost:3000',
+              cacheClientBaseUrl: 'http://localhost:3000',
+              cacheServerBaseUrl: 'http://localhost:3000',
               assetEndpoint: '/_sanity/cache/asset',
               queryEndpoint: '/_sanity/cache/query',
               webhookEndpoint: '/_sanity/cache/invalidate',

@@ -11,7 +11,16 @@ export type ModuleOptions = ClientConfig & {
   /** @default { cachingEnabled: true, cacheBaseUrl: "http://localhost:3000", assetEndpoint: "/_sanity/cache/asset", queryEndpoint: "/_sanity/cache/query", webhookEndpoint: "/_sanity/cache/invalidate" } */
   minimalClient?: boolean | {
     cachingEnabled?: boolean
-    cacheBaseUrl?: string
+    /**
+     * This is the base url for fetching data after hydration
+     * @default 'http://localhost:3000'
+     */
+    cacheClientBaseUrl?: string
+    /**
+     * This is the base url for fetching data during SSR
+     * @default 'http://localhost:3000'
+     */
+    cacheServerBaseUrl?: string
     assetEndpoint?: string
     queryEndpoint?: string
     webhookEndpoint?: string
