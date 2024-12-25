@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.4.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.2...v2.4.3)
+
+### 🩹 Fixes
+
+- Allow separate server and client cache base urls ([91b9fba](https://github.com/devite-io/nuxt-sanity/commit/91b9fba))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.4.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.1...v2.4.2)
