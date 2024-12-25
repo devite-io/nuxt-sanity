@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.4.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.1...v2.4.2)
+
+### 🩹 Fixes
+
+- Set correct response status for not found page ([07dc2a3](https://github.com/devite-io/nuxt-sanity/commit/07dc2a3))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.4.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.0...v2.4.1)
