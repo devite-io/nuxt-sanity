@@ -9,9 +9,9 @@ export default abstract class SanityClient {
     this.config = config
   }
 
-  public abstract fetch<T = unknown>(
+  public abstract fetch<T>(
     query: string,
     params: QueryParams,
     options?: { perspective?: ClientPerspective }
-  ): Promise<T>
+  ): Promise<T | null>
 }

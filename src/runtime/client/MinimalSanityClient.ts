@@ -50,7 +50,7 @@ class MinimalSanityClient extends SanityClient {
     query: string,
     params: QueryParams,
     _options?: { perspective?: ClientPerspective },
-  ): Promise<T> {
+  ): Promise<T | null> {
     const perspectiveQueryString = `&perspective=${_options?.perspective || this.config.perspective}`
     const queryString = this.toQueryString(query, params || {}) + (this.config.useCdn ? '' : perspectiveQueryString)
     const byteLength = this.getByteLength(queryString)
@@ -63,13 +63,19 @@ class MinimalSanityClient extends SanityClient {
       ? cacheBaseUrl + minimalClientConfig.queryEndpoint
       : `https://${this.config.projectId}.${this.config.useCdn && isEligibleForGetRequest ? API_CDN_HOST : API_HOST}${this.queryPath}`
 
-    return (await $fetch<{
-      result: T
-    }>(requestUrl + queryString, {
-      ...this.fetchOptions,
-      method: isEligibleForGetRequest ? 'GET' : 'POST',
-      body: !isEligibleForGetRequest ? { query, params } : undefined,
-    })).result
+    try {
+      return (await $fetch<{
+        result: T
+      }>(requestUrl + queryString, {
+        ...this.fetchOptions,
+        method: isEligibleForGetRequest ? 'GET' : 'POST',
+        body: !isEligibleForGetRequest ? { query, params } : undefined,
+      })).result
+    }
+    catch (error) {
+      console.error('Failed to fetch data from Sanity:', error)
+      return null
+    }
   }
 
   public clone(): MinimalSanityClient {

@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
   )
 
   if (!result)
-    throw createError({ statusCode: 400, statusMessage: 'Invalid query' })
+    throw createError({ statusCode: 404, statusMessage: 'No results' })
 
   setResponseHeader(event, 'Content-Type', 'application/json')
 

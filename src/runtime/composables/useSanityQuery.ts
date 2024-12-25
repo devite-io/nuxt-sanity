@@ -74,7 +74,7 @@ export const useSanityQuery = <T = unknown, E = Error>(query: string, _params: Q
     }
   }
 
-  let fetchFunc: () => Promise<SanityQueryResponse<T>> = async () => {
+  let fetchFunc: () => Promise<SanityQueryResponse<T | null>> = async () => {
     return { data: await client.fetch<T>(query, reactiveParams || {}, { perspective }) }
   }
 

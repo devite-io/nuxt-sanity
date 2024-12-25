@@ -17,12 +17,18 @@ class DefaultSanityClient extends SanityClient {
     this.client = createClient(config)
   }
 
-  public async fetch<T = unknown>(
+  public async fetch<T>(
     query: string,
     params: QueryParams,
     options?: { perspective?: ClientPerspective },
-  ): Promise<T> {
-    return await this.client.fetch<T>(query, params, options)
+  ): Promise<T | null> {
+    try {
+      return await this.client.fetch<T>(query, params, options)
+    }
+    catch (error) {
+      console.error('Failed to fetch data from Sanity:', error)
+      return null
+    }
   }
 
   public createQueryStore(tag?: string) {
