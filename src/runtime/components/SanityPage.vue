@@ -12,10 +12,11 @@
 import { computed, type ComputedRef } from 'vue'
 import type { ImageAsset } from '@sanity/types'
 import type { GlobalSEO, Home, NotFound, Page } from '@devite/nuxt-sanity'
+import { setResponseStatus } from 'h3'
 import { IMAGE_WITHOUT_PREVIEW_PROJECTION } from '../utils/projections'
 import { useSanityQuery } from '../composables/useSanityQuery'
 import { groq } from '../utils/groq'
-import { useHead, useRoute, useRuntimeConfig, useSeoMeta } from '#imports'
+import { useHead, useRoute, useRuntimeConfig, useSeoMeta, useRequestEvent } from '#imports'
 
 const path = useRoute().path
 const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`
@@ -23,6 +24,13 @@ const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(
   groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
   { slug: path.substring(1) },
 )
+
+if (sanityData.value?._type === 'notFound' && import.meta.server) {
+  const event = useRequestEvent()
+
+  if (event)
+    setResponseStatus(event, 404)
+}
 
 const { baseURL } = useRuntimeConfig().public
 const seo = computed(() => sanityData.value?.seo)
