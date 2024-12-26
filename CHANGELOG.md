@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.5.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.1...v2.5.2)
+
+### 🩹 Fixes
+
+- Bundle size reduction without visual editing ([0c7555e](https://github.com/devite-io/nuxt-sanity/commit/0c7555e))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.5.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.0...v2.5.1)
