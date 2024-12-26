@@ -1,11 +1,8 @@
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
-import { useSanityLiveMode } from '../composables/useSanityLiveMode'
-import { useSanityVisualEditing } from '../composables/useSanityVisualEditing'
-import {
-  defineNuxtPlugin, useCookie,
-  useRuntimeConfig,
-} from '#imports'
+import type DefaultSanityClient from '../client/DefaultSanityClient'
+import useSanityClient from '../utils/useSanityClient'
+import { defineNuxtPlugin, useCookie, useRuntimeConfig } from '#imports'
 
 export default defineNuxtPlugin(async () => {
   const visualEditingState = useSanityVisualEditingState()
@@ -25,12 +22,16 @@ export default defineNuxtPlugin(async () => {
     switch (visualEditing?.mode) {
       case 'live-visual-editing':
       case 'visual-editing':
-        useSanityVisualEditing({
+        import('../utils/visualEditing/enableVisualEditing').then(({ enableVisualEditing }) => enableVisualEditing({
           refresh: visualEditing?.refresh,
           zIndex: visualEditing?.zIndex,
-        })
+        }))
 
-        if (visualEditing?.mode === 'live-visual-editing') await useSanityLiveMode()
+        if (visualEditing?.mode === 'live-visual-editing') {
+          const client = await useSanityClient(true, 'default', $config.public.sanity as ModuleOptions) as DefaultSanityClient
+
+          client.queryStore?.enableLiveMode({ client: client.client })
+        }
         break
     }
   }

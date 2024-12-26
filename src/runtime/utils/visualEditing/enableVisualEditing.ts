@@ -1,8 +1,7 @@
 import type { DisableVisualEditing, VisualEditingOptions } from '@sanity/visual-editing'
-import { enableVisualEditing } from '@sanity/visual-editing'
+import { enableVisualEditing as enableSanityVisualEditing } from '@sanity/visual-editing'
 import type { SanityVisualEditingRefreshHandler } from '@devite/nuxt-sanity'
 import type { Router } from 'vue-router'
-import { onScopeDispose } from 'vue'
 import { reloadNuxtApp, useRouter } from '#imports'
 
 export interface VisualEditingProps {
@@ -11,14 +10,14 @@ export interface VisualEditingProps {
 }
 
 /** @return A function to disable visual editing */
-export const useSanityVisualEditing = (options: VisualEditingProps = {}): DisableVisualEditing => {
+export function enableVisualEditing(options: VisualEditingProps = {}): DisableVisualEditing {
   const { refresh, zIndex } = options
   let disable = () => {}
 
   if (import.meta.client) {
     const router: Router = useRouter()
 
-    disable = enableVisualEditing({
+    disable = enableSanityVisualEditing({
       zIndex,
       refresh: (payload) => {
         function refreshDefault() {
@@ -53,8 +52,6 @@ export const useSanityVisualEditing = (options: VisualEditingProps = {}): Disabl
       },
     })
   }
-
-  onScopeDispose(disable)
 
   return disable
 }
