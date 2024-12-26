@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.5.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.0...v2.5.1)
+
+### 🩹 Fixes
+
+- Dynamic imports in production builds ([85f9668](https://github.com/devite-io/nuxt-sanity/commit/85f9668))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.5.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.3...v2.5.0)
