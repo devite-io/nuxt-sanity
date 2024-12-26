@@ -1,12 +1,27 @@
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import type SanityClient from '../client/SanityClient'
-import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
-import getOrCreateSanityClient from './getOrCreateSanityClient'
-import { useRuntimeConfig } from '#imports'
+import type { SanityClientType } from '../client/SanityClient'
+import type DefaultSanityClient from '~/src/runtime/client/DefaultSanityClient'
 
-export default function useSanityClient(type?: 'minimal' | 'default'): SanityClient {
-  const $config = useRuntimeConfig()
-  const sanityConfig = $config.public.sanity as ModuleOptions
+const clients = {} as Record<SanityClientType, SanityClient>
 
-  return getOrCreateSanityClient(useSanityVisualEditingState().enabled, sanityConfig, type)
+export default async function useSanityClient(visualEditing: boolean, type: SanityClientType, config: ModuleOptions): Promise<SanityClient> {
+  const clientType = visualEditing ? 'default' : type
+
+  if (clientType in clients) return clients[clientType]
+
+  const clientConfig = {
+    ...config,
+    stega: visualEditing && config.stega,
+  }
+
+  const client = new (await import(
+    clientType === 'minimal' ? '../client/MinimalSanityClient.ts' : '../client/DefaultSanityClient.ts'
+  )).default(clientConfig) as SanityClient
+
+  if (visualEditing) (client as DefaultSanityClient).createQueryStore()
+
+  clients[clientType] = client
+
+  return client
 }

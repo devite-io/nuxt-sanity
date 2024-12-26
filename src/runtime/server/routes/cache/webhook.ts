@@ -1,6 +1,7 @@
 import { createHmac } from 'node:crypto'
-import { defineEventHandler, readRawBody, setResponseStatus, getRequestHeader } from 'h3'
-import { useRuntimeConfig, useStorage } from '#imports'
+import { defineEventHandler, getRequestHeader, readRawBody, setResponseStatus } from 'h3'
+import { useStorage } from 'nitropack/runtime/internal/storage'
+import { useRuntimeConfig } from '#imports'
 
 export default defineEventHandler(async (event) => {
   const body = await readRawBody(event)

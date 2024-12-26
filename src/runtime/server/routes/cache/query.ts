@@ -6,8 +6,9 @@ import {
 } from 'h3'
 import type { ClientPerspective } from '@sanity/client'
 import { hash } from 'ohash'
+import { useStorage } from 'nitropack/runtime/internal/storage'
 import useSanityClient from '../../utils/useSanityClient'
-import { useRuntimeConfig, useStorage } from '#imports'
+import { useRuntimeConfig } from '#imports'
 
 const TTL = 60 * 60 * 8 // 8 hours
 

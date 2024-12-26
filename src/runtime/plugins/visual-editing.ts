@@ -7,14 +7,13 @@ import {
   useRuntimeConfig,
 } from '#imports'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   const visualEditingState = useSanityVisualEditingState()
   const $config = useRuntimeConfig()
   const { visualEditing } = $config.public.sanity as ModuleOptions
 
   if (import.meta.server) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const previewModeId = ($config.sanity as any).visualEditing.previewModeId
+    const previewModeId = $config.sanity.visualEditing.previewModeId
 
     if (visualEditing?.previewMode && previewModeId) {
       const previewModeCookie = useCookie('__sanity_preview')
@@ -31,7 +30,7 @@ export default defineNuxtPlugin(() => {
           zIndex: visualEditing?.zIndex,
         })
 
-        if (visualEditing?.mode === 'live-visual-editing') useSanityLiveMode()
+        if (visualEditing?.mode === 'live-visual-editing') await useSanityLiveMode()
         break
     }
   }

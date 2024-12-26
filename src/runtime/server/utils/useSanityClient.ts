@@ -1,23 +1,36 @@
 import defu from 'defu'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import type SanityClient from '../../client/SanityClient'
-import type { SanityClientType } from '../../utils/getOrCreateSanityClient'
-import getOrCreateSanityClient from '../../utils/getOrCreateSanityClient'
+import type { SanityClientType } from '../../client/SanityClient'
+import DefaultSanityClient from '../../client/DefaultSanityClient'
+import MinimalSanityClient from '../../client/MinimalSanityClient'
 import { useRuntimeConfig } from '#imports'
 
-export default function useSanityClient(type?: SanityClientType): SanityClient {
-  const $config = useRuntimeConfig()
-  const sanityConfig = defu($config.sanity, $config.public.sanity || {}) as ModuleOptions
+type ReusableClientType = SanityClientType | 'default-visual-editing'
+
+const clients = {} as Record<ReusableClientType, SanityClient>
+
+export default function useSanityClient(type?: SanityClientType, config?: ModuleOptions): SanityClient {
+  const sanityConfig = config || defu(useRuntimeConfig().sanity, useRuntimeConfig().public.sanity || {}) as ModuleOptions
   const visualEditingEnabled = type !== 'minimal' && sanityConfig.visualEditing && sanityConfig.visualEditing.previewMode !== false
 
-  return getOrCreateSanityClient(
-    visualEditingEnabled || false,
-    visualEditingEnabled
-      ? {
-          ...sanityConfig,
-          token: sanityConfig.visualEditing?.token,
-          useCdn: false,
-        }
-      : sanityConfig,
-    type)
+  const clientType = ((type || (sanityConfig.minimalClient ? 'minimal' : 'default')) + (visualEditingEnabled ? '-visual-editing' : '')) as ReusableClientType
+
+  if (clientType in clients) return clients[clientType]
+
+  const clientConfig = visualEditingEnabled
+    ? {
+        ...sanityConfig,
+        token: sanityConfig.visualEditing?.token,
+        useCdn: false,
+      }
+    : sanityConfig
+
+  const client = new (clientType === 'minimal' ? MinimalSanityClient : DefaultSanityClient)(clientConfig)
+
+  if (visualEditingEnabled) (client as DefaultSanityClient).createQueryStore()
+
+  clients[clientType] = client
+
+  return client
 }

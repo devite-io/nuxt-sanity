@@ -1,7 +1,7 @@
 import { createError, defineEventHandler, getRequestURL } from 'h3'
 import { hash } from 'ohash'
+import { useStorage } from 'nitropack/runtime/internal/storage'
 import resolveSanityImageUrl from '../../utils/resolveSanityImageUrl'
-import { useStorage } from '#imports'
 
 const TTL = 60 * 60 * 24 * 365 // 1 year
 

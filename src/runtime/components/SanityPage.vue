@@ -14,9 +14,8 @@ import type { ImageAsset } from '@sanity/types'
 import type { GlobalSEO, Home, NotFound, Page } from '@devite/nuxt-sanity'
 import { setResponseStatus } from 'h3'
 import { IMAGE_WITHOUT_PREVIEW_PROJECTION } from '../utils/projections'
-import { useSanityQuery } from '../composables/useSanityQuery'
 import { groq } from '../utils/groq'
-import { useHead, useRoute, useRuntimeConfig, useSeoMeta, useRequestEvent } from '#imports'
+import { useHead, useRequestEvent, useRoute, useRuntimeConfig, useSanityQuery, useSeoMeta } from '#imports'
 
 const path = useRoute().path
 const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`

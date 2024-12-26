@@ -6,7 +6,8 @@ import {
   addPlugin,
   addServerHandler,
   createResolver,
-  defineNuxtModule, installModule,
+  defineNuxtModule,
+  installModule,
 } from '@nuxt/kit'
 import defu from 'defu'
 import type { StegaConfig } from '@sanity/client'
@@ -190,8 +191,8 @@ export default defineNuxtModule<ModuleOptions>({
     addImportsDir(resolve('runtime/client'))
     addImports([
       // composables
-      { name: 'useSanityQuery', from: resolve('runtime/composables/useSanityQuery') },
-      { name: 'useLazySanityQuery', from: resolve('runtime/composables/useLazySanityQuery') },
+      { name: 'useSanityQuery', from: resolve('runtime/composables/query') },
+      { name: 'useLazySanityQuery', from: resolve('runtime/composables/query') },
 
       // helper methods
       { name: 'groq', from: resolve('runtime/utils/groq') },
