@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v2.5.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.3...v2.5.0)
+
+### 🚀 Enhancements
+
+- Improve error handling ([cf08a15](https://github.com/devite-io/nuxt-sanity/commit/cf08a15))
+- Split up code and dynamically import fractions to drastically reduce bundle size ([ffbd89b](https://github.com/devite-io/nuxt-sanity/commit/ffbd89b))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.4.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.4.2...v2.4.3)
