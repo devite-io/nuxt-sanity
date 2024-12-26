@@ -84,7 +84,7 @@ export function useSanityQuery<T = unknown, E = Error>(
   }
 
   const fetchFunc: (() => Promise<SanityQueryResponse<T | null>>) = () => new Promise((resolve) => {
-    import(visualEditingEnabled ? '../utils/visualEditing/fetchSanityData.ts' : '../utils/default/fetchSanityData.ts').then(async ({ fetchSanityData }) => {
+    (visualEditingEnabled ? import('../utils/visualEditing/fetchSanityData') : import('../utils/default/fetchSanityData')).then(async ({ fetchSanityData }) => {
       const client = import.meta.server
         ? useServerSanityClient(clientType, sanityConfig)
         : await useSanityClient(visualEditingEnabled, clientType, sanityConfig)
@@ -114,7 +114,7 @@ export function useSanityQuery<T = unknown, E = Error>(
     : useAsyncData<SanityQueryResponse<T | null>, E>(key, fetchFunc, options)) as AsyncData<SanityQueryResponse<T | null>, E>
 
   if (visualEditingEnabled && import.meta.client) {
-    import('../utils/visualEditing/subscribeToChanges.ts').then(async ({ subscribeToChanges }) => {
+    import('../utils/visualEditing/subscribeToChanges').then(async ({ subscribeToChanges }) => {
       const client = await useSanityClient(visualEditingEnabled, clientType, sanityConfig)
 
       subscribeToChanges<T, E>(query, reactiveParams, client as SanityClient, updateRefs)

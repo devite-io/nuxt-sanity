@@ -15,8 +15,7 @@ export default async function useSanityClient(visualEditing: boolean, type: Sani
     stega: visualEditing && config.stega,
   }
 
-  const client = new (await import(
-    clientType === 'minimal' ? '../client/MinimalSanityClient.ts' : '../client/DefaultSanityClient.ts'
+  const client = new (await (clientType === 'minimal' ? import('../client/MinimalSanityClient') : import('../client/DefaultSanityClient')
   )).default(clientConfig) as SanityClient
 
   if (visualEditing) (client as DefaultSanityClient).createQueryStore()
