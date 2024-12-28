@@ -5,7 +5,7 @@ import { useSanityQuery } from '#imports'
 
 export const resolveInternalLink = async (reference: Reference): Promise<Ref<LinkInternal | null>> => {
   return (await useSanityQuery<LinkInternal>(
-    `*[_id == $documentId][0] { '_type': 'linkInternal', 'slug': coalesce(slug.current, '/') }`,
+    `*[_id == $documentId][0] { '_type': 'linkInternal', 'slug': '/' + coalesce(slug.current, '') }`,
     { documentId: reference._ref },
   )).data
 }

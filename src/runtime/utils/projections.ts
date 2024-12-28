@@ -23,5 +23,5 @@ export const IMAGE_WITH_PREVIEW_PROJECTION = groq`{
 export const LINK_PROJECTION = groq`{
   '_type': @._type,
   _type == 'linkExternal' => { url, newWindow },
-  _type == 'linkInternal' => { 'slug': coalesce(@.reference->slug.current, '/') }
+  _type == 'linkInternal' => { 'slug': '/' + coalesce(@.reference->slug.current, '') }
 }`
