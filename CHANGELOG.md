@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v2.5.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.2...v2.5.3)
+
+### 🩹 Fixes
+
+- Always add slash to optimize client navigation ([faeb746](https://github.com/devite-io/nuxt-sanity/commit/faeb746))
+- Casing of runtime config variable ([a3a003d](https://github.com/devite-io/nuxt-sanity/commit/a3a003d))
+
+### 📖 Documentation
+
+- Add nuxt config info to README ([44ea618](https://github.com/devite-io/nuxt-sanity/commit/44ea618))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.5.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.1...v2.5.2)
