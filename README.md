@@ -14,6 +14,29 @@ npx nuxi module add @devite/nuxt-sanity
 
 That's it! You can now use Sanity with your Nuxt app ✨
 
+## Configuration
+
+Further configuration can be done in the `nuxt.config.ts` file:
+
+```ts
+export default {
+  modules: [
+    '@devite/nuxt-sanity',
+    "@nuxt/image"
+  ],
+  sanity: {
+    projectId: 'YOUR_PROJECT_ID',
+    dataset: 'YOUR_DATASET',
+    ...
+  },
+  runtimeConfig: {
+    public: {
+      // Required for SanityPage component to set a correct "canonical" url
+      baseUrl: "https://www.example.com"
+    }
+  }
+};
+```
 
 ## Contribution
 
@@ -49,8 +72,10 @@ That's it! You can now use Sanity with your Nuxt app ✨
 </details>
 
 <!-- Links -->
+
 [nuxt-sanity]: https://github.com/nuxt-modules/sanity
 
 <!-- Badges -->
+
 [npm-version-src]: https://img.shields.io/npm/v/@devite/nuxt-sanity/latest.svg?style=flat&colorA=020420&colorB=00DC82
 [npm-version-href]: https://npmjs.com/package/@devite/nuxt-sanity
