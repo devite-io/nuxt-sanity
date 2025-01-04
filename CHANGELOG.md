@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.5.4
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.3...v2.5.4)
+
+### 🩹 Fixes
+
+- Rename operation gone wrong ([068e5a0](https://github.com/devite-io/nuxt-sanity/commit/068e5a0))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.5.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.2...v2.5.3)
