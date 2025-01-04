@@ -31,11 +31,11 @@ if (sanityData.value?._type === 'notFound' && import.meta.server) {
     setResponseStatus(event, 404)
 }
 
-const { baseURL } = useRuntimeConfig().public
+const { baseURL: baseUrl } = useRuntimeConfig().public
 const seo = computed(() => sanityData.value?.seo)
 const url = computed(
   () =>
-    ((baseURL as string) || '')
+    ((baseUrl as string) || '')
     + ((sanityData.value && ('slug' in sanityData.value ? sanityData.value.slug.current : null)) || '/'),
 )
 
