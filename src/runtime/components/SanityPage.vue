@@ -31,7 +31,7 @@ if (sanityData.value?._type === 'notFound' && import.meta.server) {
     setResponseStatus(event, 404)
 }
 
-const { baseURL: baseUrl } = useRuntimeConfig().public
+const { baseUrl } = useRuntimeConfig().public
 const seo = computed(() => sanityData.value?.seo)
 const url = computed(
   () =>
