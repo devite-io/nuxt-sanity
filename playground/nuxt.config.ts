@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     dirs: ['types/**/*.ts'], // auto-imports for types
   },
 
-  devtools: { enabled: false },
+  devtools: { enabled: true },
 
   runtimeConfig: {
     public: {

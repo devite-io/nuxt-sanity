@@ -8,7 +8,7 @@
   "dependencies": {
     "@devite/nuxt-sanity": "latest",
     "@sanity/client": "latest",
-    "nuxt": "3.14.1592",
+    "nuxt": "latest",
     "vue": "latest",
     "vue-router": "latest"
   },
