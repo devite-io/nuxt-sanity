@@ -5,6 +5,7 @@
       :key="module._key"
       :data="module"
     />
+    <slot />
   </main>
 </template>
 
