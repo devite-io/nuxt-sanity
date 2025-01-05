@@ -171,9 +171,9 @@ export default defineNuxtModule<ModuleOptions>({
       useCdn: moduleConfig.useCdn,
       apiVersion: moduleConfig.apiVersion,
       perspective: 'raw',
-      /* Visual Editing */
       token: options.token || '',
       withCredentials: options.withCredentials || false,
+      /* Visual Editing */
       stega:
           (moduleConfig.visualEditing
             && moduleConfig.visualEditing.stega !== false
@@ -183,7 +183,10 @@ export default defineNuxtModule<ModuleOptions>({
               studioUrl: moduleConfig.visualEditing.studioUrl,
             } as StegaConfig))
             || {},
-      visualEditing: moduleConfig.visualEditing,
+      visualEditing: {
+        ...moduleConfig.visualEditing,
+        token: undefined,
+      },
     })
 
     /* Imports */
