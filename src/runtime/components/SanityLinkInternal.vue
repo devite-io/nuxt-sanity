@@ -1,5 +1,9 @@
 <template>
-  <NuxtLink :to="resolvedLink?.slug">
+  <NuxtLink
+    :to="resolvedLink?.slug"
+    :title="data.linkTitle"
+    :rel="data.relationship"
+  >
     <slot />
   </NuxtLink>
 </template>

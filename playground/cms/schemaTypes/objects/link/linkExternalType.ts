@@ -19,6 +19,15 @@ export const linkExternalType = defineField({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'linkTitle',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'relationship',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {

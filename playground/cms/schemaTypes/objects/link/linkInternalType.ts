@@ -14,6 +14,15 @@ export const linkInternalType = defineField({
       validation: (Rule) => Rule.required(),
       to: PAGE_REFERENCES,
     }),
+    defineField({
+      name: 'linkTitle',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'relationship',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {

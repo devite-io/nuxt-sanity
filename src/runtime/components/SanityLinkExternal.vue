@@ -2,6 +2,8 @@
   <NuxtLink
     :to="data.url"
     :target="data.newWindow ? '_blank' : '_self'"
+    :title="data.linkTitle"
+    :rel="data.relationship"
     external
   >
     <slot />

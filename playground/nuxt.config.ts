@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     projectId: process.env.NUXT_SANITY_PROJECT_ID,
     dataset: process.env.NUXT_SANITY_DATASET,
     minimalClient: {
+      cachingEnabled: process.env.NODE_ENV === 'production',
       webhookSecret: process.env.NUXT_SANITY_WEBHOOK_SECRET,
     },
     visualEditing: {
