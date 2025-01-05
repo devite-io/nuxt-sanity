@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.7.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.6.0...v2.7.0)
+
+### 🚀 Enhancements
+
+- Add seo anchor attributes ([5dd17bd](https://github.com/devite-io/nuxt-sanity/commit/5dd17bd))
+
+### 🏡 Chore
+
+- Update dependencies ([68c0d09](https://github.com/devite-io/nuxt-sanity/commit/68c0d09))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.6.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.4...v2.6.0)
