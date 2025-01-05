@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.6.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.4...v2.6.0)
+
+### 🚀 Enhancements
+
+- Add slot for SanityPage component ([2905504](https://github.com/devite-io/nuxt-sanity/commit/2905504))
+
+### 🩹 Fixes
+
+- Don't include visual editing token in client side runtime config ([ec9a121](https://github.com/devite-io/nuxt-sanity/commit/ec9a121))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.5.4
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.5.3...v2.5.4)
