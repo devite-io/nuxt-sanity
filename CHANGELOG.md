@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.8.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.7.0...v2.8.0)
+
+### 🚀 Enhancements
+
+- Disable image placeholders by default + don't resolve lqip if unused ([b78a142](https://github.com/devite-io/nuxt-sanity/commit/b78a142))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.7.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.6.0...v2.7.0)
