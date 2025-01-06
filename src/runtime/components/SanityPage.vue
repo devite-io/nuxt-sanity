@@ -48,16 +48,11 @@ const image: ComputedRef<ImageAsset | undefined> = computed(
 )
 const imageUrl = computed(() => image.value?.url)
 const imageDimensions = computed(() => image.value?.metadata.dimensions)
+const imageMimeType = computed(() => image.value?.mimeType as 'image/gif' | 'image/jpeg' | 'image/png' | undefined)
+const imageAlt = computed(() => image.value?.altText as string | undefined)
 
 useHead({
   meta: [
-    { name: 'site_name', content: () => globalSEO.value?.siteName },
-    { name: 'og:image', content: () => imageUrl.value },
-    { name: 'og:image:width', content: () => imageDimensions.value?.width },
-    { name: 'og:image:height', content: () => imageDimensions.value?.height },
-    { name: 'twitter:image', content: () => imageUrl.value },
-    { name: 'twitter:image:width', content: () => imageDimensions.value?.width },
-    { name: 'twitter:image:height', content: () => imageDimensions.value?.height },
     { name: 'og:url', content: () => url.value },
     { name: 'twitter:url', content: () => url.value },
   ],
@@ -65,12 +60,26 @@ useHead({
 })
 
 useSeoMeta({
+  // indexing
   robots: () => `${seo.value?.indexable ? '' : 'no'}index,follow`,
+  // title
   title: () => seo.value?.title || '',
-  description: () => seo.value?.description,
   ogTitle: () => seo.value?.shortTitle,
-  ogDescription: () => seo.value?.description,
   twitterTitle: () => seo.value?.shortTitle,
+  // description
+  description: () => seo.value?.description,
+  ogDescription: () => seo.value?.description,
   twitterDescription: () => seo.value?.description,
+  // OpenGraph site name
+  ogSiteName: () => globalSEO.value?.siteName,
+  // OpenGraph Image
+  ogImage: () => imageUrl.value,
+  ogImageWidth: () => imageDimensions.value?.width,
+  ogImageHeight: () => imageDimensions.value?.height,
+  ogImageType: () => imageMimeType.value,
+  ogImageAlt: () => imageAlt.value,
+  // Twitter Image
+  twitterImage: () => imageUrl.value,
+  twitterImageAlt: () => imageAlt.value,
 })
 </script>

@@ -4,7 +4,7 @@ import notFound from './notFoundStructure'
 import pages from './pageStructure'
 import settings from './settingStructure'
 
-// If you add document types to structure manually, you can add them to this function to prevent duplicates in the root pane
+// if you add document types to structure manually, you can add them to this function to prevent duplicates in the root pane
 const hiddenDocTypes = (listItem: ListItemBuilder) => {
   const id = listItem.getId()
 

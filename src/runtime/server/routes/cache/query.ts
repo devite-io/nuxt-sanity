@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
   const client = useSanityClient('minimal')
 
-  // Prevent recursive calls
+  // prevent recursive calls
   delete client.config.minimalClient
 
   // prevent caching of outdated data

@@ -14,7 +14,7 @@ import { homeType } from './singletons/homeType'
 import { notFoundType } from './singletons/notFoundType'
 import { settingsType } from './singletons/settingsType'
 
-// Objects used as annotations must be imported first
+// objects used as annotations must be imported first
 const annotations = [linkExternalType, linkInternalType]
 
 const objects = [globalSEOType, seoType]
