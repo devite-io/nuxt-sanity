@@ -6,7 +6,7 @@
     :width="imageAsset.metadata.dimensions.width"
     :height="imageAsset.metadata.dimensions.height"
     :alt="imageAsset.altText as (string | undefined)"
-    :placeholder="loading === 'eager' ? undefined : imageAsset.metadata.lqip"
+    :placeholder="loading === 'eager' || !lqip ? undefined : imageAsset.metadata.lqip"
     :loading="loading || 'lazy'"
     :format="imageAsset.mimeType === 'image/svg+xml' ? undefined : 'webp'"
     draggable="false"
@@ -22,13 +22,14 @@ import { resolveImageAssetById } from '../utils/resolveImageAssetById'
 const props = defineProps<{
   asset?: ImageAsset | Reference | null
   loading?: 'eager' | 'lazy'
+  lqip?: boolean
 }>()
 const imageAsset = ref<ImageAsset | null>(null)
 let unwatchFunc = undefined as (() => void) | undefined
 
 async function resolveImageAsset() {
   if (props.asset?._ref) {
-    const assetRef = await resolveImageAssetById((props.asset as Reference)._ref)
+    const assetRef = await resolveImageAssetById((props.asset as Reference)._ref, props.lqip || false)
 
     imageAsset.value = assetRef.value
 
