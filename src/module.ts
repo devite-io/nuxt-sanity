@@ -183,11 +183,19 @@ export default defineNuxtModule<ModuleOptions>({
               studioUrl: moduleConfig.visualEditing.studioUrl,
             } as StegaConfig))
             || {},
-      visualEditing: {
-        ...moduleConfig.visualEditing,
-        token: undefined,
-      },
+      visualEditing: moduleConfig.visualEditing,
     })
+
+    // remove sensitive data from public runtime config
+    const publicSanityConfig = $config.public.sanity as ModuleOptions
+
+    if (publicSanityConfig.visualEditing) {
+      delete publicSanityConfig.visualEditing.token
+    }
+
+    if (publicSanityConfig.minimalClient && publicSanityConfig.minimalClient !== true) {
+      delete publicSanityConfig.minimalClient.webhookSecret
+    }
 
     /* Imports */
 
