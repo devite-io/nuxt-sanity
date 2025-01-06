@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v2.8.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.8.0...v2.8.1)
+
+### 🩹 Fixes
+
+- Add missing open graph meta tags + prefer useSeoMeta over useHead ([53a5de3](https://github.com/devite-io/nuxt-sanity/commit/53a5de3))
+- Remove secrets from public runtime config ([4ac3d97](https://github.com/devite-io/nuxt-sanity/commit/4ac3d97))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.8.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.7.0...v2.8.0)
