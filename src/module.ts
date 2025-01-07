@@ -88,7 +88,7 @@ export default defineNuxtModule<ModuleOptions>({
           `${name} > @sanity/visual-editing > react/jsx-runtime`,
           `${name} > @sanity/visual-editing > react-dom`,
           `${name} > @sanity/visual-editing > react-dom/client`,
-          `${name} > @sanity/visual-editing > react-compiler-runtime`,
+          // `${name} > @sanity/visual-editing > react-compiler-runtime`,
           '@sanity/client',
         ],
       })

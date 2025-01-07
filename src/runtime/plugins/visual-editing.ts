@@ -18,7 +18,7 @@ export default defineNuxtPlugin(async () => {
       visualEditingState.enabled = previewModeId === previewModeCookie.value
     }
   }
-  else if (visualEditingState.enabled && visualEditing?.mode !== 'custom') {
+  else if (visualEditingState.enabled) {
     switch (visualEditing?.mode) {
       case 'live-visual-editing':
       case 'visual-editing':
