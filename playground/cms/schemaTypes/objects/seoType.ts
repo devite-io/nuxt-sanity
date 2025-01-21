@@ -17,6 +17,21 @@ export const seoType = defineField({
       initialValue: true,
     }),
     defineField({
+      name: 'priority',
+      type: 'number',
+      description: 'A number between 0 and 1 indicating the priority of this page',
+      initialValue: 0.5,
+    }),
+    defineField({
+      name: 'changeFreq',
+      title: 'Change Frequency',
+      type: 'string',
+      options: {
+        list: ['always', 'daily', 'weekly', 'monthly', 'yearly', 'never'],
+      },
+      initialValue: 'weekly',
+    }),
+    defineField({
       name: 'title',
       type: 'string',
       validation: (Rule) =>
