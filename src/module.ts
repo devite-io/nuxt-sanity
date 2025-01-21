@@ -2,9 +2,9 @@ import crypto from 'node:crypto'
 import {
   addComponentsDir,
   addImports,
-  addImportsDir,
   addPlugin,
   addServerHandler,
+  addServerImports,
   createResolver,
   defineNuxtModule,
   installModule,
@@ -199,16 +199,14 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* Imports */
 
-    addImportsDir(resolve('runtime/client'))
-    addImports([
-      // composables
-      { name: 'useSanityQuery', from: resolve('runtime/composables/query') },
-      { name: 'useLazySanityQuery', from: resolve('runtime/composables/query') },
+    const sharedImports = [
+      // clients
+      { name: 'default', as: 'SanityClient', from: resolve('runtime/client/SanityClient') },
+      { name: 'default', as: 'DefaultSanityClient', from: resolve('runtime/client/DefaultSanityClient') },
+      { name: 'default', as: 'MinimalSanityClient', from: resolve('runtime/client/MinimalSanityClient') },
 
       // helper methods
       { name: 'groq', from: resolve('runtime/utils/groq') },
-      { name: 'resolveImageAssetById', from: resolve('runtime/utils/resolveImageAssetById') },
-      { name: 'resolveInternalLink', from: resolve('runtime/utils/resolveInternalLink') },
 
       // projections
       ...[
@@ -219,8 +217,30 @@ export default defineNuxtModule<ModuleOptions>({
       ].map((field) => ({
         name: field,
         from: resolve('runtime/utils/projections'),
-      }))],
-    )
+      })),
+    ]
+
+    addImports([
+      // composables
+      { name: 'useSanityQuery', from: resolve('runtime/composables/query') },
+      { name: 'useLazySanityQuery', from: resolve('runtime/composables/query') },
+
+      // helper methods
+      { name: 'resolveImageAssetById', from: resolve('runtime/utils/resolveImageAssetById') },
+      { name: 'resolveInternalLink', from: resolve('runtime/utils/resolveInternalLink') },
+
+      // shared
+      ...sharedImports,
+    ])
+
+    addServerImports([
+      // helper methods
+      { name: 'default', as: 'useSanityClient', from: resolve('runtime/server/utils/useSanityClient') },
+      { name: 'default', as: 'resolveSanityImageUrl', from: resolve('runtime/server/utils/resolveSanityImageUrl') },
+
+      // shared
+      ...sharedImports,
+    ])
 
     /* Components */
 
