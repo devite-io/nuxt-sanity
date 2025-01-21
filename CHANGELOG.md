@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.8.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.8.2...v2.8.3)
+
+### 🩹 Fixes
+
+- Add nitro auto imports ([019be76](https://github.com/devite-io/nuxt-sanity/commit/019be76))
+
+### 🏡 Chore
+
+- **playground:** Add fields for sitemaps ([4d9911d](https://github.com/devite-io/nuxt-sanity/commit/4d9911d))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.8.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.8.1...v2.8.2)
