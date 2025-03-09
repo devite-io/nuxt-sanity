@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v2.9.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.8.3...v2.9.0)
+
+### 🚀 Enhancements
+
+- Allow relative urls for external links ([01f17e5](https://github.com/devite-io/nuxt-sanity/commit/01f17e5))
+
+### 🩹 Fixes
+
+- Type safety ([16ff4c9](https://github.com/devite-io/nuxt-sanity/commit/16ff4c9))
+
+### 💅 Refactors
+
+- Optimize imports ([ce121e6](https://github.com/devite-io/nuxt-sanity/commit/ce121e6))
+
+### 🏡 Chore
+
+- Update dependencies ([f32f8aa](https://github.com/devite-io/nuxt-sanity/commit/f32f8aa))
+- Update release script ([0eb93dd](https://github.com/devite-io/nuxt-sanity/commit/0eb93dd))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.8.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.8.2...v2.8.3)
