@@ -1,7 +1,7 @@
 import type { ClientPerspective, ContentSourceMap, QueryParams } from '@sanity/client'
 import type { Reactive } from 'vue'
 import type { EncodeDataAttributeFunction } from '@sanity/core-loader/encode-data-attribute'
-import type SanityClient from '../../client/SanityClient'
+import type { SanityClient } from '#imports'
 
 export async function fetchSanityData<T>(
   query: string,

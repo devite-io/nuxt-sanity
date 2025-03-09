@@ -1,9 +1,8 @@
 import defu from 'defu'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
-import type SanityClient from '../../client/SanityClient'
-import type { SanityClientType } from '../../client/SanityClient'
-import DefaultSanityClient from '../../client/DefaultSanityClient'
 import MinimalSanityClient from '../../client/MinimalSanityClient'
+import DefaultSanityClient from '../../client/DefaultSanityClient'
+import type { SanityClient, SanityClientType } from '#imports'
 import { useRuntimeConfig } from '#imports'
 
 type ReusableClientType = SanityClientType | 'default-visual-editing'

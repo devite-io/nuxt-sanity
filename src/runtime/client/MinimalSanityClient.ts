@@ -1,7 +1,7 @@
 import { $fetch } from 'ofetch'
 import type { ClientPerspective, QueryParams } from '@sanity/client'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
-import SanityClient from './SanityClient'
+import { SanityClient } from '#imports'
 
 const API_HOST = 'api.sanity.io'
 const API_CDN_HOST = 'apicdn.sanity.io'

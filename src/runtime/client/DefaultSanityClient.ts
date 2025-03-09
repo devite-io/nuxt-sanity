@@ -6,7 +6,7 @@ import {
 } from '@sanity/client'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import { createQueryStore as createCoreQueryStore, type QueryStore } from '@sanity/core-loader'
-import SanityClient from './SanityClient'
+import { SanityClient } from '#imports'
 
 class DefaultSanityClient extends SanityClient {
   public readonly client: SanityClientType

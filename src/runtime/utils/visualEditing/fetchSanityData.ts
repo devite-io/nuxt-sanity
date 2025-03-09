@@ -7,8 +7,8 @@ import type {
 } from '@sanity/client'
 import type { Reactive } from 'vue'
 import { defineEncodeDataAttribute, type EncodeDataAttributeFunction } from '@sanity/core-loader/encode-data-attribute'
-import type SanityClient from '../../client/SanityClient'
 import type DefaultSanityClient from '../../client/DefaultSanityClient'
+import type { SanityClient } from '#imports'
 
 export async function fetchSanityData<T>(
   query: string,

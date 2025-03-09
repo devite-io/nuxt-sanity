@@ -4,7 +4,7 @@ import type { ContentSourceMap, QueryParams } from '@sanity/client'
 import type { EncodeDataAttributeFunction } from '@sanity/core-loader/encode-data-attribute'
 import { defineEncodeDataAttribute } from '@sanity/core-loader/encode-data-attribute'
 import type DefaultSanityClient from '../../client/DefaultSanityClient'
-import type SanityClient from '../../client/SanityClient'
+import type { SanityClient } from '#imports'
 
 export const subscribeToChanges = <T, E>(
   query: string,

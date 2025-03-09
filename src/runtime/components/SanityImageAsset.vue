@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import type { ImageAsset, Reference } from '@sanity/types'
 import { ref, watch } from 'vue'
-import { resolveImageAssetById } from '../utils/resolveImageAssetById'
+import { resolveImageAssetById } from '#imports'
 
 const props = defineProps<{
   asset?: ImageAsset | Reference | null

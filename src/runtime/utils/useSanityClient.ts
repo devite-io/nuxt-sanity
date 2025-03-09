@@ -1,7 +1,6 @@
 import type { ModuleOptions } from '@devite/nuxt-sanity'
-import type SanityClient from '../client/SanityClient'
-import type { SanityClientType } from '../client/SanityClient'
-import type DefaultSanityClient from '~/src/runtime/client/DefaultSanityClient'
+import type DefaultSanityClient from '../client/DefaultSanityClient'
+import type { SanityClientType, SanityClient } from '#imports'
 
 const clients = {} as Record<SanityClientType, SanityClient>
 

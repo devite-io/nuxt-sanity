@@ -1,4 +1,4 @@
-import { groq } from './groq'
+import { groq } from '#imports'
 
 export const IMAGE_ASSET_PROJECTION = groq`{
   _type,

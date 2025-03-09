@@ -202,8 +202,7 @@ export default defineNuxtModule<ModuleOptions>({
     const sharedImports = [
       // clients
       { name: 'default', as: 'SanityClient', from: resolve('runtime/client/SanityClient') },
-      { name: 'default', as: 'DefaultSanityClient', from: resolve('runtime/client/DefaultSanityClient') },
-      { name: 'default', as: 'MinimalSanityClient', from: resolve('runtime/client/MinimalSanityClient') },
+      { name: 'SanityClientType', as: 'SanityClientType', from: resolve('runtime/client/SanityClient') },
 
       // helper methods
       { name: 'groq', from: resolve('runtime/utils/groq') },

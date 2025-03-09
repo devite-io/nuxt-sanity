@@ -7,9 +7,8 @@ import { type Reactive, reactive, type Ref, ref } from 'vue'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import defu from 'defu'
 import useSanityClient from '../utils/useSanityClient'
-import useServerSanityClient from '../server/utils/useSanityClient'
-import type SanityClient from '../client/SanityClient'
 import { useSanityVisualEditingState } from './useSanityVisualEditingState'
+import type { SanityClient } from '#imports'
 import { useRuntimeConfig } from '#imports'
 
 export interface UseSanityQueryOptions<T> extends AsyncDataOptions<T> {
@@ -85,9 +84,9 @@ export function useSanityQuery<T = unknown, E = Error>(
 
   const fetchFunc: (() => Promise<SanityQueryResponse<T | null>>) = () => new Promise((resolve) => {
     (visualEditingEnabled ? import('../utils/visualEditing/fetchSanityData') : import('../utils/default/fetchSanityData')).then(async ({ fetchSanityData }) => {
-      const client = import.meta.server
-        ? useServerSanityClient(clientType, sanityConfig)
-        : await useSanityClient(visualEditingEnabled, clientType, sanityConfig)
+      const client = (import.meta.server
+        ? (await import('../server/utils/useSanityClient')).default(clientType, sanityConfig)
+        : await useSanityClient(visualEditingEnabled, clientType, sanityConfig))
 
       function onDataUpdate(resultData: T | null, resultSourceMap?: ContentSourceMap, resultEncodeDataAttribute?: EncodeDataAttributeFunction) {
         if (resultEncodeDataAttribute)
