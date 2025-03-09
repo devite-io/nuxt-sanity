@@ -4,7 +4,7 @@
     :target="data.newWindow ? '_blank' : '_self'"
     :title="data.linkTitle"
     :rel="data.relationship"
-    external
+    :external="!data.url.startsWith('/')"
   >
     <slot />
   </NuxtLink>
