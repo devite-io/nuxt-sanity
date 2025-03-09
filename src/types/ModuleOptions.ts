@@ -5,9 +5,9 @@ import type {
 import type { ClientConfig } from '@sanity/client'
 
 export type ModuleOptions = ClientConfig & {
-  projectId: string
+  projectId?: string
   /** @default "production" */
-  dataset: string
+  dataset?: string
   /** @default { cachingEnabled: true, cacheBaseUrl: "http://localhost:3000", assetEndpoint: "/_sanity/cache/asset", queryEndpoint: "/_sanity/cache/query", webhookEndpoint: "/_sanity/cache/invalidate" } */
   minimalClient?: boolean | {
     cachingEnabled?: boolean
