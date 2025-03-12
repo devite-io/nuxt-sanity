@@ -14,7 +14,7 @@ class MinimalSanityClient extends SanityClient {
     super({
       ...config,
       perspective: config.perspective || 'raw',
-      useCdn: config.perspective === 'previewDrafts' ? false : config.useCdn,
+      useCdn: config.perspective === 'drafts' ? false : config.useCdn,
     })
 
     this.queryPath = `/v${config.apiVersion}/data/query/${config.dataset}`

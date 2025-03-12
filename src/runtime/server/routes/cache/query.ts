@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     || ((useRuntimeConfig().public.sanity as any).perspective as ClientPerspective | undefined)
 
-  if (typeof perspective === 'string' && !['previewDrafts', 'published', 'raw'].includes(perspective))
+  if (typeof perspective === 'string' && !['drafts', 'published', 'raw'].includes(perspective))
     throw createError({ statusCode: 400, statusMessage: 'Invalid perspective' })
 
   const hashedQuery = hash(query + JSON.stringify(params) + (perspective || ''))

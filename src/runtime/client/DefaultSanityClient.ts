@@ -40,7 +40,7 @@ class DefaultSanityClient extends SanityClient {
 
     if (import.meta.server) {
       const serverClient = this.client.withConfig({
-        perspective: 'previewDrafts',
+        perspective: 'drafts',
         token: this.config.token,
         useCdn: false,
       })

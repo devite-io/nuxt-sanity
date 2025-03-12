@@ -6,11 +6,9 @@
     "start": "nuxi start"
   },
   "dependencies": {
-    "@devite/nuxt-sanity": "latest",
-    "@sanity/client": "^6.24.1",
-    "nuxt": "^3.15.4",
-    "vue": "3.5.13",
-    "vue-router": "^4.5.0"
+    "@devite/nuxt-sanity": "link:..",
+    "@sanity/client": "^6.28.3",
+    "nuxt": "^3.16.0"
   },
   "engines": {
     "node": "^18.20.4 || ^20.9.0 || ^22.0.0 || >=23.0.0"

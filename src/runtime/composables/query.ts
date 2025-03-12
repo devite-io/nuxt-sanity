@@ -13,7 +13,7 @@ import { useRuntimeConfig } from '#imports'
 
 export interface UseSanityQueryOptions<T> extends AsyncDataOptions<T> {
   client?: 'default' | 'minimal'
-  perspective?: 'previewDrafts' | 'published' | 'raw'
+  perspective?: 'drafts' | 'published' | 'raw'
 }
 
 export interface SanityQueryResponse<T> {
@@ -61,7 +61,7 @@ export function useSanityQuery<T = unknown, E = Error>(
     ? 'default'
     : (options.client || (sanityConfig.minimalClient ? 'minimal' : 'default'))
   const perspective = (
-    (options.perspective || (visualEditingEnabled ? 'previewDrafts' : 'published'))
+    (options.perspective || (visualEditingEnabled ? 'drafts' : 'published'))
   ) as ClientPerspective
 
   const reactiveParams = _params ? reactive(_params) : undefined
