@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.9.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.9.0...v2.9.1)
+
+### 🏡 Chore
+
+- Update dependencies ([82834a4](https://github.com/devite-io/nuxt-sanity/commit/82834a4))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.9.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.8.3...v2.9.0)
