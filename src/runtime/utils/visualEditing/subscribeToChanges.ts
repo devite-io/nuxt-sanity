@@ -1,5 +1,5 @@
 import type { QueryStoreState } from '@sanity/core-loader'
-import { type Reactive, toRaw } from 'vue'
+import type { Reactive } from 'vue'
 import type { ContentSourceMap, QueryParams } from '@sanity/client'
 import type { EncodeDataAttributeFunction } from '@sanity/core-loader/encode-data-attribute'
 import { defineEncodeDataAttribute } from '@sanity/core-loader/encode-data-attribute'
@@ -17,7 +17,7 @@ export const subscribeToChanges = <T, E>(
   function setupFetcher(cb?: (state: Readonly<QueryStoreState<T, E>>) => void) {
     unsubscribe()
 
-    const deepClonedParams = params ? JSON.parse(JSON.stringify(toRaw(params))) : undefined
+    const deepClonedParams = params ? JSON.parse(JSON.stringify(params)) : undefined
     const fetcher = (client as DefaultSanityClient).queryStore!.createFetcherStore<T, E>(query, deepClonedParams, undefined)
 
     unsubscribe = fetcher.subscribe((newSnapshot) => {
