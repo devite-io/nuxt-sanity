@@ -84,10 +84,14 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
         include: [
           `${name} > @sanity/visual-editing > @sanity/mutate > lodash/groupBy.js`,
+          `${name} > @sanity/visual-editing > @sanity/mutate > lodash/startCase.js`,
           `${name} > @sanity/visual-editing > react`,
           `${name} > @sanity/visual-editing > react/jsx-runtime`,
+          `${name} > @sanity/visual-editing > react-is`,
           `${name} > @sanity/visual-editing > react-dom`,
           `${name} > @sanity/visual-editing > react-dom/client`,
+          `${name} > @sanity/visual-editing > react-compiler-runtime`,
+          `${name} > @sanity/visual-editing > styled-components`,
           '@sanity/client',
         ],
       })

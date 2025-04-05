@@ -7,10 +7,7 @@
   },
   "dependencies": {
     "@devite/nuxt-sanity": "link:..",
-    "@sanity/client": "^6.28.3",
-    "nuxt": "^3.16.0"
-  },
-  "engines": {
-    "node": "^18.20.4 || ^20.9.0 || ^22.0.0 || >=23.0.0"
+    "@sanity/client": "^6.28.4",
+    "nuxt": "^3.16.2"
   }
 }
