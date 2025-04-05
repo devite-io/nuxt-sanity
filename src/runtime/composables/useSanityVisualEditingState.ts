@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 import { useState } from '#imports'
 
 export const useSanityVisualEditingState = () => {
-  const enabled = useState('_sanity_visualEditing', () => false)
+  const enabled = useState('_sanity_visual_editing', () => false)
 
   return reactive({
     enabled,

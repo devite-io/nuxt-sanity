@@ -223,6 +223,7 @@ export default defineNuxtModule<ModuleOptions>({
       // composables
       { name: 'useSanityQuery', from: resolve('runtime/composables/query') },
       { name: 'useLazySanityQuery', from: resolve('runtime/composables/query') },
+      { name: 'useSanityVisualEditingState', from: resolve('runtime/composables/useSanityVisualEditingState') },
 
       // helper methods
       { name: 'resolveImageAssetById', from: resolve('runtime/utils/resolveImageAssetById') },
