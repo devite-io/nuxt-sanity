@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v2.10.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.9.1...v2.10.0)
+
+### 🚀 Enhancements
+
+- Auto import useSanityVisualEditingState composable ([3dd3b31](https://github.com/devite-io/nuxt-sanity/commit/3dd3b31))
+
+### 🩹 Fixes
+
+- Visual editing in development mode ([4ddcb0a](https://github.com/devite-io/nuxt-sanity/commit/4ddcb0a))
+
+### 📖 Documentation
+
+- Remove unused environment variable ([e64edb8](https://github.com/devite-io/nuxt-sanity/commit/e64edb8))
+
+### 🏡 Chore
+
+- Update dependencies ([263be33](https://github.com/devite-io/nuxt-sanity/commit/263be33))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.9.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.9.0...v2.9.1)
