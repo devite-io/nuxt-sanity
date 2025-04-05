@@ -88,12 +88,12 @@ export default defineNuxtModule<ModuleOptions>({
           `${name} > @sanity/visual-editing > react/jsx-runtime`,
           `${name} > @sanity/visual-editing > react-dom`,
           `${name} > @sanity/visual-editing > react-dom/client`,
-          // `${name} > @sanity/visual-editing > react-compiler-runtime`,
           '@sanity/client',
         ],
       })
 
-      addPlugin({ src: resolve('runtime/plugins/visual-editing') })
+      addPlugin({ mode: 'client', src: resolve('runtime/plugins/visual-editing.client') })
+      addPlugin({ mode: 'server', src: resolve('runtime/plugins/visual-editing.server') })
 
       if (typeof visualEditingConfig.previewMode === 'object') {
         addServerHandler({
