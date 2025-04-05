@@ -1,5 +1,6 @@
 import { createError, defineEventHandler, getCookie, readBody } from 'h3'
 import useSanityClient from '../utils/useSanityClient'
+import type DefaultSanityClient from '../../client/DefaultSanityClient'
 
 export default defineEventHandler(async (event) => {
   const previewModeCookie = getCookie(event, '__sanity_preview')
@@ -11,7 +12,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { query, params = {} } = await readBody(event)
+  const { query, params = {}, options } = await readBody(event)
 
   if (!query) {
     return createError({
@@ -20,5 +21,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  return await useSanityClient('default').fetch(query, params)
+  return (await useSanityClient('default') as DefaultSanityClient).fetch(
+    query, params, options ?? undefined,
+  )
 })

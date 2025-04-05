@@ -2,6 +2,7 @@ import type {
   ClientPerspective,
   ContentSourceMap,
   QueryParams,
+  RawQueryResponse,
   SanityClient as SanityVisualEditingClient,
   UnfilteredResponseQueryOptions,
 } from '@sanity/client'
@@ -31,7 +32,7 @@ export async function fetchSanityData<T>(
       query: string,
       params: QueryParams,
       options: UnfilteredResponseQueryOptions,
-    ) => $fetch<{ result: T, resultSourceMap: ContentSourceMap }>(client.config.visualEditing!.proxyEndpoint || '/_sanity/fetch', {
+    ) => $fetch<RawQueryResponse<T>>(client.config.visualEditing!.proxyEndpoint || '/_sanity/fetch', {
       method: 'POST',
       body: { query, params, options },
     }),
