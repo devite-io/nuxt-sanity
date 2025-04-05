@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v2.10.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.10.0...v2.10.1)
+
+### 🩹 Fixes
+
+- Proxied visual editing requests ([76324bc](https://github.com/devite-io/nuxt-sanity/commit/76324bc))
+- Unwrapping of refs as params ([43673e7](https://github.com/devite-io/nuxt-sanity/commit/43673e7))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.10.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.9.1...v2.10.0)
