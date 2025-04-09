@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.10.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.10.1...v2.10.2)
+
+### 🩹 Fixes
+
+- Type exports ([570246c](https://github.com/devite-io/nuxt-sanity/commit/570246c))
+
+### 🏡 Chore
+
+- Update dependencies ([8b2b754](https://github.com/devite-io/nuxt-sanity/commit/8b2b754))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.10.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.10.0...v2.10.1)
