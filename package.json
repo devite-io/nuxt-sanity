@@ -74,7 +74,15 @@
     "overrides": {
       "react": "19.0.0",
       "react-dom": "19.0.0"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "scrollmirror",
+      "sharp",
+      "unrs-resolver",
+      "yarn"
+    ]
   },
   "resolutions": {
     "@devite/nuxt-sanity": "link:."
