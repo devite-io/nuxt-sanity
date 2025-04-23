@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.11.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.10.2...v2.11.0)
+
+### 🚀 Enhancements
+
+- Add component with NuxtPicture integration for sanity image assets ([89ab9ce](https://github.com/devite-io/nuxt-sanity/commit/89ab9ce))
+
+### 🏡 Chore
+
+- Update dependencies ([19b8ad8](https://github.com/devite-io/nuxt-sanity/commit/19b8ad8))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.10.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.10.1...v2.10.2)
