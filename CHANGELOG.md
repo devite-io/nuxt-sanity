@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.11.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.11.1...v2.11.2)
+
+### 🩹 Fixes
+
+- Cached sanity svg assets ([dd0f669](https://github.com/devite-io/nuxt-sanity/commit/dd0f669))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.11.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.11.0...v2.11.1)
