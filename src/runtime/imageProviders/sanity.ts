@@ -12,5 +12,8 @@ export function getImage(src: string,
     return { url: cacheEndpoint + `?${params.toString()}` }
   }
 
-  return getSanityImage(src, { modifiers, projectId, dataset }, context)
+  return getSanityImage(src, { modifiers: {
+    ...modifiers,
+    format: modifiers.format === 'svg+xml' ? 'auto' : modifiers.format,
+  }, projectId, dataset }, context)
 }

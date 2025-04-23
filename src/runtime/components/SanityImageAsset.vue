@@ -8,7 +8,7 @@
     :alt="imageAsset.altText as (string | undefined)"
     :placeholder="loading === 'eager' || !lqip ? undefined : imageAsset.metadata.lqip"
     :loading="loading || 'lazy'"
-    :format="imageAsset.mimeType === 'image/svg+xml' ? undefined : 'webp'"
+    :format="imageAsset.mimeType === 'image/svg+xml' ? 'svg+xml' : 'webp'"
     draggable="false"
     provider="cachedSanity"
   />
