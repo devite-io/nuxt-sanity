@@ -4,6 +4,8 @@ import { getImage as getSanityImage } from '#image/providers/sanity'
 
 export function getImage(src: string,
   { modifiers = {}, projectId, dataset, cacheEndpoint }: ImageOptions, context: ImageCTX): ResolvedImage {
+  modifiers.format = modifiers.format === 'svg+xml' ? undefined : modifiers.format
+
   if (cacheEndpoint && !(import.meta.client && useSanityVisualEditingState().enabled)) {
     const params = new URLSearchParams()
     params.set('src', src)
@@ -12,8 +14,5 @@ export function getImage(src: string,
     return { url: cacheEndpoint + `?${params.toString()}` }
   }
 
-  return getSanityImage(src, { modifiers: {
-    ...modifiers,
-    format: modifiers.format === 'svg+xml' ? 'auto' : modifiers.format,
-  }, projectId, dataset }, context)
+  return getSanityImage(src, { modifiers, projectId, dataset }, context)
 }
