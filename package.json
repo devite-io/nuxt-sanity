@@ -1,6 +1,6 @@
 {
   "name": "@devite/nuxt-sanity",
-  "version": "2.11.0",
+  "version": "2.11.1",
   "description": "Advanced Sanity integration for Nuxt.js.",
   "repository": "devite-io/nuxt-sanity",
   "license": "MIT",

@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.11.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.11.0...v2.11.1)
+
+### 🩹 Fixes
+
+- Legacy formats ([b43e024](https://github.com/devite-io/nuxt-sanity/commit/b43e024))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.11.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.10.2...v2.11.0)
