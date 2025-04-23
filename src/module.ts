@@ -45,7 +45,7 @@ export default defineNuxtModule<ModuleOptions>({
               queryEndpoint: '/_sanity/cache/query',
               webhookEndpoint: '/_sanity/cache/invalidate',
             })
-          : false) as ({ cachingEnabled: boolean, cacheBaseUrl: string, assetEndpoint: string, queryEndpoint: string, webhookEndpoint: string, webhookSecret?: string } | false),
+          : false) as ({ cachingEnabled: boolean, cacheClientBaseUrl: string, cacheServerBaseUrl: string, assetEndpoint: string, queryEndpoint: string, webhookEndpoint: string, webhookSecret?: string } | false),
       useCdn: options.useCdn || true,
       apiVersion: options.apiVersion || '2024-08-08',
       visualEditing: options.visualEditing || null,
@@ -262,6 +262,11 @@ export default defineNuxtModule<ModuleOptions>({
       providers: {
         cachedSanity: {
           provider: resolve('runtime/imageProviders/sanity'),
+          options: {
+            projectId: moduleConfig.projectId,
+            dataset: moduleConfig.dataset,
+            cacheEndpoint: (typeof moduleConfig.minimalClient === 'object' && moduleConfig.minimalClient.cachingEnabled && (moduleConfig.minimalClient.cacheClientBaseUrl + moduleConfig.minimalClient.assetEndpoint)) || undefined,
+          },
         },
       },
     }, nuxt)

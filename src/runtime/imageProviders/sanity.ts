@@ -1,26 +1,16 @@
-import { joinURL } from 'ufo'
-import type { ModuleOptions } from '@devite/nuxt-sanity'
-import type { ProviderGetImage } from '@nuxt/image'
+import type { ImageCTX, ImageOptions, ResolvedImage } from '@nuxt/image'
 import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
-import { useRuntimeConfig } from '#imports'
 import { getImage as getSanityImage } from '#image/providers/sanity'
 
-export const getImage: ProviderGetImage = (
-  src,
-  { modifiers = {} } = {},
-  ctx,
-): { url: string } => {
-  const sanityConfig = useRuntimeConfig().public.sanity as ModuleOptions
-  const minimalClientConfig = sanityConfig.minimalClient
-  const useCaching = typeof minimalClientConfig === 'object' && minimalClientConfig.cachingEnabled
-
-  if (useCaching && minimalClientConfig.cacheClientBaseUrl && !useSanityVisualEditingState().enabled) {
+export function getImage(src: string,
+  { modifiers = {}, projectId, dataset, cacheEndpoint }: ImageOptions, context: ImageCTX): ResolvedImage {
+  if (cacheEndpoint && !(import.meta.client && useSanityVisualEditingState().enabled)) {
     const params = new URLSearchParams()
     params.set('src', src)
     params.set('modifiers', JSON.stringify(modifiers))
 
-    return { url: joinURL(minimalClientConfig.cacheClientBaseUrl, minimalClientConfig.assetEndpoint + `?${params.toString()}`) }
+    return { url: cacheEndpoint + `?${params.toString()}` }
   }
 
-  return getSanityImage(src, { modifiers, projectId: sanityConfig.projectId, dataset: sanityConfig.dataset }, ctx)
+  return getSanityImage(src, { modifiers, projectId, dataset }, context)
 }
