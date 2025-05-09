@@ -3,6 +3,7 @@
     v-if="imageAsset?._id"
     densities="x1 x2"
     :src="imageAsset._id"
+    :sizes="isSvg ? (imageAsset.metadata.dimensions.width ?? 64) + 'px' : sizes"
     :width="imageAsset.metadata.dimensions.width"
     :height="imageAsset.metadata.dimensions.height"
     :alt="imageAsset.altText as (string | undefined)"
@@ -19,21 +20,23 @@
 
 <script setup lang="ts">
 import type { ImageAsset, Reference } from '@sanity/types'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { resolveImageAssetById } from '#imports'
 
-const props = defineProps<{
+const { asset } = defineProps<{
   asset?: ImageAsset | Reference | null
+  sizes?: string
   loading?: 'eager' | 'lazy'
   lqip?: boolean
   imgAttrs?: Record<string, unknown>
 }>()
 const imageAsset = ref<ImageAsset | null>(null)
+const isSvg = computed(() => imageAsset.value?.mimeType === 'image/svg+xml')
 let unwatchFunc = undefined as (() => void) | undefined
 
 async function resolveImageAsset() {
-  if (props.asset?._ref) {
-    const assetRef = await resolveImageAssetById((props.asset as Reference)._ref, false)
+  if (asset?._ref) {
+    const assetRef = await resolveImageAssetById((asset as Reference)._ref, false)
 
     imageAsset.value = assetRef.value
 
@@ -42,7 +45,7 @@ async function resolveImageAsset() {
     return
   }
 
-  imageAsset.value = (props.asset || null) as ImageAsset | null
+  imageAsset.value = (asset || null) as ImageAsset | null
 }
 
 await resolveImageAsset()
