@@ -1,5 +1,5 @@
 import type { ImageCTX, ImageOptions, ResolvedImage } from '@nuxt/image'
-import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
+import { useSanityVisualEditingState } from '../composables/visual_editing_state'
 import { getImage as getSanityImage } from '#image/providers/sanity'
 
 export function getImage(src: string,

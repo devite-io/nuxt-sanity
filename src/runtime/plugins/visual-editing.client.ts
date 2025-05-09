@@ -1,5 +1,5 @@
 import type { ModuleOptions } from '@devite/nuxt-sanity'
-import { useSanityVisualEditingState } from '../composables/useSanityVisualEditingState'
+import { useSanityVisualEditingState } from '../composables/visual_editing_state'
 import useSanityClient from '../utils/useSanityClient'
 import type DefaultSanityClient from '../client/DefaultSanityClient'
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'

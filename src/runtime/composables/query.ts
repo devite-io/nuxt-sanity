@@ -7,7 +7,7 @@ import { type Reactive, reactive, type Ref, ref } from 'vue'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import defu from 'defu'
 import useSanityClient from '../utils/useSanityClient'
-import { useSanityVisualEditingState } from './useSanityVisualEditingState'
+import { useSanityVisualEditingState } from './visual_editing_state'
 import type { SanityClient } from '#imports'
 import { useRuntimeConfig } from '#imports'
 
