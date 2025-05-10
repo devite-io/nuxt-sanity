@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v2.12.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.11.2...v2.12.0)
+
+### 🚀 Enhancements
+
+- Provide useSanitySEO composable for more redundancy ([7ead79a](https://github.com/devite-io/nuxt-sanity/commit/7ead79a))
+
+### 🔥 Performance
+
+- Keep svgs as svg and don't generate full srcset ([014254b](https://github.com/devite-io/nuxt-sanity/commit/014254b))
+
+### 🏡 Chore
+
+- Allow dependency install scripts ([d5887dd](https://github.com/devite-io/nuxt-sanity/commit/d5887dd))
+- Update dependencies ([d3d28ec](https://github.com/devite-io/nuxt-sanity/commit/d3d28ec))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.11.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.11.1...v2.11.2)
