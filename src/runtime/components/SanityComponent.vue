@@ -18,7 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, computed, ref, resolveComponent } from 'vue'
+import type { Component } from 'vue'
+import { computed, ref, resolveComponent } from 'vue'
 import type { SanityModule } from '@devite/nuxt-sanity'
 import { SanityImageAsset, SanityLinkExternal, SanityLinkInternal, SanityRichText } from '#components'
 

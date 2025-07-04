@@ -7,7 +7,8 @@ import type {
   UnfilteredResponseQueryOptions,
 } from '@sanity/client'
 import type { Reactive } from 'vue'
-import { defineEncodeDataAttribute, type EncodeDataAttributeFunction } from '@sanity/core-loader/encode-data-attribute'
+import type { EncodeDataAttributeFunction } from '@sanity/core-loader/encode-data-attribute'
+import { defineEncodeDataAttribute } from '@sanity/core-loader/encode-data-attribute'
 import type DefaultSanityClient from '../../client/DefaultSanityClient'
 import type { SanityClient } from '#imports'
 

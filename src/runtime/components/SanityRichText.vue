@@ -6,7 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import { PortableText, type PortableTextComponents } from '@portabletext/vue'
+import type { PortableTextComponents } from '@portabletext/vue'
+import { PortableText } from '@portabletext/vue'
 import type { PortableTextChild, PortableTextSpan } from '@sanity/types'
 import type { RichText } from '@devite/nuxt-sanity'
 import { computed, h } from 'vue'

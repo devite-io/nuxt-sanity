@@ -1,6 +1,7 @@
 import type { GlobalSEO, SEO } from '@devite/nuxt-sanity'
 import type { ImageAsset } from '@sanity/types'
-import { computed, type ComputedRef, type Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
+import { computed } from 'vue'
 import { groq, IMAGE_WITHOUT_PREVIEW_PROJECTION, useHead, useSanityQuery, useSeoMeta } from '#imports'
 
 export const useSanitySEO = (url: string, seo: Ref<SEO | undefined>) => {

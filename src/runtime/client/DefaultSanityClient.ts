@@ -1,11 +1,8 @@
-import {
-  type ClientPerspective,
-  createClient,
-  type QueryParams,
-  type SanityClient as SanityClientType,
-} from '@sanity/client'
+import type { ClientPerspective, QueryParams, SanityClient as SanityClientType } from '@sanity/client'
+import { createClient } from '@sanity/client'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
-import { createQueryStore as createCoreQueryStore, type QueryStore } from '@sanity/core-loader'
+import type { QueryStore } from '@sanity/core-loader'
+import { createQueryStore as createCoreQueryStore } from '@sanity/core-loader'
 import { SanityClient } from '#imports'
 
 class DefaultSanityClient extends SanityClient {
