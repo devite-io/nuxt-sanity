@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v2.12.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.12.0...v2.12.1)
+
+### 🩹 Fixes
+
+- Caching error ([8944fd7](https://github.com/devite-io/nuxt-sanity/commit/8944fd7))
+
+### 💅 Refactors
+
+- Reorganize imports ([c42ab95](https://github.com/devite-io/nuxt-sanity/commit/c42ab95))
+
+### 🏡 Chore
+
+- Update dependencies ([680bfe1](https://github.com/devite-io/nuxt-sanity/commit/680bfe1))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.12.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.11.2...v2.12.0)
