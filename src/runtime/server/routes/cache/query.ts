@@ -79,8 +79,13 @@ export default defineEventHandler(async (event) => {
     await Promise.all(referencedIds.map((ref) => new Promise((resolve) => {
       const id = ref.split('"')[3]
 
-      sanityDocumentDeps.getItem(id).then((deps) => {
-        const documentDeps = deps as string[] || []
+      sanityDocumentDeps.getItem(id).then((deps: string[] | null) => {
+        let documentDeps = deps
+
+        if (!documentDeps || !Array.isArray(documentDeps)) {
+          documentDeps = []
+        }
+
         documentDeps.push(hashedQuery)
 
         sanityDocumentDeps.setItem(id, documentDeps).then(resolve)

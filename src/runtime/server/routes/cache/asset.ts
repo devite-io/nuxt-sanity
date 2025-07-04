@@ -55,7 +55,12 @@ export default defineEventHandler(async (event) => {
 
         if (assetId) {
           const sanityDocumentDeps = useStorage('sanityDocumentDeps')
-          const documentDeps = (await sanityDocumentDeps.getItem(assetId)) as string[] || []
+          let documentDeps = (await sanityDocumentDeps.getItem(assetId)) as string[] | null
+
+          if (!documentDeps || !Array.isArray(documentDeps)) {
+            documentDeps = []
+          }
+
           documentDeps.push(hashedPath)
 
           await sanityDocumentDeps.setItem(assetId, documentDeps)
