@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.12.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.12.1...v2.12.2)
+
+### 🩹 Fixes
+
+- Meta urls ([2249622](https://github.com/devite-io/nuxt-sanity/commit/2249622))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.12.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.12.0...v2.12.1)
