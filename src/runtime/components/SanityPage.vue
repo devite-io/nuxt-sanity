@@ -18,7 +18,7 @@ import { groq, IMAGE_WITHOUT_PREVIEW_PROJECTION, useRequestEvent, useRoute, useR
 const path = useRoute().path
 const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`
 const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(
-  groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
+  groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, slug, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
   { slug: path.substring(1) },
 )
 
@@ -33,7 +33,7 @@ const { baseUrl } = useRuntimeConfig().public
 const seo = computed(() => sanityData.value?.seo)
 
 useSanitySEO(
-  ((baseUrl as string) || '') + ((sanityData.value && ('slug' in sanityData.value ? sanityData.value.slug.current : null)) || '/'),
+  ((baseUrl as string) || '') + '/' + (sanityData.value && 'slug' in sanityData.value && sanityData.value.slug?.current ? sanityData.value.slug.current : ''),
   seo,
 )
 </script>
