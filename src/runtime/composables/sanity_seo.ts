@@ -40,6 +40,8 @@ export const useSanitySEO = (url: string, seo: Ref<SEO | undefined>) => {
     twitterDescription: () => seo.value?.description,
     // OpenGraph site name
     ogSiteName: () => globalSEO.value?.siteName,
+    // OpenGraph type
+    ogType: 'website',
     // OpenGraph Image
     ogImage: () => imageUrl.value,
     ogImageWidth: () => imageDimensions.value?.width,
