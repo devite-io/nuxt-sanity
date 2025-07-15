@@ -9,7 +9,9 @@ export function getImage(src: string,
   if (cacheEndpoint && !(import.meta.client && useSanityVisualEditingState().enabled)) {
     const params = new URLSearchParams()
     params.set('src', src)
-    params.set('modifiers', JSON.stringify(modifiers))
+
+    if (modifiers.format || !src.endsWith('-svg'))
+      params.set('modifiers', JSON.stringify(modifiers))
 
     return { url: cacheEndpoint + `?${params.toString()}` }
   }
