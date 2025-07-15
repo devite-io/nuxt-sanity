@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.13.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.12.2...v2.13.0)
+
+### 🚀 Enhancements
+
+- Add og type ([078e1a9](https://github.com/devite-io/nuxt-sanity/commit/078e1a9))
+
+### 🔥 Performance
+
+- Don't use modifiers on svgs to increase cache rate ([10f6c80](https://github.com/devite-io/nuxt-sanity/commit/10f6c80))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.12.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.12.1...v2.12.2)
