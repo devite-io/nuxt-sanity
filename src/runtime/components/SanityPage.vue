@@ -1,8 +1,9 @@
 <template>
   <main v-if="sanityData?.modules?.length">
     <SanityComponent
-      v-for="module in sanityData.modules"
+      v-for="(module, index) in sanityData.modules"
       :key="module._key"
+      :index="index"
       :data="module"
     />
     <slot />
