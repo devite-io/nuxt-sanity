@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.14.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.13.0...v2.14.0)
+
+### 🚀 Enhancements
+
+- Provide module index ([49300b5](https://github.com/devite-io/nuxt-sanity/commit/49300b5))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.13.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.12.2...v2.13.0)
