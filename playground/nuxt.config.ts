@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   modules: ['../src/module', '@nuxt/image'],
 
   imports: {
-    dirs: ['types/**/*.ts'], // auto-imports for types
+    dirs: ['shared/**/*.ts'], // auto-imports
   },
 
   devtools: { enabled: true },
