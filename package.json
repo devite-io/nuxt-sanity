@@ -39,13 +39,13 @@
     "test:types": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/image": "^1.10.0",
+    "@nuxt/image": "^1.11.0",
     "@portabletext/vue": "^1.0.12",
-    "@sanity/client": "^7.8.1",
-    "@sanity/core-loader": "^1.8.15",
+    "@sanity/client": "^7.8.2",
+    "@sanity/core-loader": "^1.8.17",
     "@sanity/preview-url-secret": "^2.1.14",
-    "@sanity/types": "^4.1.1",
-    "@sanity/visual-editing": "^3.0.0",
+    "@sanity/types": "^4.2.0",
+    "@sanity/visual-editing": "^3.0.2",
     "defu": "^6.1.4",
     "ofetch": "^1.4.1",
     "ohash": "^1.1.6",
@@ -53,22 +53,22 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.7.1",
-    "@nuxt/kit": "^4.0.1",
+    "@nuxt/kit": "^4.0.3",
     "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.0.1",
+    "@nuxt/schema": "^4.0.3",
     "@nuxt/test-utils": "^3.19.2",
     "@types/node": "latest",
     "changelogen": "^0.6.2",
     "eslint": "^9.32.0",
-    "h3": "^1.15.3",
-    "nuxt": "^4.0.1",
+    "h3": "^1.15.4",
+    "nuxt": "^4.0.3",
     "typescript": "5.8.3",
     "vite": "7.0.6",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "1.0.1",
     "vue": "3.5.18",
     "vue-router": "^4.5.1",
-    "vue-tsc": "^3.0.4"
+    "vue-tsc": "^3.0.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
