@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.14.2
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.14.1...v2.14.2)
+
+### 🩹 Fixes
+
+- Prevent server side import of useState ([af87098](https://github.com/devite-io/nuxt-sanity/commit/af87098))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.14.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.14.0...v2.14.1)
