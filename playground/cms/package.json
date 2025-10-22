@@ -12,21 +12,21 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/asset-utils": "^2.2.1",
+    "@sanity/asset-utils": "^2.3.0",
     "@sanity/icons": "^3.7.4",
-    "@sanity/ui": "^3.0.1",
-    "@sanity/vision": "^4.1.1",
+    "@sanity/ui": "^3.1.11",
+    "@sanity/vision": "^4.11.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "sanity": "^4.1.1",
+    "sanity": "^4.11.0",
     "sanity-plugin-hotspot-array": "^2.2.1",
-    "sanity-plugin-media": "^3.0.4",
+    "sanity-plugin-media": "^3.0.5",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
-    "eslint": "^9.32.0",
+    "eslint": "^9.38.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   }
 }
