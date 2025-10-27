@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.15.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.14.2...v2.15.0)
+
+### 🚀 Enhancements
+
+- Support prefix for slug matching ([1581792](https://github.com/devite-io/nuxt-sanity/commit/1581792))
+
+### 🏡 Chore
+
+- Update dependencies ([00013ec](https://github.com/devite-io/nuxt-sanity/commit/00013ec))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.14.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.14.1...v2.14.2)
