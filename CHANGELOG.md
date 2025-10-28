@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v2.16.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.15.0...v2.16.0)
+
+### 🚀 Enhancements
+
+- Enhance cms structure ([acf9fc4](https://github.com/devite-io/nuxt-sanity/commit/acf9fc4))
+- Support query string for internal links ([33176ac](https://github.com/devite-io/nuxt-sanity/commit/33176ac))
+
+### 🏡 Chore
+
+- Update dependencies ([2727b87](https://github.com/devite-io/nuxt-sanity/commit/2727b87))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.15.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.14.2...v2.15.0)
