@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="resolvedLink?.slug"
+    :to="resolvedLink?.slug + (data.queryString ? `?${data.queryString}` : '')"
     :title="resolvedLink?.linkTitle"
     :rel="resolvedLink?.relationship"
   >

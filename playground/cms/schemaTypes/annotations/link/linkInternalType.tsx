@@ -29,6 +29,10 @@ export const linkInternalType = defineField({
       to: PAGE_REFERENCES,
     }),
     defineField({
+      name: 'queryString',
+      type: 'string',
+    }),
+    defineField({
       name: 'linkTitle',
       type: 'string',
       validation: (Rule) => Rule.required(),
