@@ -8,6 +8,6 @@
   "dependencies": {
     "@devite/nuxt-sanity": "link:..",
     "@sanity/client": "^7.12.0",
-    "nuxt": "^4.1.3"
+    "nuxt": "^4.2.0"
   }
 }

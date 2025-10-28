@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "editDocument": "sanity documents create --replace --id"
   },
   "keywords": [
     "sanity"
@@ -15,12 +16,15 @@
     "@sanity/asset-utils": "^2.3.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/ui": "^3.1.11",
-    "@sanity/vision": "^4.11.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "sanity": "^4.11.0",
-    "sanity-plugin-hotspot-array": "^2.2.1",
-    "sanity-plugin-media": "^3.0.5",
+    "@sanity/vision": "^4.12.0",
+    "nuxt": "^4.2.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "rxjs": "^7.8.2",
+    "sanity": "^4.12.0",
+    "sanity-plugin-hotspot-array": "^3.0.1",
+    "sanity-plugin-iframe-pane": "^4.0.0",
+    "sanity-plugin-media": "^4.0.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
