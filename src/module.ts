@@ -1,4 +1,3 @@
-import crypto from 'node:crypto'
 import {
   addComponentsDir,
   addImports,
@@ -7,10 +6,10 @@ import {
   addServerImports,
   createResolver,
   defineNuxtModule,
-  installModule,
 } from '@nuxt/kit'
-import defu from 'defu'
 import type { StegaConfig } from '@sanity/client'
+import defu from 'defu'
+import { randomBytes } from 'node:crypto'
 import { name, version } from '../package.json'
 import type { ModuleOptions, SanityVisualEditingMode } from './types/ModuleOptions'
 
@@ -26,6 +25,9 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: CONFIG_KEY,
   },
   defaults: {},
+  moduleDependencies: {
+    '@nuxt/image': { version: '>=1.11.0', optional: false },
+  },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
     const $config = nuxt.options.runtimeConfig
@@ -160,7 +162,7 @@ export default defineNuxtModule<ModuleOptions>({
       visualEditing: moduleConfig.visualEditing && {
         ...moduleConfig.visualEditing,
         previewModeId: moduleConfig.visualEditing!.previewMode
-          ? crypto.randomBytes(16).toString('hex')
+          ? randomBytes(16).toString('hex')
           : '',
         token: moduleConfig.visualEditing.token || '',
       },
@@ -231,6 +233,7 @@ export default defineNuxtModule<ModuleOptions>({
       { name: 'useSanitySEO', from: resolve('runtime/composables/sanity_seo') },
 
       // helper methods
+      { name: 'default', as: 'useSanityClient', from: resolve('runtime/utils/useSanityClient') },
       { name: 'resolveImageAssetById', from: resolve('runtime/utils/resolveImageAssetById') },
       { name: 'resolveInternalLink', from: resolve('runtime/utils/resolveInternalLink') },
 
@@ -249,27 +252,21 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* Components */
 
-    await addComponentsDir({ path: resolve('runtime/components') })
-    await addComponentsDir({
-      path: '~/sanity',
-      global: true,
-      prefix: 'Sanity',
-      pathPrefix: false,
-    })
+    addComponentsDir({ path: resolve('runtime/components'), pathPrefix: false })
+    addComponentsDir({ path: '~/sanity', global: true, prefix: 'Sanity', pathPrefix: false })
 
     /* @nuxt/image provider */
 
-    await installModule('@nuxt/image', {
-      providers: {
-        cachedSanity: {
-          provider: resolve('runtime/imageProviders/sanity'),
-          options: {
-            projectId: moduleConfig.projectId,
-            dataset: moduleConfig.dataset,
-            cacheEndpoint: (typeof moduleConfig.minimalClient === 'object' && moduleConfig.minimalClient.cachingEnabled && (moduleConfig.minimalClient.cacheClientBaseUrl + moduleConfig.minimalClient.assetEndpoint)) || undefined,
-          },
+    if (nuxt.options.image) {
+      nuxt.options.image.providers ??= {} as Record<string, unknown>
+      nuxt.options.image.providers.cachedSanity = {
+        provider: resolve('runtime/imageProviders/sanity'),
+        options: {
+          projectId: moduleConfig.projectId,
+          dataset: moduleConfig.dataset,
+          cacheEndpoint: (typeof moduleConfig.minimalClient === 'object' && moduleConfig.minimalClient.cachingEnabled && (moduleConfig.minimalClient.cacheClientBaseUrl + moduleConfig.minimalClient.assetEndpoint)) || undefined,
         },
-      },
-    }, nuxt)
+      }
+    }
   },
 })

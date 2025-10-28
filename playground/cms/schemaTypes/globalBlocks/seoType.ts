@@ -19,7 +19,8 @@ export const seoType = defineField({
     defineField({
       name: 'priority',
       type: 'number',
-      description: 'A number between 0 and 1 indicating the priority of this page',
+      description:
+        'A number between 0 and 1 indicating the priority of this page',
       initialValue: 0.5,
     }),
     defineField({
@@ -35,7 +36,9 @@ export const seoType = defineField({
       name: 'title',
       type: 'string',
       validation: (Rule) =>
-        Rule.max(50).warning('Longer titles may be truncated by search engines').required(),
+        Rule.max(50)
+          .warning('Longer titles may be truncated by search engines')
+          .required(),
     }),
     defineField({
       name: 'shortTitle',
@@ -43,14 +46,18 @@ export const seoType = defineField({
       type: 'string',
       description: 'A short, descriptive title for sharing on social media',
       validation: (Rule) =>
-        Rule.max(50).warning('Longer titles may be truncated by some platforms').required(),
+        Rule.max(50)
+          .warning('Longer titles may be truncated by some platforms')
+          .required(),
     }),
     defineField({
       name: 'description',
       type: 'text',
       rows: 2,
       validation: (Rule) =>
-        Rule.max(150).warning('Longer descriptions may be truncated by search engines').required(),
+        Rule.max(150)
+          .warning('Longer descriptions may be truncated by search engines')
+          .required(),
     }),
     defineField({
       name: 'image',

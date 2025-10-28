@@ -6,12 +6,30 @@ export const linkExternalType = defineField({
   title: 'External Link',
   type: 'object',
   icon: EarthGlobeIcon,
+  components: {
+    annotation: (props) => (
+      <span>
+        <EarthGlobeIcon
+          style={{
+            marginLeft: '0.05em',
+            marginRight: '0.1em',
+            width: '0.75em',
+          }}
+        />
+        {props.renderDefault(props)}
+      </span>
+    ),
+  },
   fields: [
     defineField({
       title: 'URL',
       name: 'url',
       type: 'url',
-      validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'], allowRelative: true }),
+      validation: (Rule) =>
+        Rule.required().uri({
+          scheme: ['http', 'https', 'tel', 'mailto', 'whatsapp'],
+          allowRelative: true,
+        }),
     }),
     defineField({
       title: 'Open in a new window?',
@@ -27,6 +45,7 @@ export const linkExternalType = defineField({
     defineField({
       name: 'relationship',
       type: 'string',
+      initialValue: 'noreferrer noopener nofollow',
     }),
   ],
   preview: {

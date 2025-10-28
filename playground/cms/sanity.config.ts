@@ -1,13 +1,14 @@
+import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array'
 import { media, mediaAssetSource } from 'sanity-plugin-media'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
-import { visionTool } from '@sanity/vision'
 import { customDocumentActions } from './plugins/customDocumentActions'
 import { schemaTypes } from './schemaTypes'
-import { structure } from './structure'
+import { defaultDocumentNodeResolver, structure } from './structure'
+import resolveUrl from './utils/resolveUrl'
 
 export default defineConfig({
   name: 'default',
@@ -17,19 +18,21 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
+    structureTool({ structure, defaultDocumentNode: defaultDocumentNodeResolver }),
     customDocumentActions(),
-    structureTool({ structure }),
     imageHotspotArrayPlugin(),
     media(),
     presentationTool({
+      resolve: resolveUrl,
       title: 'Visual Editor',
       previewUrl: {
-        origin: 'http://localhost:3000',
+        initial: 'http://localhost:3000',
         previewMode: {
           enable: '/_sanity/preview/enable',
           disable: '/_sanity/preview/disable',
         },
       },
+      allowOrigins: ['http://localhost:3000'],
     }),
     visionTool(),
   ],
@@ -41,12 +44,16 @@ export default defineConfig({
   form: {
     file: {
       assetSources: (previousAssetSources) => {
-        return previousAssetSources.filter((assetSource) => assetSource !== mediaAssetSource)
+        return previousAssetSources.filter(
+          (assetSource) => assetSource !== mediaAssetSource,
+        )
       },
     },
     image: {
       assetSources: (previousAssetSources) => {
-        return previousAssetSources.filter((assetSource) => assetSource === mediaAssetSource)
+        return previousAssetSources.filter(
+          (assetSource) => assetSource === mediaAssetSource,
+        )
       },
     },
   },

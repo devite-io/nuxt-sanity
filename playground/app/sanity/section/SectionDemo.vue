@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ data: DemoSection }>()
+defineProps<{ data: SectionDemo }>()
 </script>

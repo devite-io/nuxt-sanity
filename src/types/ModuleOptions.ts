@@ -55,5 +55,5 @@ export type SanityVisualEditingMode = 'live-visual-editing' | 'visual-editing' |
 
 export type SanityVisualEditingRefreshHandler = (
   payload: HistoryRefresh,
-  refreshDefault: () => false | Promise<void>
+  refreshDefault: () => false | Promise<void>,
 ) => false | Promise<void>

@@ -1,6 +1,6 @@
+export * from './annotations'
 export * from './documents'
-export * from './objects'
-export * from './richText'
+export * from './globalBlocks'
 export * from './singletons'
 
 export * from './SanityModule'

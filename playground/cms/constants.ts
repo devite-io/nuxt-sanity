@@ -1,6 +1,6 @@
 import { ComposeIcon, SearchIcon } from '@sanity/icons'
 
-// Document types which:
+// document types which:
 // - cannot be created in the 'new document' menu
 // - cannot be duplicated, unpublished or deleted
 export const LOCKED_DOCUMENT_TYPES = ['settings', 'home', 'notFound', 'media.tag']
@@ -8,10 +8,10 @@ export const LOCKED_DOCUMENT_TYPES = ['settings', 'home', 'notFound', 'media.tag
 // references to include in 'internal' links
 export const PAGE_REFERENCES = [{ type: 'home' }, { type: 'page' }]
 
-// module types
-export const MODULE_TYPES = [{ type: 'imageBlock' }, { type: 'demoSection' }]
+// modules that can be added to pages
+export const MODULE_TYPES = [{ type: 'imageBlock' }, { type: 'sectionDemo' }]
 
-// field groups used through schema types
+// document groups
 export const GROUPS = [
   {
     default: true,

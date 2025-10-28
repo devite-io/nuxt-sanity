@@ -7,6 +7,20 @@ export const linkInternalType = defineField({
   title: 'Internal Link',
   type: 'object',
   icon: LinkIcon,
+  components: {
+    annotation: (props) => (
+      <span>
+        <LinkIcon
+          style={{
+            marginLeft: '0.05em',
+            marginRight: '0.1em',
+            width: '0.75em',
+          }}
+        />
+        {props.renderDefault(props)}
+      </span>
+    ),
+  },
   fields: [
     defineField({
       name: 'reference',
@@ -22,6 +36,7 @@ export const linkInternalType = defineField({
     defineField({
       name: 'relationship',
       type: 'string',
+      initialValue: 'follow',
     }),
   ],
   preview: {
