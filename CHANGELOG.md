@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.17.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.16.1...v2.17.0)
+
+### 🚀 Enhancements
+
+- Allow other schema types for SanityPage component ([0b3d664](https://github.com/devite-io/nuxt-sanity/commit/0b3d664))
+
+### 🏡 Chore
+
+- Update dependencies ([de08da8](https://github.com/devite-io/nuxt-sanity/commit/de08da8))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.16.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.16.0...v2.16.1)
