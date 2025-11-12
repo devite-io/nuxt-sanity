@@ -16,13 +16,13 @@ import type { Home, NotFound, Page } from '@devite/nuxt-sanity'
 import { setResponseStatus } from 'h3'
 import { groq, IMAGE_WITHOUT_PREVIEW_PROJECTION, useRequestEvent, useRoute, useRuntimeConfig, useSanityQuery, useSanitySEO } from '#imports'
 
-const { prefix = '' } = defineProps<{ prefix?: string }>()
+const { prefix = '', allowedSchemaTypes = ['page'] } = defineProps<{ prefix?: string, allowedSchemaTypes?: string[] }>()
 
 const path = useRoute().path
-const groqFilter = path === '/' ? '_type == "home"' : `_type == "page" && slug.current == $slug`
+const groqFilter = path === '/' ? '_type == "home"' : `_type in $allowedSchemaTypes && slug.current == $slug`
 const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(
   groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, slug, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
-  { slug: prefix + path.substring(1) },
+  { slug: prefix + path.substring(1), allowedSchemaTypes },
 )
 
 if (sanityData.value?._type === 'notFound' && import.meta.server) {
