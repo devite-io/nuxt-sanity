@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.17.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.17.0...v2.17.1)
+
+### 🩹 Fixes
+
+- Build warnings ([2ec0fae](https://github.com/devite-io/nuxt-sanity/commit/2ec0fae))
+
+### 🏡 Chore
+
+- Update dependencies ([cfbcc24](https://github.com/devite-io/nuxt-sanity/commit/cfbcc24))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.17.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.16.1...v2.17.0)
