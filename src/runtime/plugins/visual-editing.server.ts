@@ -11,4 +11,4 @@ export default defineNuxtPlugin(() => {
 
     visualEditingState.enabled = previewModeId === previewModeCookie.value
   }
-})
+}) as unknown

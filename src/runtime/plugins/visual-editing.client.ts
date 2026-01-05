@@ -25,4 +25,4 @@ export default defineNuxtPlugin(() => {
       }
       break
   }
-})
+}) as unknown
