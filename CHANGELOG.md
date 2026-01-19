@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.18.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.17.1...v2.18.0)
+
+### 🚀 Enhancements
+
+- Add query string field to 'LinkInternal' type ([602e4f0](https://github.com/devite-io/nuxt-sanity/commit/602e4f0))
+
+### 🏡 Chore
+
+- Update dependencies ([9972007](https://github.com/devite-io/nuxt-sanity/commit/9972007))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.17.1
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.17.0...v2.17.1)
