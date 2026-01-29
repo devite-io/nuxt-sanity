@@ -1,32 +1,44 @@
-import {
-  createError,
-  defineEventHandler,
-  getRequestURL,
-  setResponseHeader,
-} from 'h3'
-import type { ClientPerspective } from '@sanity/client'
-import { hash } from 'ohash'
-import { useStorage } from 'nitropack/runtime/internal/storage'
-import useSanityClient from '../../utils/useSanityClient'
 import { useRuntimeConfig } from '#imports'
+import type { ModuleOptions } from '@devite/nuxt-sanity'
+import type { ClientPerspective } from '@sanity/client'
+import { createError, defineEventHandler, getQuery, getRequestURL, readBody, setResponseHeader } from 'h3'
+import { useStorage } from 'nitropack/runtime/internal/storage'
+import { hash } from 'ohash'
+import useSanityClient from '../../utils/useSanityClient'
 
 const TTL = 60 * 60 * 8 // 8 hours
 
 export default defineEventHandler(async (event) => {
-  const url = getRequestURL(event)
-  const queryParams = url.searchParams
+  let query, params
 
-  const query = queryParams.get('query')
+  switch (event.method) {
+    case 'GET': {
+      const queryParams = getRequestURL(event).searchParams
+      query = queryParams.get('query')
+      params = Object.fromEntries(Array.from(queryParams).filter(([key]) => key.startsWith('$')).map(([key, value]) => [key.slice(1), JSON.parse(value)]))
 
-  if (!query)
-    throw createError({ statusCode: 400, statusMessage: 'Missing query parameter' })
+      if (!query)
+        throw createError({ statusCode: 400, statusMessage: 'Missing query parameter "query"' })
 
-  const params = Array.from(queryParams).filter(([key]) => key.startsWith('$'))
-  const perspective = queryParams.get('perspective')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    || ((useRuntimeConfig().public.sanity as any).perspective as ClientPerspective | undefined)
+      break
+    }
+    case 'POST': {
+      const body = await readBody(event)
+      query = body.query
+      params = body.params || {}
 
-  if (typeof perspective === 'string' && !['drafts', 'published', 'raw'].includes(perspective))
+      if (!query)
+        throw createError({ statusCode: 400, statusMessage: 'Missing field "query"' })
+
+      break
+    }
+    default:
+      throw createError({ statusCode: 405, statusMessage: 'Method Not Allowed' })
+  }
+
+  const perspective = getQuery(event).perspective || ((useRuntimeConfig().public.sanity as ModuleOptions).perspective as ClientPerspective | undefined)
+
+  if (typeof perspective === 'string' && !['drafts', 'preview-drafts', 'published', 'raw'].includes(perspective))
     throw createError({ statusCode: 400, statusMessage: 'Invalid perspective' })
 
   const hashedQuery = hash(query + JSON.stringify(params) + (perspective || ''))
@@ -55,7 +67,7 @@ export default defineEventHandler(async (event) => {
 
   const result = await client.fetch<object>(
     query,
-    Object.fromEntries(params.map(([key, value]) => [key.slice(1), JSON.parse(value)])),
+    params,
     { perspective: perspective as ClientPerspective | undefined },
   )
 

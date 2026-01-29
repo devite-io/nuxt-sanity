@@ -49,24 +49,26 @@ class MinimalSanityClient extends SanityClient {
   public async fetch<T>(
     query: string,
     params: QueryParams,
-    _options?: { perspective?: ClientPerspective },
+    options?: { perspective?: ClientPerspective },
   ): Promise<T | null> {
-    const perspectiveQueryString = `&perspective=${_options?.perspective || this.config.perspective}`
-    const queryString = this.toQueryString(query, params || {}) + (this.config.useCdn ? '' : perspectiveQueryString)
-    const byteLength = this.getByteLength(queryString)
+    const perspectiveQueryString = (this.config.useCdn ? '' : `perspective=${options?.perspective || this.config.perspective}`)
+    const queryString = this.toQueryString(query, params || {})
+    const byteLength = this.getByteLength(queryString + (perspectiveQueryString.length > 0 ? perspectiveQueryString.length + 1 : 0))
     const isEligibleForGetRequest = byteLength <= 9000
 
     const minimalClientConfig = typeof this.config.minimalClient === 'object' ? this.config.minimalClient : {}
-    const useCache = minimalClientConfig.cachingEnabled && isEligibleForGetRequest
     const cacheBaseUrl = import.meta.client ? minimalClientConfig.cacheClientBaseUrl : minimalClientConfig.cacheServerBaseUrl
-    const requestUrl = useCache && cacheBaseUrl
+    const requestUrl = minimalClientConfig.cachingEnabled && cacheBaseUrl
       ? cacheBaseUrl + minimalClientConfig.queryEndpoint
       : `https://${this.config.projectId}.${this.config.useCdn && isEligibleForGetRequest ? API_CDN_HOST : API_HOST}${this.queryPath}`
+    const requestSearchParams = isEligibleForGetRequest
+      ? (queryString + (perspectiveQueryString.length > 0 ? `&${perspectiveQueryString}` : ''))
+      : ('?' + perspectiveQueryString)
 
     try {
       return (await $fetch<{
         result: T
-      }>(requestUrl + queryString, {
+      }>(requestUrl + requestSearchParams, {
         ...this.fetchOptions,
         method: isEligibleForGetRequest ? 'GET' : 'POST',
         body: !isEligibleForGetRequest ? { query, params } : undefined,

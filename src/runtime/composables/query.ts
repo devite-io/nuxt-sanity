@@ -14,7 +14,7 @@ import { useRuntimeConfig } from '#imports'
 
 export interface UseSanityQueryOptions<T> extends AsyncDataOptions<T> {
   client?: 'default' | 'minimal'
-  perspective?: 'drafts' | 'published' | 'raw'
+  perspective?: 'drafts' | 'preview-drafts' | 'published' | 'raw'
 }
 
 export interface SanityQueryResponse<T> {

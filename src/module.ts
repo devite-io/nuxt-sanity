@@ -140,7 +140,6 @@ export default defineNuxtModule<ModuleOptions>({
         handler: resolve('runtime/server/routes/cache/asset'),
       })
       addServerHandler({
-        method: 'get',
         route: moduleConfig.minimalClient.queryEndpoint,
         handler: resolve('runtime/server/routes/cache/query'),
       })
@@ -176,7 +175,7 @@ export default defineNuxtModule<ModuleOptions>({
       minimalClient: moduleConfig.minimalClient,
       useCdn: moduleConfig.useCdn,
       apiVersion: moduleConfig.apiVersion,
-      perspective: 'raw',
+      perspective: options.perspective || 'raw',
       token: options.token || '',
       withCredentials: options.withCredentials || false,
       /* Visual Editing */
