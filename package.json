@@ -41,34 +41,34 @@
   "dependencies": {
     "@nuxt/image": "^2.0.0",
     "@portabletext/vue": "^1.0.14",
-    "@sanity/client": "^7.14.0",
+    "@sanity/client": "^7.14.1",
     "@sanity/core-loader": "^2.0.5",
     "@sanity/preview-url-secret": "^4.0.2",
-    "@sanity/types": "^5.5.0",
-    "@sanity/visual-editing": "^5.1.0",
+    "@sanity/types": "^5.7.0",
+    "@sanity/visual-editing": "^5.1.1",
     "defu": "^6.1.4",
     "ofetch": "^1.5.1",
     "ohash": "^2.0.11",
     "unstorage": "^1.17.4"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.12.1",
-    "@nuxt/kit": "^4.2.2",
+    "@nuxt/eslint-config": "^1.13.0",
+    "@nuxt/kit": "^4.3.0",
     "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.2.2",
+    "@nuxt/schema": "^4.3.0",
     "@nuxt/test-utils": "^3.23.0",
     "@types/node": "latest",
     "changelogen": "^0.6.2",
     "eslint": "^9.39.2",
     "h3": "^1.15.5",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.3.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
     "vue": "^3.5.27",
     "vue-router": "^4.6.4",
-    "vue-tsc": "^3.2.2"
+    "vue-tsc": "^3.2.4"
   },
   "pnpm": {
     "overrides": {
@@ -77,10 +77,10 @@
     },
     "onlyBuiltDependencies": [
       "@parcel/watcher",
+      "@swc/core",
       "esbuild",
       "scrollmirror",
       "sharp",
-      "unrs-resolver",
       "yarn"
     ]
   },
