@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.19.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.18.0...v2.19.0)
+
+### 🚀 Enhancements
+
+- Support large queries for cache route ([f25f46e](https://github.com/devite-io/nuxt-sanity/commit/f25f46e))
+
+### 🏡 Chore
+
+- Update dependencies ([a494a72](https://github.com/devite-io/nuxt-sanity/commit/a494a72))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.18.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.17.1...v2.18.0)
