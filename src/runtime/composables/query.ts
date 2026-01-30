@@ -92,8 +92,6 @@ export function useSanityQuery<T = unknown, E = Error>(
         function onDataUpdate(resultData: T | null, resultSourceMap?: ContentSourceMap, resultEncodeDataAttribute?: EncodeDataAttributeFunction) {
           updateRefs(resultData, resultSourceMap, resultEncodeDataAttribute)
           resolve(resultData)
-
-          sanityFetchPromises.delete(key)
         }
 
         const fetchSanityDataFunc = fetchSanityData as (
