@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.19.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.19.0...v2.19.1)
+
+### 🩹 Fixes
+
+- Deduplicate sanity requests ([36fb2ac](https://github.com/devite-io/nuxt-sanity/commit/36fb2ac))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.19.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.18.0...v2.19.0)
