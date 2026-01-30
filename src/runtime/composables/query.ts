@@ -9,18 +9,12 @@ import type { ModuleOptions } from '@devite/nuxt-sanity'
 import defu from 'defu'
 import useSanityClient from '../utils/useSanityClient'
 import { useSanityVisualEditingState } from './visual_editing_state'
-import type { SanityClient } from '#imports'
+import { type SanityClient, useNuxtApp } from '#imports'
 import { useRuntimeConfig } from '#imports'
 
 export interface UseSanityQueryOptions<T> extends AsyncDataOptions<T> {
   client?: 'default' | 'minimal'
   perspective?: 'drafts' | 'preview-drafts' | 'published' | 'raw'
-}
-
-export interface SanityQueryResponse<T> {
-  data: T
-  sourceMap?: ContentSourceMap
-  encodeDataAttribute?: EncodeDataAttributeFunction
 }
 
 export type AsyncSanityData<T, E> = _AsyncSanityData<T, E> & Promise<_AsyncSanityData<T, E>>
@@ -44,7 +38,7 @@ export interface _AsyncSanityData<T, E> {
 export function useLazySanityQuery<T = unknown, E = Error>(
   query: string,
   params: QueryParams = {},
-  options: UseSanityQueryOptions<SanityQueryResponse<T | null>> = {},
+  options: UseSanityQueryOptions<T | null> = {},
 ): AsyncSanityData<T | null, E> {
   return useSanityQuery(query, params, options, true)
 }
@@ -52,7 +46,7 @@ export function useLazySanityQuery<T = unknown, E = Error>(
 export function useSanityQuery<T = unknown, E = Error>(
   query: string,
   _params: QueryParams = {},
-  options: UseSanityQueryOptions<SanityQueryResponse<T | null>> = {},
+  options: UseSanityQueryOptions<T | null> = {},
   lazy = false,
 ): AsyncSanityData<T | null, E> {
   const $config = useRuntimeConfig()
@@ -72,46 +66,61 @@ export function useSanityQuery<T = unknown, E = Error>(
     options.watch.push(reactiveParams)
   }
 
-  const data = ref<T | null>(null)
   const sourceMap = ref<ContentSourceMap | null>(null)
   const encodeDataAttribute = ref<EncodeDataAttributeFunction | (() => void)>(() => {})
 
   function updateRefs(resultData: T | null, resultSourceMap?: ContentSourceMap, resultEncodeDataAttribute?: EncodeDataAttributeFunction) {
-    data.value = resultData
+    pendingData.data.value = resultData
     sourceMap.value = resultSourceMap || null
 
     if (resultEncodeDataAttribute) encodeDataAttribute.value = resultEncodeDataAttribute
   }
 
-  const fetchFunc: (() => Promise<SanityQueryResponse<T | null>>) = () => new Promise((resolve) => {
-    (visualEditingEnabled ? import('../utils/visualEditing/fetchSanityData') : import('../utils/default/fetchSanityData')).then(async ({ fetchSanityData }) => {
-      const client = (import.meta.server
-        ? (await import('../server/utils/useSanityClient')).default(clientType, sanityConfig)
-        : await useSanityClient(visualEditingEnabled, clientType, sanityConfig))
+  const fetchFunc: (() => Promise<T | null>) = () => {
+    const sanityFetchPromises = (useNuxtApp()._sanityFetchPromises ||= new Map<string, Promise<unknown>>()) as Map<string, Promise<unknown>>
 
-      function onDataUpdate(resultData: T | null, resultSourceMap?: ContentSourceMap, resultEncodeDataAttribute?: EncodeDataAttributeFunction) {
-        if (resultEncodeDataAttribute)
-          encodeDataAttribute.value = resultEncodeDataAttribute
+    if (sanityFetchPromises.has(key)) {
+      return sanityFetchPromises.get(key) as Promise<T | null>
+    }
 
-        resolve({ data: resultData, sourceMap: resultSourceMap })
-      }
+    const fetchPromise = new Promise<T | null>((resolve) => {
+      (visualEditingEnabled ? import('../utils/visualEditing/fetchSanityData') : import('../utils/default/fetchSanityData')).then(async ({ fetchSanityData }) => {
+        const client = (import.meta.server
+          ? (await import('../server/utils/useSanityClient')).default(clientType, sanityConfig)
+          : await useSanityClient(visualEditingEnabled, clientType, sanityConfig))
 
-      const fetchSanityDataFunc = fetchSanityData as (
-        query: string,
-        params: Reactive<QueryParams> | undefined,
-        client: SanityClient,
-        perspective: ClientPerspective,
-        callback: (data: T | null, sourceMap?: ContentSourceMap, encodeDataAttribute?: EncodeDataAttributeFunction) => void,
-      ) => void
+        function onDataUpdate(resultData: T | null, resultSourceMap?: ContentSourceMap, resultEncodeDataAttribute?: EncodeDataAttributeFunction) {
+          updateRefs(resultData, resultSourceMap, resultEncodeDataAttribute)
+          resolve(resultData)
 
-      fetchSanityDataFunc(query, reactiveParams, client, perspective, onDataUpdate)
+          sanityFetchPromises.delete(key)
+        }
+
+        const fetchSanityDataFunc = fetchSanityData as (
+          query: string,
+          params: Reactive<QueryParams> | undefined,
+          client: SanityClient,
+          perspective: ClientPerspective,
+          callback: (data: T | null, sourceMap?: ContentSourceMap, encodeDataAttribute?: EncodeDataAttributeFunction) => void,
+        ) => void
+
+        fetchSanityDataFunc(query, reactiveParams, client, perspective, onDataUpdate)
+      })
     })
-  })
+
+    sanityFetchPromises.set(key, fetchPromise)
+
+    return fetchPromise
+  }
 
   const key = 'sanity-' + hash(query + (reactiveParams ? JSON.stringify(reactiveParams) : ''))
   const pendingData = (lazy
-    ? useLazyAsyncData<SanityQueryResponse<T | null>, E>(key, fetchFunc, options)
-    : useAsyncData<SanityQueryResponse<T | null>, E>(key, fetchFunc, options)) as AsyncData<SanityQueryResponse<T | null>, E>
+    ? useLazyAsyncData<T | null>(key, fetchFunc, options)
+    : useAsyncData<T | null>(key, fetchFunc, options)) as AsyncData<T | null, E>
+  Object.assign(
+    pendingData,
+    { sourceMap: sourceMap, encodeDataAttribute: encodeDataAttribute },
+  )
 
   if (visualEditingEnabled && import.meta.client) {
     import('../utils/visualEditing/subscribeToChanges').then(async ({ subscribeToChanges }) => {
@@ -121,8 +130,5 @@ export function useSanityQuery<T = unknown, E = Error>(
     })
   }
 
-  return Object.assign(new Promise((resolve) => pendingData.then(({ data: { value } }) => {
-    updateRefs(value.data, value.sourceMap)
-    resolve({ ...pendingData, data, sourceMap, encodeDataAttribute })
-  })), { ...pendingData, data, sourceMap, encodeDataAttribute }) as AsyncSanityData<T | null, E>
+  return pendingData as unknown as AsyncSanityData<T | null, E>
 }
