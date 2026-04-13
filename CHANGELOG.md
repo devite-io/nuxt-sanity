@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.19.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.19.2...v2.19.3)
+
+### 🩹 Fixes
+
+- Watch for changes of asset props ([7d91fa3](https://github.com/devite-io/nuxt-sanity/commit/7d91fa3))
+
+### 🏡 Chore
+
+- Update dependencies + migrate to bun + add ide configurations ([6181a87](https://github.com/devite-io/nuxt-sanity/commit/6181a87))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.19.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.19.1...v2.19.2)
