@@ -45,4 +45,5 @@ async function resolveImageAsset() {
 }
 
 await resolveImageAsset()
+watch(() => asset, resolveImageAsset)
 </script>
