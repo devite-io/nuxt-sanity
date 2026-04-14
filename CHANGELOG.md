@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.20.0
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.19.3...v2.20.0)
+
+### 🚀 Enhancements
+
+- Add crop and hotspot fields to image projections ([20f772e](https://github.com/devite-io/nuxt-sanity/commit/20f772e))
+
+### 🩹 Fixes
+
+- Use perspective from config ([09613c4](https://github.com/devite-io/nuxt-sanity/commit/09613c4))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.19.3
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.19.2...v2.19.3)
