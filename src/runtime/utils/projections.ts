@@ -13,11 +13,15 @@ export const IMAGE_ASSET_PROJECTION = groq`{
 export const IMAGE_WITHOUT_PREVIEW_PROJECTION = groq`{
   _type,
   asset-> ${IMAGE_ASSET_PROJECTION.replace('lqip, ', '')},
+  crop,
+  hotspot
 }`
 
 export const IMAGE_WITH_PREVIEW_PROJECTION = groq`{
   _type,
-  asset-> ${IMAGE_ASSET_PROJECTION}
+  asset-> ${IMAGE_ASSET_PROJECTION},
+  crop,
+  hotspot
 }`
 
 export const LINK_PROJECTION = groq`{
