@@ -56,7 +56,7 @@ export function useSanityQuery<T = unknown, E = Error>(
     ? 'default'
     : (options.client || (sanityConfig.minimalClient ? 'minimal' : 'default'))
   const perspective = (
-    (options.perspective || (visualEditingEnabled ? 'drafts' : 'published'))
+    (options.perspective || (visualEditingEnabled ? 'drafts' : sanityConfig.perspective ?? 'published'))
   ) as ClientPerspective
 
   const reactiveParams = _params ? reactive(_params) : undefined
