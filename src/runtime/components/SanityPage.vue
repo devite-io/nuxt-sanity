@@ -21,7 +21,7 @@ const { prefix = '', allowedSchemaTypes = ['page'] } = defineProps<{ prefix?: st
 const path = useRoute().path
 const groqFilter = path === '/' ? '_type == "home"' : `_type in $allowedSchemaTypes && slug.current == $slug`
 const { data: sanityData } = await useSanityQuery<Home | Page | NotFound>(
-  groq`*[(${groqFilter}) || _type == "notFound"][0] { _id, _type, slug, title, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
+  groq`coalesce(*[${groqFilter}][0], *[_type == "notFound"][0]) { _id, _type, _type != "notFound" => { slug, title }, modules, seo { _type, indexable, title, shortTitle, description, image ${IMAGE_WITHOUT_PREVIEW_PROJECTION} } }`,
   { slug: prefix + path.substring(1), allowedSchemaTypes },
 )
 
