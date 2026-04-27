@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v2.20.1
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.0...v2.20.1)
+
+### 🩹 Fixes
+
+- Page query ([250fb84](https://github.com/devite-io/nuxt-sanity/commit/250fb84))
+- Query not updating upon parameter change ([73effc7](https://github.com/devite-io/nuxt-sanity/commit/73effc7))
+
+### 🏡 Chore
+
+- Update dependencies ([4a026c5](https://github.com/devite-io/nuxt-sanity/commit/4a026c5))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.20.0
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.19.3...v2.20.0)
