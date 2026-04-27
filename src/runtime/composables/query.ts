@@ -62,8 +62,7 @@ export function useSanityQuery<T = unknown, E = Error>(
   const reactiveParams = _params ? reactive(_params) : undefined
 
   if (reactiveParams) {
-    options.watch ||= []
-    options.watch.push(reactiveParams)
+    (options.watch ??= []).push(reactiveParams)
   }
 
   const sourceMap = ref<ContentSourceMap | null>(null)
@@ -100,9 +99,9 @@ export function useSanityQuery<T = unknown, E = Error>(
           client: SanityClient,
           perspective: ClientPerspective,
           callback: (data: T | null, sourceMap?: ContentSourceMap, encodeDataAttribute?: EncodeDataAttributeFunction) => void,
-        ) => void
+        ) => Promise<void>
 
-        fetchSanityDataFunc(query, reactiveParams, client, perspective, onDataUpdate)
+        fetchSanityDataFunc(query, reactiveParams, client, perspective, onDataUpdate).then(() => sanityFetchPromises.delete(key))
       })
     })
 
