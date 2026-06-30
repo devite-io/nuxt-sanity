@@ -1,7 +1,14 @@
 import { useRuntimeConfig } from '#imports'
 import type { ModuleOptions } from '@devite/nuxt-sanity'
 import type { ClientPerspective } from '@sanity/client'
-import { createError, defineEventHandler, getQuery, getRequestURL, readBody, setResponseHeader } from 'h3'
+import {
+  createError,
+  defineEventHandler,
+  getQuery,
+  getRequestURL,
+  readBody,
+  setResponseHeader,
+} from 'h3'
 import { useStorage } from 'nitropack/runtime/internal/storage'
 import { hash } from 'ohash'
 import useSanityClient from '../../utils/useSanityClient'
@@ -15,10 +22,18 @@ export default defineEventHandler(async (event) => {
     case 'GET': {
       const queryParams = getRequestURL(event).searchParams
       query = queryParams.get('query')
-      params = Object.fromEntries(Array.from(queryParams).filter(([key]) => key.startsWith('$')).map(([key, value]) => [key.slice(1), JSON.parse(value)]))
+      params = Object.fromEntries(
+        Array.from(queryParams)
+          .filter(([key]) => key.startsWith('$'))
+          .map(([key, value]) => [key.slice(1), JSON.parse(value)]),
+      )
 
-      if (!query)
-        throw createError({ statusCode: 400, statusMessage: 'Missing query parameter "query"' })
+      if (!query) {
+        throw createError({
+          status: 400,
+          statusText: 'Missing query parameter "query"',
+        })
+      }
 
       break
     }
@@ -28,20 +43,31 @@ export default defineEventHandler(async (event) => {
       params = body.params || {}
 
       if (!query)
-        throw createError({ statusCode: 400, statusMessage: 'Missing field "query"' })
+        throw createError({ status: 400, statusText: 'Missing field "query"' })
 
       break
     }
     default:
-      throw createError({ statusCode: 405, statusMessage: 'Method Not Allowed' })
+      throw createError({ status: 405, statusText: 'Method Not Allowed' })
   }
 
-  const perspective = getQuery(event).perspective || ((useRuntimeConfig().public.sanity as ModuleOptions).perspective as ClientPerspective | undefined)
+  const perspective
+    = getQuery(event).perspective
+      || ((useRuntimeConfig().public.sanity as ModuleOptions).perspective as
+      ClientPerspective | undefined)
 
-  if (typeof perspective === 'string' && !['drafts', 'preview-drafts', 'published', 'raw'].includes(perspective))
-    throw createError({ statusCode: 400, statusMessage: 'Invalid perspective' })
+  if (
+    typeof perspective === 'string'
+    && !['drafts', 'preview-drafts', 'published', 'raw'].includes(perspective)
+  )
+    throw createError({
+      status: 400,
+      statusText: 'Invalid perspective',
+    })
 
-  const hashedQuery = hash(query + JSON.stringify(params) + (perspective || ''))
+  const hashedQuery = hash(
+    query + JSON.stringify(params) + (perspective || ''),
+  )
 
   const dataCache = useStorage('sanityData')
   const cachedResult = await dataCache.getItem(hashedQuery)
@@ -65,44 +91,46 @@ export default defineEventHandler(async (event) => {
   // prevent caching of outdated data
   client.config.useCdn = false
 
-  const result = await client.fetch<object>(
-    query,
-    params,
-    { perspective: perspective as ClientPerspective | undefined },
-  )
+  const result = await client.fetch<object>(query, params, {
+    perspective: perspective as ClientPerspective | undefined,
+  })
 
-  if (!result)
-    throw createError({ statusCode: 404, statusMessage: 'No results' })
+  if (!result) throw createError({ status: 404, statusText: 'No results' })
 
   setResponseHeader(event, 'Content-Type', 'application/json')
 
-  if (Object.keys(result).length === 0)
-    return {}
+  if (Object.keys(result).length === 0) return {}
 
   await dataCache.setItem(hashedQuery, result, { ttl: TTL })
 
   // resolve document ids
   const stringifiedResult = JSON.stringify(result)
-  const referencedIds = stringifiedResult.match(/"(_ref|_id)":\s*"(.*?)"/g) || []
+  const referencedIds
+    = stringifiedResult.match(/"(_ref|_id)":\s*"(.*?)"/g) || []
 
   if (referencedIds.length > 0) {
     const sanityDocumentDeps = useStorage('sanityDocumentDeps')
 
-    await Promise.all(referencedIds.map((ref) => new Promise((resolve) => {
-      const id = ref.split('"')[3]
+    await Promise.all(
+      referencedIds.map(
+        (ref) =>
+          new Promise((resolve) => {
+            const id = ref.split('"')[3]!
 
-      sanityDocumentDeps.getItem(id).then((deps: string[] | null) => {
-        let documentDeps = deps
+            sanityDocumentDeps.getItem<string[]>(id).then((deps) => {
+              let documentDeps = deps
 
-        if (!documentDeps || !Array.isArray(documentDeps)) {
-          documentDeps = []
-        }
+              if (!documentDeps || !Array.isArray(documentDeps)) {
+                documentDeps = []
+              }
 
-        documentDeps.push(hashedQuery)
+              documentDeps.push(hashedQuery)
 
-        sanityDocumentDeps.setItem(id, documentDeps).then(resolve)
-      })
-    })))
+              sanityDocumentDeps.setItem(id, documentDeps).then(resolve)
+            })
+          }),
+      ),
+    )
   }
 
   if (import.meta.dev) {

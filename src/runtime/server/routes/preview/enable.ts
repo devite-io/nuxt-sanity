@@ -11,8 +11,8 @@ export default defineEventHandler(async (event) => {
 
   if (!isValid) {
     return createError({
-      statusCode: 403,
-      statusMessage: 'Invalid secret',
+      status: 403,
+      statusText: 'Invalid secret',
     })
   }
 

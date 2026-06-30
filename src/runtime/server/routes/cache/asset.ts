@@ -9,9 +9,7 @@ export default defineEventHandler(async (event) => {
   const queryParams = getRequestURL(event).searchParams
   const src = queryParams.get('src')
 
-  if (!src) {
-    throw createError({ statusCode: 400, statusMessage: 'Missing src parameter' })
-  }
+  if (!src) throw createError({ status: 400, statusText: 'Missing src parameter' })
 
   const modifiers = JSON.parse(queryParams.get('modifiers') || '{}')
 
@@ -29,7 +27,8 @@ export default defineEventHandler(async (event) => {
 
     return new Response(cachedAsset, {
       headers: {
-        'Content-Type': meta.contentType as string || 'application/octet-stream',
+        'Content-Type':
+          (meta.contentType as string) || 'application/octet-stream',
         'Cache-Control': `public, max-age=${TTL}, immutable`,
       },
     })
@@ -37,25 +36,37 @@ export default defineEventHandler(async (event) => {
 
   const imageUrl = resolveSanityImageUrl(src, modifiers)
 
-  return await new Promise((resolve, reject) => $fetch(imageUrl, {
-    headers: {
-      'Accept-Encoding': 'gzip, deflate',
-    },
-    method: 'GET',
-    responseType: 'stream',
-    onResponseError: ({ response }) => reject(response),
-    async onResponse({ response }) {
-      if (response.status === 200) {
+  return await new Promise((resolve, reject) =>
+    $fetch(imageUrl, {
+      headers: { 'Accept-Encoding': 'gzip, deflate' },
+      method: 'GET',
+      responseType: 'stream',
+      onResponseError: ({ error, response }) =>
+        reject(
+          createError({
+            status: response.status,
+            statusText: response.statusText,
+            cause: error,
+          }),
+        ),
+      async onResponse({ response }) {
+        if (response.status !== 200) return
+
         const assetBinaryData = Buffer.from(await response.arrayBuffer())
 
         await dataCache.setItemRaw(hashedPath, assetBinaryData, { ttl: TTL })
-        await dataCache.setMeta(hashedPath, { contentType: response.headers.get('Content-Type') }, { ttl: TTL })
+        await dataCache.setMeta(
+          hashedPath,
+          { contentType: response.headers.get('Content-Type') },
+          { ttl: TTL },
+        )
 
         const assetId = src.split('/').pop()
 
         if (assetId) {
           const sanityDocumentDeps = useStorage('sanityDocumentDeps')
-          let documentDeps = (await sanityDocumentDeps.getItem(assetId)) as string[] | null
+          let documentDeps = (await sanityDocumentDeps.getItem(assetId)) as
+            string[] | null
 
           if (!documentDeps || !Array.isArray(documentDeps)) {
             documentDeps = []
@@ -70,13 +81,15 @@ export default defineEventHandler(async (event) => {
           }
         }
 
-        resolve(new Response(assetBinaryData, {
-          headers: {
-            'Content-Type': response.headers.get('Content-Type') || 'application/octet-stream',
-            'Cache-Control': `public, max-age=${TTL}, immutable`,
-          },
-        }))
-      }
-    },
-  }))
+        resolve(
+          new Response(assetBinaryData, {
+            headers: {
+              'Content-Type': response.headers.get('Content-Type') || 'application/octet-stream',
+              'Cache-Control': `public, max-age=${TTL}, immutable`,
+            },
+          }),
+        )
+      },
+    }),
+  )
 })

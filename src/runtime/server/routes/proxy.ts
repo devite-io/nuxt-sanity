@@ -7,8 +7,8 @@ export default defineEventHandler(async (event) => {
 
   if (!previewModeCookie) {
     return createError({
-      statusCode: 403,
-      statusMessage: 'This route is only available in preview mode',
+      status: 403,
+      statusText: 'This route is only available in preview mode',
     })
   }
 
@@ -16,8 +16,8 @@ export default defineEventHandler(async (event) => {
 
   if (!query) {
     return createError({
-      statusCode: 400,
-      statusMessage: `Field "query" is required`,
+      status: 400,
+      statusText: `Field "query" is required`,
     })
   }
 
