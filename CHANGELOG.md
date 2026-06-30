@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.20.3
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.2...v2.20.3)
+
+### 🩹 Fixes
+
+- Cdn asset error handling ([acbfc81](https://github.com/devite-io/nuxt-sanity/commit/acbfc81))
+
+### 🏡 Chore
+
+- Update dependencies ([f272bdf](https://github.com/devite-io/nuxt-sanity/commit/f272bdf))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.20.2
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.1...v2.20.2)
