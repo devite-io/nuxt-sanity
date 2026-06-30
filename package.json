@@ -28,61 +28,15 @@
   ],
   "scripts": {
     "prepack": "nuxt-module-build build",
-    "dev": "nuxi dev playground",
-    "dev:cms": "cd playground/cms && pnpm dev",
-    "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "pnpm lint && pnpm test && pnpm prepack && git push && changelogen --release && pnpm publish --access=public && git push --follow-tags",
+    "dev": "nuxt dev playground",
+    "dev:cms": "cd playground/cms && npm run dev",
+    "dev:build": "nuxt build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
+    "release": "bun run lint && bun run test && bun run prepack && git push && changelogen --release && npm publish --access=public && git push --follow-tags",
     "lint": "eslint --fix .",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit"
-  },
-  "dependencies": {
-    "@nuxt/image": "^2.0.0",
-    "@portabletext/vue": "^1.0.14",
-    "@sanity/client": "^7.22.0",
-    "@sanity/core-loader": "^2.0.8",
-    "@sanity/preview-url-secret": "^4.0.5",
-    "@sanity/types": "^5.22.0",
-    "@sanity/visual-editing": "^5.3.4",
-    "defu": "^6.1.7",
-    "ofetch": "^1.5.1",
-    "ohash": "^2.0.11",
-    "unstorage": "^1.17.5"
-  },
-  "devDependencies": {
-    "@nuxt/eslint-config": "^1.15.2",
-    "@nuxt/kit": "^4.4.2",
-    "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.4.2",
-    "@nuxt/test-utils": "^3.23.0",
-    "@types/node": "latest",
-    "changelogen": "^0.6.2",
-    "eslint": "^10.2.1",
-    "h3": "^1.15.11",
-    "nuxt": "^4.4.2",
-    "typescript": "^5.9.3",
-    "vite": "^8.0.10",
-    "vitest": "^3.2.4",
-    "vitest-environment-nuxt": "^2.0.0",
-    "vue": "^3.5.33",
-    "vue-router": "^5.0.6",
-    "vue-tsc": "^3.2.7"
-  },
-  "pnpm": {
-    "overrides": {
-      "sharp": "0.34.4",
-      "css-tree": "2.2.1"
-    },
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@swc/core",
-      "esbuild",
-      "scrollmirror",
-      "sharp",
-      "yarn"
-    ]
   },
   "resolutions": {
     "@devite/nuxt-sanity": "link:."
@@ -91,5 +45,45 @@
     "externals": [
       "@sanity/client"
     ]
-  }
+  },
+  "dependencies": {
+    "@nuxt/image": "^2.0.0",
+    "@portabletext/vue": "^1.0.14",
+    "@sanity/client": "^7.23.0",
+    "@sanity/core-loader": "^2.0.12",
+    "@sanity/preview-url-secret": "^4.0.7",
+    "@sanity/types": "~6.2.0",
+    "@sanity/visual-editing": "^5.4.4",
+    "defu": "^6.1.7",
+    "ofetch": "^1.5.1",
+    "ohash": "^2.0.11",
+    "unstorage": "^1.17.5"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.16.0",
+    "@nuxt/kit": "^4.4.8",
+    "@nuxt/module-builder": "^1.0.2",
+    "@nuxt/schema": "^4.4.8",
+    "@nuxt/test-utils": "^3.23.0",
+    "@types/node": "latest",
+    "changelogen": "^0.6.2",
+    "eslint": "^10.6.0",
+    "h3": "^1.15.11",
+    "nuxt": "^4.4.8",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.1",
+    "vitest": "^3.2.6",
+    "vitest-environment-nuxt": "^2.0.0",
+    "vue": "^3.5.39",
+    "vue-router": "^5.1.0",
+    "vue-tsc": "^3.3.5"
+  },
+  "overrides": {
+    "sharp": "0.34.4",
+    "css-tree": "2.2.1"
+  },
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "unrs-resolver"
+  ]
 }
