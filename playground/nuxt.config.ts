@@ -45,6 +45,6 @@ export default defineNuxtConfig({
       studioUrl: process.env.NUXT_SANITY_STUDIO_URL,
       token: process.env.NUXT_SANITY_READ_TOKEN,
     },
-    apiVersion: '2024-08-08',
+    apiVersion: '2026-10-19',
   },
 })

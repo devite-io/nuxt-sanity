@@ -1,5 +1,5 @@
-import type { DisableVisualEditing, VisualEditingOptions } from '@sanity/visual-editing'
-import { enableVisualEditing as enableSanityVisualEditing } from '@sanity/visual-editing'
+import type { DisableVisualEditing, VisualEditingOptions } from '@sanity/visual-editing-standalone'
+import { enableVisualEditing as enableSanityVisualEditing } from '@sanity/visual-editing-standalone'
 import type { SanityVisualEditingRefreshHandler } from '@devite/nuxt-sanity'
 import type { Router } from 'vue-router'
 import { reloadNuxtApp, useRouter } from '#imports'

@@ -1,4 +1,5 @@
-import { ComposeIcon, SearchIcon } from '@sanity/icons'
+import { ComposeIcon } from '@sanity/icons/Compose'
+import { SearchIcon } from '@sanity/icons/Search'
 
 // document types which:
 // - cannot be created in the 'new document' menu

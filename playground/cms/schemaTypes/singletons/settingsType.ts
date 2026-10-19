@@ -1,4 +1,5 @@
-import { CogIcon, SearchIcon } from '@sanity/icons'
+import { CogIcon } from '@sanity/icons/Cog'
+import { SearchIcon } from '@sanity/icons/Search'
 import { defineField, defineType } from 'sanity'
 
 const TITLE = 'Settings'

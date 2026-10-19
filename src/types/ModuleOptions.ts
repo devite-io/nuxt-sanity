@@ -1,7 +1,7 @@
 import type {
   HistoryRefresh,
   VisualEditingOptions as SanityVisualEditingOptions,
-} from '@sanity/visual-editing'
+} from '@sanity/visual-editing-standalone'
 import type { ClientConfig } from '@sanity/client'
 
 export type ModuleOptions = ClientConfig & {
@@ -28,7 +28,7 @@ export type ModuleOptions = ClientConfig & {
   }
   /** @default true */
   useCdn?: boolean
-  /** @default "2024-08-08" */
+  /** @default "2026-10-19" */
   apiVersion?: string
   visualEditing?: VisualEditingOptions
 }

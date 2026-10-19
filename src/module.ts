@@ -26,7 +26,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {},
   moduleDependencies: {
-    '@nuxt/image': { version: '>=1.11.0', optional: false },
+    '@nuxt/image': { version: '>=2.2.0', optional: false },
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -49,7 +49,7 @@ export default defineNuxtModule<ModuleOptions>({
             })
           : false) as ({ cachingEnabled: boolean, cacheClientBaseUrl: string, cacheServerBaseUrl: string, assetEndpoint: string, queryEndpoint: string, webhookEndpoint: string, webhookSecret?: string } | false),
       useCdn: options.useCdn || true,
-      apiVersion: options.apiVersion || '2024-08-08',
+      apiVersion: options.apiVersion || '2026-10-19',
       visualEditing: options.visualEditing || null,
     }
 
@@ -81,21 +81,10 @@ export default defineNuxtModule<ModuleOptions>({
       if (visualEditingConfig.mode === 'live-visual-editing' && !visualEditingConfig.stega)
         console.warn('Visual Editing requires "stega" to be enabled in "live-visual-editing" mode')
 
-      nuxt.options.build.transpile.push('@sanity/preview-url-secret', 'async-cache-dedupe')
       nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, { dedupe: ['@sanity/client'] })
       nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
         include: [
-          `${name} > @sanity/visual-editing > @sanity/mutate > lodash/isObject.js`,
-          `${name} > @sanity/visual-editing > @sanity/mutate > lodash/groupBy.js`,
-          `${name} > @sanity/visual-editing > @sanity/mutate > lodash/startCase.js`,
-          `${name} > @sanity/visual-editing > react`,
-          `${name} > @sanity/visual-editing > react/compiler-runtime`,
-          `${name} > @sanity/visual-editing > react/jsx-runtime`,
-          `${name} > @sanity/visual-editing > react-is`,
-          `${name} > @sanity/visual-editing > react-dom`,
-          `${name} > @sanity/visual-editing > react-dom/client`,
-          `${name} > @sanity/visual-editing > react-compiler-runtime`,
-          `${name} > @sanity/visual-editing > styled-components`,
+          `${name} > @sanity/visual-editing-standalone`,
           '@sanity/client',
         ],
       })

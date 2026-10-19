@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@devite/nuxt-sanity": "link:..",
-    "@sanity/client": "^7.23.0",
-    "nuxt": "^4.4.8"
+    "@sanity/client": "^8.9.0",
+    "nuxt": "^4.6.2"
   }
 }

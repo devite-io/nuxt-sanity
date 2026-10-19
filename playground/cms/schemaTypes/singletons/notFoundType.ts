@@ -1,4 +1,4 @@
-import { ErrorOutlineIcon } from '@sanity/icons'
+import { ErrorOutlineIcon } from '@sanity/icons/ErrorOutline'
 import { defineField } from 'sanity'
 import { GROUPS, MODULE_TYPES } from '../../constants'
 

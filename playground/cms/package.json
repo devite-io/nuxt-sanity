@@ -1,8 +1,5 @@
 {
-  "name": "nuxt-sanity-playground-cms",
-  "private": true,
-  "version": "1.0.0",
-  "main": "package.json",
+  "type": "module",
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
@@ -11,22 +8,22 @@
   },
   "dependencies": {
     "@sanity/asset-utils": "^2.3.0",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/ui": "^3.2.0",
-    "@sanity/vision": "^6.2.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "@sanity/icons": "^5.2.3",
+    "@sanity/ui": "^4.4.9",
+    "@sanity/vision": "^6.20.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "rxjs": "^7.8.2",
-    "sanity": "^6.2.0",
-    "sanity-plugin-hotspot-array": "^5.0.3",
-    "sanity-plugin-iframe-pane": "^5.0.17",
-    "sanity-plugin-media": "^5.0.5",
-    "styled-components": "^6.4.3"
+    "sanity": "^6.20.0",
+    "sanity-plugin-hotspot-array": "^5.0.22",
+    "sanity-plugin-iframe-pane": "^5.0.41",
+    "sanity-plugin-media": "^6.4.0",
+    "styled-components": "^6.6.0"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^6.0.0",
-    "eslint": "^10.6.0",
-    "prettier": "^3.9.4",
-    "typescript": "^6.0.3"
+    "@sanity/eslint-config-studio": "^7.0.0",
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2"
   }
 }

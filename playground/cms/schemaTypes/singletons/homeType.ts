@@ -1,4 +1,4 @@
-import { HomeIcon } from '@sanity/icons'
+import { HomeIcon } from '@sanity/icons/Home'
 import { defineField } from 'sanity'
 import { GROUPS, MODULE_TYPES } from '../../constants'
 

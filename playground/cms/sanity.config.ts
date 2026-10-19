@@ -18,7 +18,10 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool({ structure, defaultDocumentNode: defaultDocumentNodeResolver }),
+    structureTool({
+      structure,
+      defaultDocumentNode: defaultDocumentNodeResolver,
+    }),
     customDocumentActions(),
     imageHotspotArrayPlugin(),
     media(),
@@ -57,4 +60,7 @@ export default defineConfig({
       },
     },
   },
+
+  scheduledDrafts: { enabled: false },
+  releases: { enabled: false },
 })
