@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.20.5
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.4...v2.20.5)
+
+### 🩹 Fixes
+
+- GET request byte limit ([5eabc60](https://github.com/devite-io/nuxt-sanity/commit/5eabc60))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.20.4
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.3...v2.20.4)
