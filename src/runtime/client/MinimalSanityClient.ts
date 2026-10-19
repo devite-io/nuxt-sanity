@@ -53,8 +53,12 @@ class MinimalSanityClient extends SanityClient {
   ): Promise<T | null> {
     const perspectiveQueryString = (this.config.useCdn ? '' : `perspective=${options?.perspective || this.config.perspective}`)
     const queryString = this.toQueryString(query, params || {})
-    const byteLength = this.getByteLength(queryString + (perspectiveQueryString.length > 0 ? perspectiveQueryString.length + 1 : 0))
-    const isEligibleForGetRequest = byteLength <= 9000
+    const byteLength = this.getByteLength(
+      queryString
+      + (perspectiveQueryString.length > 0 ? perspectiveQueryString.length + 1 : 0)
+      + Object.entries(this.fetchOptions.headers ?? {}).map(([key, value]) => `${key}: ${value}\n`).join(''),
+    )
+    const isEligibleForGetRequest = byteLength <= 8_192 /* 8KB */
 
     const minimalClientConfig = typeof this.config.minimalClient === 'object' ? this.config.minimalClient : {}
     const cacheBaseUrl = import.meta.client ? minimalClientConfig.cacheClientBaseUrl : minimalClientConfig.cacheServerBaseUrl
