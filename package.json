@@ -49,7 +49,7 @@
   "dependencies": {
     "@nuxt/image": "^2.2.0",
     "@portabletext/vue": "^2.0.0",
-    "@sanity/client": "^8.9.0",
+    "@sanity/client": "^8.10.1",
     "@sanity/core-loader": "^2.2.3",
     "@sanity/preview-url-secret": "^4.1.5",
     "@sanity/types": "^6.20.0",
@@ -71,14 +71,8 @@
     "h3": "^1.15.11",
     "nuxt": "^4.6.2",
     "typescript": "^6.0.3",
-    "vite": "^8.3.4",
     "vitest": "^4.1.12",
     "vitest-environment-nuxt": "^2.0.0",
-    "vue": "^3.5.44",
-    "vue-router": "^5.4.0",
     "vue-tsc": "^3.3.13"
-  },
-  "trustedDependencies": [
-    "unrs-resolver"
-  ]
+  }
 }
