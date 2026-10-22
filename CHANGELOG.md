@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v2.20.6
+
+[compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.5...v2.20.6)
+
+### 🩹 Fixes
+
+- Leave more space for headers ([3a5f741](https://github.com/devite-io/nuxt-sanity/commit/3a5f741))
+
+### 🏡 Chore
+
+- Update dependencies ([8badfea](https://github.com/devite-io/nuxt-sanity/commit/8badfea))
+
+### ❤️ Contributors
+
+- Justus Geramb <admin@justix.dev>
+
 ## v2.20.5
 
 [compare changes](https://github.com/devite-io/nuxt-sanity/compare/v2.20.4...v2.20.5)
